@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1976d2">
+    <meta name="description" content="Directorio interactivo de empresas en los polígonos industriales de Santander. Explora empresas en Candina y El Campón.">
+    <meta property="og:title" content="Polígonos Industriales de Santander | Directorio Interactivo">
+    <meta property="og:description" content="Directorio interactivo de 143+ empresas en los polígonos industriales de Santander. Mapa, fichas, audio, Street View 360°.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_ES">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="keywords" content="polígonos industriales Santander, empresas Candina, directorio empresarial Santander, naves industriales Cantabria, El Campón empresas, Parayas empresas">
+    <link rel="canonical" href="https://poligonos-santander.es">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="manifest.json">
+    <title>Polígonos Industriales de Santander | Directorio Interactivo</title>
+
+    <!-- MapLibre GL -->
+    <script src="https://unpkg.com/maplibre-gl@4.1.2/dist/maplibre-gl.js"></script>
+    <link href="https://unpkg.com/maplibre-gl@4.1.2/dist/maplibre-gl.css" rel="stylesheet" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+                    colors: {
+                        santander: {
+                            DEFAULT: '#1976d2',
+                            light: '#42a5f5',
+                            dark: '#0d47a1',
+                            accent: '#2196f3',
+                            glow: '#90caf9',
+                            pale: '#e3f2fd'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Data -->
+    <script src="data.js"></script>
+    <script src="panoramas.js"></script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- ========== LOADER ========== -->
+    <div id="loader">
+        <img src="logo-santander-marca-blanco.jpg" alt="Santander Ciudad" class="loader-logo-city">
+        <img src="agencia-desarrollo-santander-2023.svg" alt="Agencia Desarrollo Santander" class="loader-logo-agency">
+        <div class="spinner"></div>
+        <p id="loaderText">Cargando directorio empresarial...</p>
+    </div>
+
+    <!-- ========== MAIN LAYOUT ========== -->
+    <div class="flex h-screen overflow-hidden" role="main">
+
+        <!-- ====== DESKTOP SIDEBAR ====== -->
+        <aside id="desktopSidebar" class="desktop-only flex flex-col w-[380px] bg-white border-r border-slate-200 z-20 shadow-xl" role="navigation" aria-label="Directorio de empresas">
+            <!-- Header -->
+            <div class="sidebar-header">
+                <div class="sidebar-logo-row">
+                    <img src="logo-santander-marca-blanco.jpg" alt="Ayuntamiento de Santander" class="sidebar-logo-city">
+                    <img src="agencia-desarrollo-santander-2023.svg" alt="Agencia Desarrollo Santander" class="sidebar-logo">
+                </div>
+                <div class="flex items-center justify-between mb-2">
+                    <div>
+                        <h1 id="sidebarTitle">Polígonos Industriales</h1>
+                        <p id="sidebarSubtitle" style="font-size: 13px; opacity: 0.9; font-weight: 500;">Santander</p>
+                    </div>
+                    <button class="lang-toggle-btn" id="btnLang" onclick="toggleLanguage()" title="Change language">
+                        <img id="langFlag" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 30'%3E%3CclipPath id='a'%3E%3Crect width='60' height='30'/%3E%3C/clipPath%3E%3Cg clip-path='url(%23a)'%3E%3Cpath d='M0 0v30h60V0z' fill='%23012169'/%3E%3Cpath d='M0 0l60 30m0-30L0 30' stroke='%23fff' stroke-width='6'/%3E%3Cpath d='M0 0l60 30m0-30L0 30' stroke='%23C8102E' stroke-width='4' clip-path='url(%23a)'/%3E%3Cpath d='M30 0v30M0 15h60' stroke='%23fff' stroke-width='10'/%3E%3Cpath d='M30 0v30M0 15h60' stroke='%23C8102E' stroke-width='6'/%3E%3C/g%3E%3C/svg%3E" alt="EN" class="lang-flag-img">
+                        <span id="langLabel">EN</span>
+                    </button>
+                </div>
+                <div class="stats-bar">
+                    <span class="stat-badge">
+                        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect width="16" height="20" x="4" y="2" rx="2"/><path d="M8 6h.01M16 6h.01M12 6h.01"/></svg>
+                        <span id="statsTotal">355 empresas</span>
+                    </span>
+                    <span class="stat-badge">
+                        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span id="statsPolygons">4 polígonos</span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Search -->
+            <div class="search-container" role="search">
+                <svg class="search-icon w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+                </svg>
+                <input type="text" id="searchDesktop" class="search-input" placeholder="Buscar empresa, sector, actividad...">
+            </div>
+            <div class="search-results-count" id="searchResultsDesktop" style="display:none"></div>
+
+            <!-- Filters: Areas -->
+            <div id="filtersAreaDesktop" class="filters-container"></div>
+
+            <!-- Filters: Sectors -->
+            <div id="filtersSectorDesktop" class="filters-container"></div>
+
+            <!-- Company List -->
+            <div id="listDesktop" class="company-list custom-scroll"></div>
+
+            <!-- POI Distances Panel Desktop -->
+            <div class="poi-distances-panel" style="display:none">
+                <div class="poi-panel-header" onclick="this.parentElement.classList.toggle('collapsed')">
+                    <span class="poi-panel-title">📍 Distancias a puntos clave</span>
+                    <svg class="poi-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><path d="m6 9 6 6 6-6"/></svg>
+                </div>
+                <div id="poiDistancesDesktop" class="poi-distances-content"></div>
+            </div>
+        </aside>
+
+        <!-- ====== MAP AREA ====== -->
+        <div class="flex-1 relative">
+            <div id="map"></div>
+
+            <!-- Map Controls -->
+            <div class="map-controls">
+                <button class="map-ctrl-btn" id="btnSatellite" onclick="toggleSatellite()" data-title-es="Vista satélite" data-title-en="Satellite view" title="Vista satélite">
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/>
+                    </svg>
+                </button>
+                <button class="map-ctrl-btn" onclick="locateUser()" data-title-es="Mi ubicación" data-title-en="My location" title="Mi ubicación">
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"/><path d="M12 2v4m0 12v4M2 12h4m12 0h4"/>
+                    </svg>
+                </button>
+                <button class="map-ctrl-btn" onclick="resetView()" data-title-es="Vista general" data-title-en="Overview" title="Vista general">
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Floating Map Overlays (bottom-right) — Apple iOS 18+ Style -->
+            <div id="floatingOverlays" class="floating-overlays">
+                <!-- Weather Floating Button + Panel -->
+                <div id="weatherFloating" class="floating-btn-group">
+                    <button class="floating-pill" id="btnWeatherFloat" onclick="toggleWeatherOverlay()">
+                        <span class="floating-pill-icon" id="weatherFloatIcon">🌡️</span>
+                        <span class="floating-pill-label" id="weatherFloatLabel">--°C</span>
+                    </button>
+                    <div class="floating-expand-panel" id="weatherFloatPanel"></div>
+                </div>
+
+                <!-- Puntos clave (POIs) -->
+                <button class="floating-pill" id="btnPOIsFloat" onclick="togglePOIs()">
+                    <span class="floating-pill-icon">
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    </span>
+                    <span class="floating-pill-label" data-i18n="keyPoints">Puntos clave</span>
+                </button>
+
+                <!-- Transporte (bus + tren) -->
+                <button class="floating-pill" id="btnTransportFloat" onclick="toggleTransport()">
+                    <span class="floating-pill-icon">
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><path d="M8 6v6"/><path d="M16 6v6"/><path d="M2 12h20"/><path d="M7 18H5a2 2 0 0 1-2-2V6a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v10a2 2 0 0 1-2 2h-2"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg>
+                    </span>
+                    <span class="floating-pill-label" data-i18n="transport">Transporte</span>
+                </button>
+
+                <!-- Parcelas libres -->
+                <button class="floating-pill" id="btnParcelasFloat" onclick="toggleParcelas()">
+                    <span class="floating-pill-icon">
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+                    </span>
+                    <span class="floating-pill-label" data-i18n="freePlots">Parcelas libres</span>
+                </button>
+
+                <!-- Accesos -->
+                <button class="floating-pill" id="btnAccessFloat" onclick="toggleAccessPoints()">
+                    <span class="floating-pill-icon">
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg>
+                    </span>
+                    <span class="floating-pill-label" data-i18n="accesses">Accesos</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== MOBILE BOTTOM SHEET ========== -->
+    <div id="bottomSheet" class="bottom-sheet mobile-only">
+        <!-- Handle -->
+        <div id="sheetHandle" class="flex justify-center pt-2 pb-1 cursor-grab">
+            <div class="sheet-handle"></div>
+        </div>
+
+        <!-- Header -->
+        <div class="sheet-header">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <img src="logo-santander-marca-blanco.jpg" alt="Ayuntamiento" class="mobile-logo-city">
+                    <img src="agencia-desarrollo-santander-2023.svg" alt="" class="mobile-logo">
+                    <div>
+                        <h2>Polígonos Industriales</h2>
+                        <p id="mobileStats">355 empresas en Santander</p>
+                    </div>
+                </div>
+                <div class="stat-badge" style="background: var(--santander-pale); color: var(--santander);">
+                    <span id="mobileCount">355</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search -->
+        <div class="search-container" role="search">
+            <svg class="search-icon w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+            </svg>
+            <input type="text" id="searchMobile" class="search-input" placeholder="Buscar empresa...">
+        </div>
+        <div class="search-results-count" id="searchResultsMobile" style="display:none"></div>
+
+        <!-- Filters -->
+        <div id="filtersAreaMobile" class="filters-container"></div>
+        <div id="filtersSectorMobile" class="filters-container"></div>
+
+        <!-- Company List -->
+        <div class="sheet-content custom-scroll">
+            <div id="listMobile" class="company-list"></div>
+
+            <!-- POI Distances Panel Mobile -->
+            <div class="poi-distances-panel" style="display:none">
+                <div class="poi-panel-header" onclick="this.parentElement.classList.toggle('collapsed')">
+                    <span class="poi-panel-title">📍 Distancias a puntos clave</span>
+                    <svg class="poi-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><path d="m6 9 6 6 6-6"/></svg>
+                </div>
+                <div id="poiDistancesMobile" class="poi-distances-content"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== DETAIL MODAL ========== -->
+    <div id="detailModal" class="detail-overlay" role="dialog" aria-modal="true" aria-label="Detalle de empresa" onclick="if(event.target===this)closeDetail()">
+        <div class="detail-card">
+            <!-- Header -->
+            <div class="detail-header">
+                <button class="detail-close" onclick="closeDetail()">&times;</button>
+                <div class="detail-title" id="detailTitle"></div>
+                <div class="detail-sector-badge" id="detailSector"></div>
+                <div class="detail-area" id="detailArea"></div>
+            </div>
+
+            <!-- Body -->
+            <div class="detail-body">
+
+                <!-- Street View Photo Preview (facade thumbnail) -->
+                <div class="detail-section" id="detailPhotoSection" style="display:none">
+                    <div class="sv-photo-card" id="svPhotoCard">
+                        <div class="sv-photo-iframe-wrap">
+                            <iframe id="svPhotoIframe"
+                                src=""
+                                allowfullscreen
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"
+                                class="sv-photo-iframe">
+                            </iframe>
+                            <div class="sv-photo-overlay">
+                                <span class="sv-photo-label">Vista de fachada / Street View</span>
+                                <span class="sv-photo-expand-hint">Toca para ver en 360</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Audio Spot Button (prominent) -->
+                <div class="detail-section" id="detailAudioSection" style="display:none">
+                    <button id="audioPlayBtn" class="audio-play-btn" onclick="toggleAudio()">
+                        <div class="audio-icon-wrap">
+                            <svg class="audio-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="5 3 19 12 5 21 5 3" id="audioIconPlay"/>
+                            </svg>
+                            <div class="audio-waves" id="audioWaves">
+                                <span></span><span></span><span></span><span></span>
+                            </div>
+                            <canvas id="audioCanvas" class="audio-canvas" width="52" height="52"></canvas>
+                        </div>
+                        <div class="audio-text">
+                            <span class="audio-title" data-i18n="listenSpot">Escuchar spot de empresa</span>
+                            <span class="audio-duration" data-i18n="audioSeconds">~30 segundos</span>
+                        </div>
+                        <div class="audio-badge">AUDIO</div>
+                    </button>
+                    <audio id="audioPlayer" preload="none"></audio>
+                </div>
+
+                <!-- Description -->
+                <div class="detail-section" id="detailDescSection">
+                    <div class="detail-section-title" data-i18n="description">Descripción</div>
+                    <div class="detail-description" id="detailDesc"></div>
+                </div>
+
+                <!-- Panorama 360° (Google Street View Embed API) -->
+                <div class="detail-section" id="detailPanoramaSection" style="display:none">
+                    <div class="detail-section-title">
+                        <svg style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:4px" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12c0-3 4-6 10-6s10 3 10 6-4 6-10 6-10-3-10-6"/></svg>
+                        <span data-i18n="panorama360">Vista panorámica 360°</span>
+                    </div>
+                    <div class="panorama-distance" id="panoramaDistance"></div>
+                    <div class="panorama-embed-container">
+                        <iframe id="panoramaIframe"
+                            src=""
+                            allowfullscreen
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            class="panorama-iframe">
+                        </iframe>
+                    </div>
+                </div>
+
+                <!-- Street View EMBEBIDO (donde iba la altimetría en Vías Verdes) -->
+                <div class="detail-section" id="detailStreetViewSection" style="display:none">
+                    <div class="detail-section-title">
+                        <svg style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:4px" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+                        <span data-i18n="streetView">Vista de la zona</span>
+                    </div>
+                    <div class="streetview-embed-container">
+                        <iframe id="streetViewIframe"
+                            src=""
+                            allowfullscreen
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            class="streetview-iframe">
+                        </iframe>
+                    </div>
+                </div>
+
+                <!-- Mini-Map Location -->
+                <div class="detail-section" id="detailMapSection">
+                    <div class="detail-section-title">
+                        <svg style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:4px" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span data-i18n="location">Ubicación</span>
+                    </div>
+                    <div id="miniMapContainer" class="minimap-container"></div>
+                </div>
+
+                <!-- Info -->
+                <div class="detail-section">
+                    <div class="detail-section-title" data-i18n="contactInfo">Información de contacto</div>
+                    <div id="detailInfo"></div>
+                </div>
+
+                <!-- Transporte público cercano -->
+                <div class="detail-section" id="detailBusStopSection" style="display:none">
+                    <div class="detail-section-title">
+                        <svg style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:4px" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6v6"/><path d="M16 6v6"/><path d="M2 12h20"/><path d="M7 18H5a2 2 0 0 1-2-2V6a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v10a2 2 0 0 1-2 2h-2"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg>
+                        <span data-i18n="publicTransport">Transporte público</span>
+                    </div>
+                    <div id="detailBusStop"></div>
+                </div>
+
+                <!-- Distancias a puntos clave -->
+                <div class="detail-section" id="detailPOISection" style="display:none">
+                    <div class="detail-section-title">
+                        <svg style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:4px" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        <span data-i18n="poiDistances">Distancias a puntos clave</span>
+                    </div>
+                    <div id="detailPOI"></div>
+                </div>
+
+                <!-- CNAE -->
+                <div class="detail-section" id="detailCnaeSection">
+                    <div class="detail-section-title" data-i18n="economicActivity">Actividad económica</div>
+                    <div class="detail-description" id="detailCnae"></div>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="action-buttons" id="detailActions"></div>
+        </div>
+    </div>
+
+    <!-- App JS -->
+    <script src="app.js"></script>
+
+    <!-- Service Worker -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js').catch(() => {});
+            });
+        }
+    </script>
+</body>
+</html>

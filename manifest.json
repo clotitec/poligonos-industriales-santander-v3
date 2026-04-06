@@ -1,0 +1,25 @@
+{
+    "name": "Polígonos Industriales de Santander",
+    "short_name": "PI Santander",
+    "description": "Directorio interactivo de empresas en los polígonos industriales de Santander. Explora empresas en 4 áreas industriales.",
+    "start_url": "./index.html",
+    "scope": "./",
+    "display": "standalone",
+    "orientation": "portrait",
+    "lang": "es",
+    "categories": ["business", "navigation", "productivity"],
+    "background_color": "#FFFFFF",
+    "theme_color": "#1976d2",
+    "icons": [
+        {
+            "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='32' fill='%231976d2'/%3E%3Cg stroke='white' stroke-width='6' fill='none' stroke-linecap='round' stroke-linejoin='round' transform='translate(40,30)'%3E%3Crect width='72' height='96' x='20' y='16' rx='8'/%3E%3Cpath d='M44 40h.1M68 40h.1M56 40h.1M56 56h.1M56 72h.1M68 56h.1M68 72h.1M44 56h.1M44 72h.1'/%3E%3Cpath d='M50 112v-12h12v12'/%3E%3C/g%3E%3C/svg%3E",
+            "sizes": "192x192",
+            "type": "image/svg+xml"
+        },
+        {
+            "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='80' fill='%231976d2'/%3E%3Cg stroke='white' stroke-width='12' fill='none' stroke-linecap='round' stroke-linejoin='round' transform='translate(110,80)'%3E%3Crect width='170' height='240' x='55' y='36' rx='16'/%3E%3Cpath d='M110 90h.1M160 90h.1M135 90h.1M135 130h.1M135 170h.1M160 130h.1M160 170h.1M110 130h.1M110 170h.1'/%3E%3Cpath d='M120 276v-30h30v30'/%3E%3C/g%3E%3C/svg%3E",
+            "sizes": "512x512",
+            "type": "image/svg+xml"
+        }
+    ]
+}
