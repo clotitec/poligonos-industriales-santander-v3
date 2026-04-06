@@ -553,11 +553,66 @@ function loadCompanyMarkers() {
         });
     });
 
-    // Click point -> detail
+    // Click point -> Street View popup + detail access
+    let svPopup = null;
     map.on('click', 'company-points', (e) => {
         const props = e.features[0].properties;
         const company = empresas.find(c => c.id === props.id);
-        if (company) openDetail(company);
+        if (!company) return;
+
+        // Remove previous popup
+        if (svPopup) svPopup.remove();
+        popup.remove();
+
+        const coords = e.features[0].geometry.coordinates.slice();
+        const sectorColor = SECTOR_COLORS[company.sector] || SECTOR_COLORS.default;
+
+        // Build popup HTML with embedded Street View
+        let svContent = '';
+        if (company.streetView) {
+            svContent = `<div class="sv-popup-iframe-wrap">
+                <iframe src="${company.streetView}" class="sv-popup-iframe" allowfullscreen loading="eager" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>`;
+        } else {
+            svContent = `<div class="sv-popup-no-sv">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="1.5" width="32" height="32"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+                <span>Street View no disponible</span>
+            </div>`;
+        }
+
+        const gmapsBtn = company.googleMapsUrl
+            ? `<a href="${company.googleMapsUrl}" target="_blank" rel="noopener" class="sv-popup-btn sv-popup-btn-gmaps" title="Abrir en Google Maps">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Google Maps
+               </a>`
+            : '';
+
+        const popupHTML = `
+            <div class="sv-popup-container">
+                <div class="sv-popup-header" style="border-left: 3px solid ${sectorColor}">
+                    <strong class="sv-popup-title">${company.nombre}</strong>
+                    <span class="sv-popup-sector">${company.sector || ''}</span>
+                </div>
+                ${svContent}
+                <div class="sv-popup-actions">
+                    <button class="sv-popup-btn sv-popup-btn-detail" onclick="openDetailById(${company.id})">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M15 3h6v6"/><path d="M10 14L21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+                        Ver ficha completa
+                    </button>
+                    ${gmapsBtn}
+                </div>
+            </div>`;
+
+        svPopup = new maplibregl.Popup({
+            closeButton: true,
+            closeOnClick: false,
+            maxWidth: '340px',
+            className: 'sv-map-popup',
+            offset: 15
+        })
+        .setLngLat(coords)
+        .setHTML(popupHTML)
+        .addTo(map);
     });
 
     // Hover popup
@@ -565,13 +620,14 @@ function loadCompanyMarkers() {
 
     map.on('mouseenter', 'company-points', (e) => {
         map.getCanvas().style.cursor = 'pointer';
+        if (svPopup && svPopup.isOpen()) return; // Don't show hover if SV popup is open
         const props = e.features[0].properties;
         const coords = e.features[0].geometry.coordinates.slice();
         popup.setLngLat(coords)
             .setHTML(`<strong style="font-size:13px">${props.nombre}</strong><br><span style="color:#64748b;font-size:11px">${props.sector}</span>`)
             .addTo(map);
     });
-    map.on('mouseleave', 'company-points', () => { map.getCanvas().style.cursor = ''; popup.remove(); });
+    map.on('mouseleave', 'company-points', () => { map.getCanvas().style.cursor = ''; if (!svPopup || !svPopup.isOpen()) popup.remove(); });
     map.on('mouseenter', 'clusters', () => { map.getCanvas().style.cursor = 'pointer'; });
     map.on('mouseleave', 'clusters', () => { map.getCanvas().style.cursor = ''; });
 }

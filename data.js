@@ -430,7 +430,7 @@ const empresas = [
         cif: 'B39733746',
         cnae: 'Forja, estampación y embutición de metales; metalurgia de polvos',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775466175824!6m8!1m7!1sCAoSHENJQUJJaERKbDViRXpnZ2FFbWRkTmVSUGFQWFE.!2m2!1d43.45042746732852!2d-3.834258490859198!3f225.114992345916!4f2.9961784893014425!5f0.4000000000000002',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/Z2fcTj2GAuugwxgy7',
         audioUrl: './audio/SPOT_09_TALLERES_ORAN_ESTILO_D.mp3',
         lat: 43.45107735026919,
         lng: -3.834
@@ -474,7 +474,7 @@ const empresas = [
         cif: 'H39494364',
         cnae: 'Otras actividades postales y de correos',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775466514917!6m8!1m7!1sCAoSHENJQUJJaEEwckF2ZDM3VXF0RWV0TU43MHRVRlI.!2m2!1d43.45004446523752!2d-3.833397256388563!3f307.5158834335157!4f-1.7938680072328168!5f0.4000000000000002',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/umg4jb5tWZhTgjhz9',
         audioUrl: './audio/SPOT_11_MRW_ESTILO_E.mp3',
         lat: 43.44989794095887,
         lng: -3.8334484643459756
@@ -562,7 +562,7 @@ const empresas = [
         cif: 'B62745765',
         cnae: 'Otras actividades anexas al transporte',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775464522357!6m8!1m7!1sCAoSHENJQUJJaEJyMmZ0R2N1Nm82VFByR01ZS1RkNTI.!2m2!1d43.45231668006819!2d-3.831658297825004!3f330.4606221747607!4f2.4761896968789614!5f0.4000000000000002',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/P1sxPCfn6LEt8tim9',
         audioUrl: './audio/SPOT_15_NACEX_ESTILO_E.mp3',
         lat: 43.452418,
         lng: -3.8316675
@@ -584,7 +584,7 @@ const empresas = [
         cif: 'B23709892',
         cnae: 'Comercio al por menor de combustible para la automoción en establecimientos especializados',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775464621037!6m8!1m7!1sCAoSHENJQUJJaERQbVllbENiTUJwa1dTR1FwVDd0X0U.!2m2!1d43.45234723111522!2d-3.830661118747289!3f282.92334713856343!4f-1.2045475897285058!5f0.7820865974627469',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/cEQpsGexAMMhXjjP7',
         audioUrl: './audio/SPOT_16_PETROPRIX_ESTILO_B.mp3',
         lat: 43.452428,
         lng: -3.8308658
@@ -738,7 +738,7 @@ const empresas = [
         cif: 'B39848049',
         cnae: 'Comercio al por mayor de productos de perfumería y cosmética',
         streetView: '',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/PVQTRSMAbBmsiJwB9',
         audioUrl: './audio/SPOT_23_CHIWAWAP_ESTILO_E.mp3',
         lat: 43.45058742526702,
         lng: -3.834996171081033
@@ -804,7 +804,7 @@ const empresas = [
         cif: 'J39616834',
         cnae: 'Mantenimiento y reparación de vehículos de motor',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775463427150!6m8!1m7!1sCAoSHENJQUJJaEJBY1cxaXdoNlBSWXhxRW1PZUxxaUw.!2m2!1d43.45130556226106!2d-3.835385297762729!3f0.3107589093339982!4f3.6236088391978285!5f0.7820865974627469',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/4d5Wqa9w1cgjp3ks8',
         audioUrl: './audio/SPOT_26_TALLERES_MANOLO_ESTILO_D.mp3',
         lat: 43.4515436,
         lng: -3.835554
@@ -826,7 +826,7 @@ const empresas = [
         cif: 'A08472276',
         cnae: 'Comercio al por mayor de ferretería, fontanería y calefacción',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775463454189!6m8!1m7!1sCAoSHENJQUJJaEJ3dVpYNkJTb3poNkZEakdlRHNNT1Q.!2m2!1d43.45137499113748!2d-3.835117799194683!3f317.7885055920831!4f1.3738540990460848!5f0.7820865974627469',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/GkB9rWSndxtE7CDF7',
         audioUrl: './audio/SPOT_27_WURTH_ESTILO_C.mp3',
         lat: 43.4515436,
         lng: -3.835554
@@ -848,7 +848,7 @@ const empresas = [
         cif: 'B05550330',
         cnae: 'Comercio al por mayor de repuestos y accesorios de vehículos de motor',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775463487232!6m8!1m7!1sCAoSHENJQUJJaEJ3dVpYNkJTb3poNkZEakdlRHNNT1Q.!2m2!1d43.45137499113748!2d-3.835117799194683!3f13.74746221385439!4f4.009104114610807!5f1.350663054820219',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/PT94S56veYQWHFTG8',
         audioUrl: './audio/SPOT_28_DAVASA_AUTOMOCION_ESTILO_D.mp3',
         lat: 43.4515054,
         lng: -3.8350535
@@ -936,7 +936,7 @@ const empresas = [
         cif: '',
         cnae: 'Mantenimiento y reparación de vehículos de motor',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775466004755!6m8!1m7!1sCAoSHENJQUJJaEFzdzFfMXlLNWJwZEpjakQ0ZUp4VHM.!2m2!1d43.45281425860001!2d-3.831711390180831!3f207.51292613461484!4f-1.5307564951975365!5f0.7820865974627469',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/5DSpm2W6hpuekDUeA',
         audioUrl: './audio/SPOT_32_TALLER_GALINDO_ESTILO_D.mp3',
         lat: 43.4526914,
         lng: -3.8318537
@@ -958,7 +958,7 @@ const empresas = [
         cif: '',
         cnae: '',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775464563198!6m8!1m7!1sCAoSHENJQUJJaERLNWxDb0F1SHBoU3JCSkdTMjlLNWY.!2m2!1d43.45244724603265!2d-3.831113871498087!3f283.9074894268586!4f0.7222020859057494!5f0.6334206513034594',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/qa29tnUqK3yQ4N4C8',
         audioUrl: './audio/SPOT_33_CAFETERIA_ALTAMIRA_ESTILO_B.mp3',
         lat: 43.4525762,
         lng: -3.8312251
@@ -1002,7 +1002,7 @@ const empresas = [
         cif: 'B39741749',
         cnae: 'Actividades de cuidado diurno de niños',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775466768321!6m8!1m7!1sCAoSHENJQUJJaEJtWElvR19mZG14eGRZdkJkSTJVaXc.!2m2!1d43.45336079591236!2d-3.829669780420693!3f226.7897361529948!4f5.0880790119926615!5f0.7820865974627469',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/nAdhXvNGfNYSfjWW8',
         audioUrl: './audio/SPOT_35_DIMINUTOS_CANDINA_ESTILO_B.mp3',
         lat: 43.449345,
         lng: -3.850269
@@ -1068,7 +1068,7 @@ const empresas = [
         cif: 'A48027056',
         cnae: '',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775463720558!6m8!1m7!1sCAoSHENJQUJJaER2cHJTMzdNY2YxbzhwLTVEQ054MlM.!2m2!1d43.45165978701697!2d-3.834039978892436!3f323.53946365969813!4f4.706527645648691!5f0.7820865974627469',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/ARQczTDCVJJ3Km9U6',
         audioUrl: './audio/SPOT_38_ELECNOR_ESTILO_A.mp3',
         lat: 43.4518955,
         lng: -3.8305343
@@ -1112,7 +1112,7 @@ const empresas = [
         cif: 'B39854187',
         cnae: 'Otros tipos de transporte terrestre de pasajeros n.c.o.p.',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775463890026!6m8!1m7!1sCAoSHENJQUJJaERkUnBiTV91Y1B2blh4UDBYMW1zOTg.!2m2!1d43.45176692537753!2d-3.833663115864856!3f108.06691819413345!4f6.682938095517116!5f0.7820865974627469',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/NNemCRH12pL23rxRA',
         audioUrl: './audio/SPOT_40_TALLER_ALSA_ESTILO_F.mp3',
         lat: 43.4517188,
         lng: -3.8331202
@@ -1134,7 +1134,7 @@ const empresas = [
         cif: 'A24376337',
         cnae: 'Comercio al por mayor de repuestos y accesorios de vehículos de motor',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775464236329!6m8!1m7!1sCAoSHENJQUJJaERzb1BRaDdmZkpYTjBJSXdMWFZ0OUI.!2m2!1d43.45172777233102!2d-3.831858325891622!3f41.162794925266184!4f-0.6459768015500629!5f0.7820865974627469',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/ZjJMZX6An9sTrASK8',
         audioUrl: './audio/SPOT_41_RECAMBIOS_RAF_ESTILO_E.mp3',
         lat: 43.4514973,
         lng: -3.8318568
@@ -1156,7 +1156,7 @@ const empresas = [
         cif: '',
         cnae: '',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775464236329!6m8!1m7!1sCAoSHENJQUJJaERzb1BRaDdmZkpYTjBJSXdMWFZ0OUI.!2m2!1d43.45172777233102!2d-3.831858325891622!3f41.162794925266184!4f-0.6459768015500629!5f0.7820865974627469',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/ZjJMZX6An9sTrASK8',
         audioUrl: './audio/SPOT_42_TALLER_CGA_RALY_ESTILO_D.mp3',
         lat: 43.45168,
         lng: -3.8315
@@ -1178,7 +1178,7 @@ const empresas = [
         cif: 'B39809173',
         cnae: 'Comercio al por mayor de repuestos y accesorios de vehículos de motor',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775464364154!6m8!1m7!1sCAoSHENJQUJJaEFia3EzQlRuM3lWZkNrMmkyWTdMTXI.!2m2!1d43.45129724873598!2d-3.831638892737948!3f256.10075948871116!4f-0.10507008337486923!5f0.4000000000000002',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/TnXRMpXoFTLmaABEA',
         audioUrl: './audio/SPOT_43_RECAMBIOS_ARROSAM_ESTILO_C.mp3',
         lat: 43.45118,
         lng: -3.832
@@ -1222,7 +1222,7 @@ const empresas = [
         cif: 'H39788591',
         cnae: 'Alquiler de bienes inmobiliarios por cuenta propia',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775466591663!6m8!1m7!1sCAoSHENJQUJJaEFSQlFVMi1VakJ0b3gyRTIzTjBnRi0.!2m2!1d43.45116562594909!2d-3.833094682818265!3f34.00613486171062!4f4.579670350107492!5f0.7820865974627469',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/fViJx4o6L5iPjwDF7',
         audioUrl: './audio/SPOT_45_EL_TRASTERO_AMERICANO_ESTILO_B.mp3',
         lat: 43.4510983,
         lng: -3.8328028
@@ -1244,7 +1244,7 @@ const empresas = [
         cif: 'B39540695',
         cnae: 'Alquiler de maquinaria y equipo para la construcción e ingeniería civil',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775462969832!6m8!1m7!1sCAoSHENJQUJJaEJjSU5pYXZZX0lFdkVtZWxOSXNkRzg.!2m2!1d43.45073904337762!2d-3.83741292961943!3f248.19786483639078!4f-0.13266027274288206!5f1.3089208454651193',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/DFsVssQ24GQLbDTbA',
         audioUrl: './audio/SPOT_46_ALTOR_ALQUILERES_ESTILO_E.mp3',
         lat: 43.449228740150225,
         lng: -3.8342248667628307
@@ -1266,7 +1266,7 @@ const empresas = [
         cif: 'B81639270',
         cnae: 'Recogida de residuos no peligrosos',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775466555508!6m8!1m7!1sCAoSHENJQUJJaEJXUGFITjYtUXE0NXVtNlpCTXJTNUc.!2m2!1d43.45023888083425!2d-3.83259440797202!3f26.848948095505662!4f3.8173949180206677!5f0.7820865974627469',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/cDQYppuNAwrWWJu29',
         audioUrl: './audio/SPOT_47_EL_SACO_UTIL_ESTILO_E.mp3',
         lat: 43.450319,
         lng: -3.8325412
@@ -1288,7 +1288,7 @@ const empresas = [
         cif: 'B62733159',
         cnae: 'Distribución de energía eléctrica',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775466514917!6m8!1m7!1sCAoSHENJQUJJaEEwckF2ZDM3VXF0RWV0TU43MHRVRlI.!2m2!1d43.45004446523752!2d-3.833397256388563!3f307.5158834335157!4f-1.7938680072328168!5f0.4000000000000002',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/umg4jb5tWZhTgjhz9',
         audioUrl: './audio/SPOT_48_VIESGO_ESTILO_A.mp3',
         lat: 43.4514999,
         lng: -3.8340673
@@ -1310,7 +1310,7 @@ const empresas = [
         cif: 'B39413539',
         cnae: 'Fabricación de carpintería metálica',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775462348465!6m8!1m7!1sCAoSHENJQUJJaENCQ0FlcDdaVDNPc0RIczlhcTRQN2Y.!2m2!1d43.44915368143098!2d-3.836629269874958!3f205.95945057380405!4f-0.2571583008893299!5f0.7820865974627469',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/mktipmwS4ga7BUNj8',
         audioUrl: './audio/SPOT_49_ALUFASA_ESTILO_C.mp3',
         lat: 43.4490199,
         lng: -3.836671
@@ -1354,7 +1354,7 @@ const empresas = [
         cif: 'G39041710',
         cnae: 'Otras actividades asociativas n.c.o.p.',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775466482669!6m8!1m7!1sCAoSHENJQUJJaEEwckF2ZDM3VXF0RWV0TU43MHRVRlI.!2m2!1d43.45004446523752!2d-3.833397256388563!3f159.7197929979201!4f1.9685843559698384!5f0.4000000000000002',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/TnunFC5MzqLB2w9k6',
         audioUrl: './audio/SPOT_51_AMICA_ESTILO_A.mp3',
         lat: 43.4500445,
         lng: -3.8331475
@@ -1376,7 +1376,7 @@ const empresas = [
         cif: 'B88357322',
         cnae: 'Comercio al por mayor, no especializado, de productos alimenticios, bebidas y tabaco',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775466244800!6m8!1m7!1sCAoSHENJQUJJaEFZTnRfNWNwNnFzQlZIUW9YUUtCLUg.!2m2!1d43.44912967425039!2d-3.833589994668166!3f115.99981052703171!4f3.554956853688779!5f0.7820865974627469',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/68ekt6Tq4hLoidPM8',
         audioUrl: './audio/SPOT_52_TOP_CASH_ESTILO_B.mp3',
         lat: 43.4492767,
         lng: -3.833395
@@ -1442,7 +1442,7 @@ const empresas = [
         cif: 'B31881469',
         cnae: 'Hoteles y alojamientos similares',
         streetView: '',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/Z2fcTj2GAuugwxgy7',
         audioUrl: '',
         lat: 43.4524584,
         lng: -3.8282533
@@ -1464,7 +1464,7 @@ const empresas = [
         cif: 'B05186028',
         cnae: '',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775467431827!6m8!1m7!1sCAoSHENJQUJJaENfQ2k0Vk8wQkJIdXQzdUJCbzNPQ04.!2m2!1d43.45170278461986!2d-3.828016635349237!3f316.9926380262708!4f1.8977784321951106!5f0.4000000000000002',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/8KXbfFGuRzrD4fDt8',
         audioUrl: '',
         lat: 43.4519474,
         lng: -3.8283212
@@ -1508,7 +1508,7 @@ const empresas = [
         cif: 'B39540216',
         cnae: 'Venta de automóviles y vehículos de motor ligeros',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775467524770!6m8!1m7!1sCAoSHENJQUJJaEJjWjJkWWtHOUF0YXhqaUE5eTBOejg.!2m2!1d43.45092486981737!2d-3.829587738954195!3f232.00661473869118!4f-0.8248545813260364!5f0.7820865974627469',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/KuFTogmj3uU8EraNA',
         audioUrl: '',
         lat: 43.4505271,
         lng: -3.830295
@@ -1530,7 +1530,7 @@ const empresas = [
         cif: 'B23438427',
         cnae: 'Comercio al por mayor de combustibles sólidos, líquidos y gaseosos, y productos similares',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775467573443!6m8!1m7!1sCAoSHENJQUJJaEJuVXpGZVZrb3RscG5aRVpzTkNVQk8.!2m2!1d43.45026936108993!2d-3.83009574617791!3f255.78944309219665!4f-7.73246633173369!5f0.4000000000000002',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/b56ze1XyTXursYpi7',
         audioUrl: '',
         lat: 43.450132,
         lng: -3.8304387
@@ -1574,7 +1574,7 @@ const empresas = [
         cif: 'B39317797',
         cnae: 'Venta de automóviles y vehículos de motor ligeros',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775232051507!6m8!1m7!1sCAoSHENJQUJJaEJMMU9JS2lzTjBFYkgxZDBZT045aUE.!2m2!1d43.44363124249102!2d-3.83501207321668!3f311.37688879928464!4f6.46519513786933!5f0.4000000000000002',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/ruHBhpVMLTaPwnSa9',
         audioUrl: './audio/SPOT_54_MEGAMOTOR_TOYOTA_ESTILO_C.mp3',
         lat: 43.450103449907324,
         lng: -3.8325248453107097
@@ -1596,7 +1596,7 @@ const empresas = [
         cif: 'B39784277',
         cnae: 'Venta de automóviles y vehículos de motor ligeros',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775468485439!6m8!1m7!1sCAoSHENJQUJJaEFETjBFNDV2aUdSa3dpRzZjaHVuVTM.!2m2!1d43.44849414203568!2d-3.831408360867251!3f258.5537659171554!4f0.8032378882054303!5f0.4000000000000002',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/hfpBiZ9VzwFKVwkz9',
         audioUrl: '',
         lat: 43.4497415,
         lng: -3.8306185
@@ -1618,7 +1618,7 @@ const empresas = [
         cif: 'A39001888',
         cnae: 'Venta de automóviles y vehículos de motor ligeros',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775285912257!6m8!1m7!1sCAoSHENJQUJJaENDcmY3bEs3cG0wSGF2THRrbkNvM1c.!2m2!1d43.44700548861083!2d-3.832505453484774!3f335.2691563444379!4f0.8079752536256279!5f0.4000000000000002',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/TAntKAKpyDMBfdSc9',
         audioUrl: '',
         lat: 43.4472401,
         lng: -3.8326835
@@ -1640,7 +1640,7 @@ const empresas = [
         cif: 'A39013735',
         cnae: 'Venta de automóviles y vehículos de motor ligeros',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775232134337!6m8!1m7!1sCAoSHENJQUJJaERZQl9OSWhpaTN0Q0R6WEdfdUdvejE.!2m2!1d43.44435007378586!2d-3.834488181709387!3f262.49908488985426!4f1.3229080491783805!5f0.7820865974627469',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/rEtephTE4wTwTj5HA',
         audioUrl: '',
         lat: 43.44455,
         lng: -3.834505
@@ -1662,7 +1662,7 @@ const empresas = [
         cif: 'B39889720',
         cnae: 'Comercio al por menor de artículos deportivos en establecimientos especializados',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775284342960!6m8!1m7!1sCAoSHENJQUJJaEJBS2ZYSElnSTgtYURhUzJyR2EyMS0.!2m2!1d43.44288119713485!2d-3.837792071541034!3f68.7764961474381!4f3.6932167408297545!5f1.950578357192661',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/NJFDpv6GCUz2oLMEA',
         audioUrl: '',
         lat: 43.4429593,
         lng: -3.8375182
@@ -1684,7 +1684,7 @@ const empresas = [
         cif: 'B39783808',
         cnae: 'Venta de automóviles y vehículos de motor ligeros',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775470253281!6m8!1m7!1sCAoSHENJQUJJaENSUmMtdnNBRTFYeVhiVGViV05SbFc.!2m2!1d43.446752184477!2d-3.832202652328298!3f152.80849771365462!4f4.400824802520518!5f0.4000000000000002',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/62ZjtdHaUALze3tYA',
         audioUrl: '',
         lat: 43.4466202,
         lng: -3.8321753
@@ -1706,7 +1706,7 @@ const empresas = [
         cif: 'A39003355',
         cnae: 'Fundición de acero',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775232256076!6m8!1m7!1sCAoSHENJQUJJaEFXR2FHTEE3V0JwNzE2eFNQYnd2Z0g.!2m2!1d43.44569045628834!2d-3.833483883733249!3f232.24522140107155!4f-2.891658339137919!5f0.7820865974627469',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/RNXU3AW4SFbNWcgC6',
         audioUrl: '',
         lat: 43.4454022,
         lng: -3.8337866
@@ -1728,7 +1728,7 @@ const empresas = [
         cif: 'B72627409',
         cnae: 'Venta de automóviles y vehículos de motor ligeros',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775467629911!6m8!1m7!1sCAoSHENJQUJJaEN3a2pXZmlXWkxEejRCVmd2TWd2VS0.!2m2!1d43.44977497258295!2d-3.830477783354809!3f255.01281274559057!4f-2.265193764671423!5f0.40032598973851774',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/C8bxRcrdYBQLneKu7',
         audioUrl: '',
         lat: 43.4436603,
         lng: -3.835171
@@ -1750,7 +1750,7 @@ const empresas = [
         cif: 'A39454509',
         cnae: 'Comercio al por mayor de madera, materiales de construcción y aparatos sanitarios',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775231850869!6m8!1m7!1sCAoSHENJQUJJaEJYdzhlZ05ZU21GanFUMk9DQlYyT2k.!2m2!1d43.44242009900962!2d-3.835905627627122!3f335.983953155577!4f-0.6093604321089003!5f0.7820865974627469',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/aWVs6CiHTnAh2GsA7',
         audioUrl: '',
         lat: 43.4430054,
         lng: -3.8356379
@@ -1772,7 +1772,7 @@ const empresas = [
         cif: 'B39776711',
         cnae: 'Venta de automóviles y vehículos de motor ligeros',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775468066825!6m8!1m7!1sCAoSHENJQUJJaENPd1pCNUhQRlJ5RXNFUHdObkRpQzY.!2m2!1d43.44959268973688!2d-3.830608570813558!3f303.77998854235574!4f0.6506956481532598!5f0.4000000000000002',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/gG8yYubGUHvma8jp7',
         audioUrl: '',
         lat: 43.4500724,
         lng: -3.8307919
@@ -1794,7 +1794,7 @@ const empresas = [
         cif: 'B39580592',
         cnae: 'Venta de automóviles y vehículos de motor ligeros',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775468300421!6m8!1m7!1sCAoSHENJQUJJaERodjBkbE5NY3AtY0tIRUxscDJDZ1U.!2m2!1d43.44930874923936!2d-3.830814105727493!3f269.8104038982452!4f-2.579232852819217!5f0.4000000000000002',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/unMYBYTB6W8SbQxp6',
         audioUrl: '',
         lat: 43.4494552,
         lng: -3.8313155
@@ -1816,7 +1816,7 @@ const empresas = [
         cif: 'B39868765',
         cnae: 'Venta de automóviles y vehículos de motor ligeros',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775468377050!6m8!1m7!1sCAoSHENJQUJJaER5d2FOZmRILXluSENXRE11ZFRTTF8.!2m2!1d43.44891396585404!2d-3.83110781717461!3f297.31616563052296!4f10.732549926752739!5f0.7820865974627469',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/Bd3JzHNQDvpFVotV6',
         audioUrl: '',
         lat: 43.44896,
         lng: -3.83115
@@ -1838,7 +1838,7 @@ const empresas = [
         cif: 'B42846998',
         cnae: 'Venta de automóviles y vehículos de motor ligeros',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775468456717!6m8!1m7!1sCAoSHENJQUJJaEJXUTAwbmZKZWl0YkxWejFWb0ZlczA.!2m2!1d43.44862897470794!2d-3.831485127088547!3f54.23232090794422!4f8.750846725051474!5f0.4000000000000002',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/mEEYjdCw7wNUZk2F8',
         audioUrl: '',
         lat: 43.4436603,
         lng: -3.835171
@@ -1860,7 +1860,7 @@ const empresas = [
         cif: '',
         cnae: '',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775469518051!6m8!1m7!1sCAoSHENJQUJJaEFwWnJqLU12U2RWQVhPbFlGMURMMkM.!2m2!1d43.44811436845295!2d-3.831709527290217!3f303.28720116638!4f6.0330222259648!5f0.4000000000000002',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/AC6G47D7So1xJdgw6',
         audioUrl: '',
         lat: 43.4480928,
         lng: -3.8318099
@@ -1882,7 +1882,7 @@ const empresas = [
         cif: 'B74085408',
         cnae: 'Alquiler de automóviles y vehículos de motor ligeros',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775469596039!6m8!1m7!1sCAoSHENJQUJJaENVOTVlbEpRSk5FR29PcWd5ektxejA.!2m2!1d43.44778316704702!2d-3.831960630032608!3f260.28864042188104!4f-5.8603832062439665!5f0.4000000000000002',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/3GV5QEsMdKqCyckz8',
         audioUrl: '',
         lat: 43.4476631,
         lng: -3.8321277
@@ -1904,7 +1904,7 @@ const empresas = [
         cif: 'A39295514',
         cnae: 'Venta de automóviles y vehículos de motor ligeros',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775468021647!6m8!1m7!1sCAoSHENJQUJJaEFOR2dRQ0tPWF9KNC0tM3Q4anhkSi0.!2m2!1d43.45011687960481!2d-3.830702955323998!3f296.80806491999255!4f-2.1826138341222503!5f0.4000000000000002',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/Yw8FqHnqEebEoZXb8',
         audioUrl: '',
         lat: 43.4471323,
         lng: -3.8336464
@@ -1926,7 +1926,7 @@ const empresas = [
         cif: 'B39870555',
         cnae: 'Transporte de mercancías por carretera',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775285189321!6m8!1m7!1sCAoSHENJQUJJaEF4alNKYTRjUW9yWHZfa0RjTjRZSjc.!2m2!1d43.4472188006329!2d-3.833795231073486!3f193.0721530766732!4f6.563510150538292!5f1.2316357233712583',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/x7vTDF7CTUnrYuaM6',
         audioUrl: '',
         lat: 43.4470653,
         lng: -3.8338348
@@ -1948,7 +1948,7 @@ const empresas = [
         cif: 'A39290846',
         cnae: 'Venta de automóviles y vehículos de motor ligeros',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775285669668!6m8!1m7!1sCAoSHENJQUJJaENsazZORmJxRmRUTnFQQXpxRThqNVY.!2m2!1d43.44660245472267!2d-3.833470843048323!3f152.12573445672285!4f-1.817744076235556!5f0.7820865974627469',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/Appmvo1CSbCLj7Fz6',
         audioUrl: './audio/SPOT_58_HONDA_TECNOCAS_ESTILO_F.mp3',
         lat: 43.4467315,
         lng: -3.8333919
@@ -1970,7 +1970,7 @@ const empresas = [
         cif: 'A96933510',
         cnae: 'Comercio al por mayor de equipos electrónicos y de telecomunicaciones y sus componentes',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775285737601!6m8!1m7!1sCAoSHENJQUJJaEFPcDl6aHpMdGxNT2EtdHNoUS1KTzE.!2m2!1d43.44619872093244!2d-3.834687134097476!3f318.32483036851494!4f2.78862488440771!5f0.4000000000000002',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/5dtKnTXK2ZUZyddu9',
         audioUrl: '',
         lat: 43.4462858,
         lng: -3.8346685
@@ -2014,7 +2014,7 @@ const empresas = [
         cif: 'B39669551',
         cnae: 'Mantenimiento y reparación de vehículos de motor',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775284049358!6m8!1m7!1sCAoSHENJQUJJaEJObjh2djlyUDZYZkdUTVVDUGFnS3U.!2m2!1d43.44438531160746!2d-3.835606610026876!3f272.0030020861101!4f-6.426852867580223!5f0.4000000000000002',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/hErwD2ihG2FoBQxB9',
         audioUrl: '',
         lat: 43.4443888,
         lng: -3.8359143
@@ -2036,7 +2036,7 @@ const empresas = [
         cif: 'A39000641',
         cnae: 'Edición de periódicos',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775232095907!6m8!1m7!1sCAoSHENJQUJJaER3Mkh3eDhZWmNZTnBqUXU2cEMzcmE.!2m2!1d43.44383057140893!2d-3.834874986848192!3f344.5626260286263!4f2.17896424839536!5f0.7820865974627469',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/DkVSehoPYNE3DW7s7',
         audioUrl: '',
         lat: 43.4440599,
         lng: -3.8349767
@@ -2058,7 +2058,7 @@ const empresas = [
         cif: 'B39576822',
         cnae: 'Venta de automóviles y vehículos de motor ligeros',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775232021623!6m8!1m7!1sCAoSHENJQUJJaEFaQk5VSzhEWE85amdyaWNpakE3bng.!2m2!1d43.44349096542758!2d-3.835119584583857!3f315.8145200165891!4f10.53706108683943!5f0.7820865974627469',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/4LncKKFYUsB28Ej37',
         audioUrl: './audio/SPOT_55_LEXUS_SANTANDER_ESTILO_F.mp3',
         lat: 43.44974733964994,
         lng: -3.8354491960061052
@@ -2080,7 +2080,7 @@ const empresas = [
         cif: 'H39317797',
         cnae: 'Venta de automóviles y vehículos de motor ligeros',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775232051507!6m8!1m7!1sCAoSHENJQUJJaEJMMU9JS2lzTjBFYkgxZDBZT045aUE.!2m2!1d43.44363124249102!2d-3.83501207321668!3f311.37688879928464!4f6.46519513786933!5f0.4000000000000002',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/ruHBhpVMLTaPwnSa9',
         audioUrl: '',
         lat: 43.45212695330183,
         lng: -3.8334058426524287
@@ -2190,7 +2190,7 @@ const empresas = [
         cif: 'H3929',
         cnae: 'Venta de automóviles y vehículos de motor ligeros',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775469663254!6m8!1m7!1sCAoSHENJQUJJaEFtWWZKekJ1UUtTaU9vVVp2M2FIaTQ.!2m2!1d43.44665239050528!2d-3.832767970575951!3f323.1278743029678!4f-0.19444963901557344!5f0.4000000000000002',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/pbWxx5J25aGSu3hH7',
         audioUrl: '',
         lat: 43.45109857255126,
         lng: -3.83209167327198
@@ -2212,7 +2212,7 @@ const empresas = [
         cif: 'A39003744',
         cnae: 'comercio de cereales legumbres harina y todo producto destinado a la',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775285961146!6m8!1m7!1sCAoSHENJQUJJaEFVWnA4VzBhSnlkSGVqNUVMemZGd1I.!2m2!1d43.44732665618973!2d-3.832278022558753!3f359.2375093820855!4f1.765899915444379!5f1.3234981878922614',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/BDDzVhG6kaR9tQaS8',
         audioUrl: '',
         lat: 43.447546,
         lng: -3.832232
@@ -2234,7 +2234,7 @@ const empresas = [
         cif: 'A39009683',
         cnae: 'Comercio al por mayor de bebidas',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775458170160!6m8!1m7!1sCAoSHENJQUJJaERTc19aWFg2bGxra0JkS3FEZmw1ckE.!2m2!1d43.4524444234177!2d-3.854449996187209!3f21.709069880652862!4f-0.4683671769329152!5f0.4000000000000002',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/bgAmfgoVjgHj5oHR9',
         audioUrl: '',
         lat: 43.4526743,
         lng: -3.8543133
@@ -2256,7 +2256,7 @@ const empresas = [
         cif: 'B39775929',
         cnae: 'Venta de automóviles y vehículos de motor ligeros',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775458124554!6m8!1m7!1sCAoSHENJQUJJaEEzUUhzQUstbnBQTGp2dS0xdGlncU0.!2m2!1d43.45221391847004!2d-3.855261108491061!3f354.6498396806713!4f0.38149060854627237!5f0.7820865974627469',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/3crbmh4eccQ6eAcU6',
         audioUrl: '',
         lat: 43.4524223,
         lng: -3.8552819
@@ -2278,7 +2278,7 @@ const empresas = [
         cif: 'A28797777',
         cnae: 'Comercio al por mayor de bebidas',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775458082004!6m8!1m7!1sCAoSHENJQUJJaEE2NF96amEzTUtfQWNKcmRkSUo3SGQ.!2m2!1d43.45210557733087!2d-3.85570002306113!3f33.37136561035526!4f-1.0945392506636438!5f0.7820865974627469',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/QCbyT51Jtyw31Z1Z7',
         audioUrl: '',
         lat: 43.4525182,
         lng: -3.8556754
@@ -2300,7 +2300,7 @@ const empresas = [
         cif: 'B39318076',
         cnae: 'Venta de automóviles y vehículos de motor ligeros',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775458052143!6m8!1m7!1sCAoSHENJQUJJaEFKeDJabTNpclpjdVpQYnA5cC1xeEk.!2m2!1d43.45190558264473!2d-3.856411131666448!3f314.0466845164!4f-3.212700500894613!5f0.4000000000000002',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/UjKrJET59c5Yzmx87',
         audioUrl: '',
         lat: 43.4528074,
         lng: -3.8561529
@@ -2322,7 +2322,7 @@ const empresas = [
         cif: 'B39547930',
         cnae: 'Corte, tallado y acabado de la piedra',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775459722946!6m8!1m7!1sCAoSHENJQUJJaEFjeG1qVmNaR1FCd1M1WGkxQnZUTVA.!2m2!1d43.4526639050672!2d-3.856647212276618!3f331.5862374745484!4f2.3906649483658953!5f0.4000000000000002',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/8wMezJ6ZVMzsaQRF8',
         audioUrl: '',
         lat: 43.4525362,
         lng: -3.8566612
@@ -2344,7 +2344,7 @@ const empresas = [
         cif: 'B39318076',
         cnae: 'Venta de automóviles y vehículos de motor ligeros',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775458052143!6m8!1m7!1sCAoSHENJQUJJaEFKeDJabTNpclpjdVpQYnA5cC1xeEk.!2m2!1d43.45190558264473!2d-3.856411131666448!3f314.0466845164!4f-3.212700500894613!5f0.4000000000000002',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/UjKrJET59c5Yzmx87',
         audioUrl: '',
         lat: 43.4520778,
         lng: -3.8565833
@@ -2388,7 +2388,7 @@ const empresas = [
         cif: '',
         cnae: '',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775458289609!6m8!1m7!1sCAoSHENJQUJJaER0cW52WEJ4ZU5UbGItcE5RODBaVWY.!2m2!1d43.45218614311596!2d-3.857011120243085!3f31.845803437079766!4f-0.00438199358870861!5f0.4000000000000002',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/b2pcCokpZnGURE8A7',
         audioUrl: '',
         lat: 43.452198,
         lng: -3.85707
@@ -2410,7 +2410,7 @@ const empresas = [
         cif: 'B39270897',
         cnae: 'Otros tipos de transporte terrestre de pasajeros n.c.o.p.',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775459631842!6m8!1m7!1sCAoSHENJQUJJaEFyYTN2VGl6ZHJQWmhDUHFGU2V0ZEU.!2m2!1d43.4514889046129!2d-3.860191658533414!3f272.08438226454376!4f0.08174214818345149!5f0.7820865974627469',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/LxmRb9r2adkqq2PTA',
         audioUrl: '',
         lat: 43.4522661,
         lng: -3.8572058
@@ -2476,7 +2476,7 @@ const empresas = [
         cif: '',
         cnae: '',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775459825958!6m8!1m7!1sCAoSHENJQUJJaEN6c3lxNkNzQ3ZnT2g4MUZNamN0VDg.!2m2!1d43.45256109070854!2d-3.857305525698798!3f274.1729671077415!4f-4.776000454770113!5f0.7820865974627469',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/FLqTbs3mubF672mS7',
         audioUrl: '',
         lat: 43.452562,
         lng: -3.8575263
@@ -2520,7 +2520,7 @@ const empresas = [
         cif: 'A39000575',
         cnae: 'Venta de automóviles y vehículos de motor ligeros',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775457835064!6m8!1m7!1sCAoSHENJQUJJaENoMEkzUVlUZHBjS3Y3WmZVMDc4Z3c.!2m2!1d43.45121109377377!2d-3.858658368086648!3f29.421159947430013!4f-4.03779146689098!5f0.7820865974627469',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/rBuKfr4D6JK1TazV6',
         audioUrl: '',
         lat: 43.4514612,
         lng: -3.8584307
@@ -2564,7 +2564,7 @@ const empresas = [
         cif: 'B39413570',
         cnae: 'Alquiler de maquinaria y equipo para la construcción e ingeniería civil',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775459919720!6m8!1m7!1sCAoSHENJQUJJaEFISkFCSVBpNy1NcDNFZ0x1MzY2OTA.!2m2!1d43.45232498423797!2d-3.858177802072614!3f253.20318301605073!4f3.3914314107130537!5f0.4000000000000002',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/2qqLnH1R21X6c4Vp7',
         audioUrl: '',
         lat: 43.4522106,
         lng: -3.8583443
@@ -2586,7 +2586,7 @@ const empresas = [
         cif: 'B39249537',
         cnae: 'Reparación de maquinaria',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775457677476!6m8!1m7!1sCAoSHENJQUJJaEFBU1NpeVRJVm1IVlB2U2xtU3FDVTg.!2m2!1d43.45185835910483!2d-3.859069431119362!3f308.5253101089205!4f-3.6872738100367144!5f0.7820865974627469',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/cjW6G4hmqscJZgsdA',
         audioUrl: '',
         lat: 43.4519076,
         lng: -3.8592059
@@ -2608,7 +2608,7 @@ const empresas = [
         cif: '',
         cnae: '',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775457385088!6m8!1m7!1sCAoSHENJQUJJaEJ2T3JHNE1KWmwtNkNfVUlCSVdBMks.!2m2!1d43.45099447610347!2d-3.859786100572076!3f4.754328246202931!4f-4.100569800924447!5f0.7820865974627469',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/ddqJXv7N7yDWHhnE9',
         audioUrl: '',
         lat: 43.4512616,
         lng: -3.8597794
@@ -2630,7 +2630,7 @@ const empresas = [
         cif: 'B39580477',
         cnae: 'Comercio al por mayor de madera, materiales de construcción y aparatos sanitarios',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775457363192!6m8!1m7!1sCAoSHENJQUJJaEJyRmZSdGpkZkhTR3FZZGpodmNQV1U.!2m2!1d43.45091110140374!2d-3.859927758139387!3f352.6105647087203!4f1.4207430506850613!5f0.7820865974627469',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/SDcgFRSqRZmA4J299',
         audioUrl: '',
         lat: 43.4510628,
         lng: -3.8599846
@@ -2652,7 +2652,7 @@ const empresas = [
         cif: 'A39460118',
         cnae: 'Otra investigación y desarrollo experimental en ciencias naturales y técnicas',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775457329553!6m8!1m7!1sCAoSHENJQUJJaEJyRmZSdGpkZkhTR3FZZGpodmNQV1U.!2m2!1d43.45091110140374!2d-3.859927758139387!3f283.8910051318471!4f3.8736630754482917!5f0.7820865974627469',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/TF8vUYF8LvVDzbzb9',
         audioUrl: '',
         lat: 43.450979,
         lng: -3.8600376
@@ -2674,7 +2674,7 @@ const empresas = [
         cif: 'B72613318',
         cnae: 'Comercio al por menor de libros en establecimientos especializados',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775457439888!6m8!1m7!1sCAoSHENJQUJJaERxZHVrVWFSd2lwdnBsbDJSUUVqNnU.!2m2!1d43.45153607364745!2d-3.859972259199429!3f312.8753400184742!4f-0.4006049497798472!5f1.6045439760179896',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/nsBtasgarQfPWv7K8',
         audioUrl: '',
         lat: 43.4516216,
         lng: -3.8601445
@@ -2696,7 +2696,7 @@ const empresas = [
         cif: '',
         cnae: '',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775457533636!6m8!1m7!1sCAoSHENJQUJJaEFyYTN2VGl6ZHJQWmhDUHFGU2V0ZEU.!2m2!1d43.4514889046129!2d-3.860191658533414!3f333.71814116257326!4f-3.3391848960019104!5f0.7188700576992046',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/HspSwHSFESFkaoaL9',
         audioUrl: '',
         lat: 43.4515218,
         lng: -3.8602777
@@ -2740,7 +2740,7 @@ const empresas = [
         cif: 'A39033428',
         cnae: 'Venta de automóviles y vehículos de motor ligeros',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775457294730!6m8!1m7!1sCAoSHENJQUJJaEI3MVgwSkZFM19iMWFHNHBwVFNManE.!2m2!1d43.45058331433727!2d-3.860202764436184!3f294.87018987300087!4f-0.2280816172888649!5f0.7820865974627469',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/pSjLxQtmn5ivZpEg8',
         audioUrl: '',
         lat: 43.450909,
         lng: -3.8607565
@@ -2762,7 +2762,7 @@ const empresas = [
         cif: 'H39432042',
         cnae: 'Fabricación de artículos confeccionados con textiles, excepto prendas de vestir',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775457105444!6m8!1m7!1sCAoSHENJQUJJaEJDbl9uTEY0SjlNdXBnQ0JQRG5uT3g.!2m2!1d43.45098052390671!2d-3.861422253802257!3f21.351825390202862!4f-5.2496022962942845!5f0.7820865974627469',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/q9QJ2EY6CMXA1NUg8',
         audioUrl: '',
         lat: 43.4511138,
         lng: -3.8613937
@@ -2806,7 +2806,7 @@ const empresas = [
         cif: 'B39299789',
         cnae: 'Comercio al por menor de muebles, aparatos de iluminación y otros artículos de uso doméstico en establecimientos especializados',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775456664592!6m8!1m7!1sCAoSHENJQUJJaENFSS1DMVE3anZwQXhqdkE5TUQxNDM.!2m2!1d43.45043608228097!2d-3.860900033557225!3f15.05129846220973!4f3.241919972023382!5f0.4000000000000002',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/M4PHvzbVagsBFuR9A',
         audioUrl: '',
         lat: 43.4506592,
         lng: -3.8609062
@@ -2828,7 +2828,7 @@ const empresas = [
         cif: '',
         cnae: '',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775456695964!6m8!1m7!1sCAoSHENJQUJJaEN6R3kyVG9jclVoaTU2TnBNUkgxY3c.!2m2!1d43.4503395743565!2d-3.861161298344723!3f350.5156968310287!4f-0.3317342786156843!5f0.4000000000000002',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/eWGUJn3xnLjLb6Rw8',
         audioUrl: '',
         lat: 43.4504279,
         lng: -3.861174
@@ -2850,7 +2850,7 @@ const empresas = [
         cif: '',
         cnae: '',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775456854708!6m8!1m7!1sCAoSHENJQUJJaEItTzJvU0w5NTN1Wlk1TUVXQzVwel8.!2m2!1d43.45016266061906!2d-3.861628456152803!3f22.200929049797413!4f-0.06800397476347086!5f0.47044924538470567',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/5sFeEMX5KR19MzwA9',
         audioUrl: '',
         lat: 43.4503071,
         lng: -3.8615883
@@ -2938,7 +2938,7 @@ const empresas = [
         cif: '',
         cnae: '',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775456904792!6m8!1m7!1sCAoSHENJQUJJaEIxdm9sWGJFR1NyS09CdEYwa0cxQnM.!2m2!1d43.45058017757004!2d-3.862160236815859!3f237.98038381222975!4f-0.27262265294493204!5f0.4000000000000002',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/BY8Q1S7vAVpuPXbu5',
         audioUrl: '',
         lat: 43.4505583,
         lng: -3.8622489
@@ -2982,7 +2982,7 @@ const empresas = [
         cif: 'A39034772',
         cnae: 'Comercio al por mayor de madera, materiales de construcción y aparatos sanitarios',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775457018445!6m8!1m7!1sCAoSHENJQUJJaEExejRBUF83VkYxa0c0bHJmdjhqcEo.!2m2!1d43.44965327302888!2d-3.862507097163581!3f294.56799266023575!4f-3.4793011455911937!5f0.4000000000000002',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/ES3qC8LByeyD9Q3BA',
         audioUrl: '',
         lat: 43.4497454,
         lng: -3.8628731
@@ -3158,7 +3158,7 @@ const empresas = [
         cif: '',
         cnae: '',
         streetView: '',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/LJ6693BFyYifsAMU6',
         audioUrl: '',
         lat: 43.452003,
         lng: -3.8343849
@@ -3202,7 +3202,7 @@ const empresas = [
         cif: '',
         cnae: '',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775466175824!6m8!1m7!1sCAoSHENJQUJJaERKbDViRXpnZ2FFbWRkTmVSUGFQWFE.!2m2!1d43.45042746732852!2d-3.834258490859198!3f225.114992345916!4f2.9961784893014425!5f0.4000000000000002',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/Z2fcTj2GAuugwxgy7',
         audioUrl: '',
         lat: 43.4502568,
         lng: -3.8342088
@@ -3224,7 +3224,7 @@ const empresas = [
         cif: '',
         cnae: '',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775468066825!6m8!1m7!1sCAoSHENJQUJJaENPd1pCNUhQRlJ5RXNFUHdObkRpQzY.!2m2!1d43.44959268973688!2d-3.830608570813558!3f303.77998854235574!4f0.6506956481532598!5f0.4000000000000002',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/gG8yYubGUHvma8jp7',
         audioUrl: '',
         lat: 43.4482861,
         lng: -3.8329294
@@ -3246,7 +3246,7 @@ const empresas = [
         cif: '',
         cnae: '',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775468485439!6m8!1m7!1sCAoSHENJQUJJaEFETjBFNDV2aUdSa3dpRzZjaHVuVTM.!2m2!1d43.44849414203568!2d-3.831408360867251!3f258.5537659171554!4f0.8032378882054303!5f0.4000000000000002',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/hfpBiZ9VzwFKVwkz9',
         audioUrl: '',
         lat: 43.4485469,
         lng: -3.8314958
@@ -3268,7 +3268,7 @@ const empresas = [
         cif: '',
         cnae: '',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775468456717!6m8!1m7!1sCAoSHENJQUJJaEJXUTAwbmZKZWl0YkxWejFWb0ZlczA.!2m2!1d43.44862897470794!2d-3.831485127088547!3f54.23232090794422!4f8.750846725051474!5f0.4000000000000002',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/mEEYjdCw7wNUZk2F8',
         audioUrl: '',
         lat: 43.4487255,
         lng: -3.8313718
@@ -3290,7 +3290,7 @@ const empresas = [
         cif: '',
         cnae: '',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775462879616!6m8!1m7!1sCAoSHENJQUJJaEJKTzY1UlNlMVRTUWwxQlc5RUZhQ2I.!2m2!1d43.45018874939908!2d-3.837153881974188!3f181.6634618985853!4f5.4865220824905805!5f0.7820865974627469',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/2aUjgnEEbNPasQQN9',
         audioUrl: '',
         lat: 43.449899,
         lng: -3.837126
@@ -3312,7 +3312,7 @@ const empresas = [
         cif: '',
         cnae: '',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775457835064!6m8!1m7!1sCAoSHENJQUJJaENoMEkzUVlUZHBjS3Y3WmZVMDc4Z3c.!2m2!1d43.45121109377377!2d-3.858658368086648!3f29.421159947430013!4f-4.03779146689098!5f0.7820865974627469',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/rBuKfr4D6JK1TazV6',
         audioUrl: '',
         lat: 43.4515557,
         lng: -3.8581447
@@ -3334,7 +3334,7 @@ const empresas = [
         cif: '',
         cnae: '',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775456664592!6m8!1m7!1sCAoSHENJQUJJaENFSS1DMVE3anZwQXhqdkE5TUQxNDM.!2m2!1d43.45043608228097!2d-3.860900033557225!3f15.05129846220973!4f3.241919972023382!5f0.4000000000000002',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/M4PHvzbVagsBFuR9A',
         audioUrl: '',
         lat: 43.4516805,
         lng: -3.859889
@@ -3356,7 +3356,7 @@ const empresas = [
         cif: '',
         cnae: '',
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775456825802!6m8!1m7!1sCAoSHENJQUJJaEFEWENXY0kyMUNHekR4V3J5cVBlVFQ.!2m2!1d43.45047619520921!2d-3.861850580893755!3f35.03661293578319!4f1.6611586911763538!5f0.4000000000000002',
-        googleMapsUrl: '',
+        googleMapsUrl: 'https://maps.app.goo.gl/MS6KxAafVTSYWzAXA',
         audioUrl: '',
         lat: 43.4508117,
         lng: -3.8619735
