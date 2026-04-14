@@ -1606,8 +1606,7 @@ function emailCompany() {
 
 function solicitarCambios() {
     if (!selectedCompany) return;
-    const empresa = encodeURIComponent(selectedCompany.nombre);
-    window.open(`formulario-empresas.html?empresa=${empresa}`, '_blank');
+    window.open(`formulario-empresas.html?id=${selectedCompany.id}`, '_blank');
 }
 
 function shareCompany() {

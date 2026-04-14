@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0a1628">
+    <title>Verificar datos | Directorio Empresarial de Santander</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+                    colors: {
+                        santander: { DEFAULT: '#00696c', light: '#14c8cc', dark: '#004f51', accent: '#3c4949', glow: '#14c8cc', pale: '#e0f7fa' }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background: linear-gradient(135deg, #0a1628 0%, #0f2035 50%, #0a1628 100%); min-height: 100vh; }
+        .glass-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(20px); }
+
+        /* Campo editable */
+        .field-row { display: flex; align-items: flex-start; gap: 12px; padding: 12px 16px; border-radius: 12px; transition: background 0.2s; }
+        .field-row:hover { background: rgba(255,255,255,0.03); }
+        .field-label { font-size: 12px; color: rgba(255,255,255,0.45); font-weight: 500; min-width: 100px; padding-top: 2px; flex-shrink: 0; }
+        .field-value { font-size: 14px; color: rgba(255,255,255,0.85); flex: 1; min-height: 24px; word-break: break-word; }
+        .field-value.empty { color: rgba(255,255,255,0.2); font-style: italic; }
+        .field-actions { flex-shrink: 0; }
+
+        .btn-edit { background: rgba(20,200,204,0.1); border: 1px solid rgba(20,200,204,0.2); color: #14c8cc; font-size: 11px; font-weight: 600;
+                     padding: 4px 12px; border-radius: 8px; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+        .btn-edit:hover { background: rgba(20,200,204,0.2); }
+
+        .field-input { background: rgba(255,255,255,0.08); border: 1px solid rgba(20,200,204,0.4); border-radius: 10px;
+                        padding: 8px 12px; font-size: 14px; color: white; width: 100%; outline: none; transition: all 0.2s; font-family: inherit; }
+        .field-input:focus { border-color: #14c8cc; box-shadow: 0 0 0 3px rgba(20,200,204,0.15); background: rgba(255,255,255,0.1); }
+        .field-input::placeholder { color: rgba(255,255,255,0.25); }
+
+        /* Campo modificado */
+        .field-row.modified { background: rgba(20,200,204,0.06); border-left: 3px solid #14c8cc; }
+        .field-row.modified .field-value { color: #14c8cc; font-weight: 500; }
+        .badge-modified { display: inline-block; font-size: 10px; background: rgba(20,200,204,0.2); color: #14c8cc;
+                          padding: 1px 8px; border-radius: 99px; font-weight: 600; margin-left: 8px; }
+
+        .btn-primary { background: linear-gradient(135deg, #00696c, #14c8cc); transition: all 0.3s; }
+        .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 25px rgba(20,200,204,0.3); }
+        .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; transform: none; box-shadow: none; }
+
+        .btn-cancel { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.6);
+                       font-size: 11px; padding: 4px 12px; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
+        .btn-cancel:hover { background: rgba(255,255,255,0.1); color: white; }
+
+        .counter { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%;
+                    background: #14c8cc; color: #0a1628; font-size: 11px; font-weight: 700; }
+
+        select option { background: #1a2a3a; color: white; }
+
+        .success-animation { animation: successPulse 0.6s ease; }
+        @keyframes successPulse { 0% { transform: scale(0.8); opacity: 0; } 50% { transform: scale(1.05); } 100% { transform: scale(1); opacity: 1; } }
+
+        .input-auth { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 12px;
+                       padding: 10px 14px; font-size: 14px; color: white; width: 100%; outline: none; transition: all 0.2s; font-family: inherit; }
+        .input-auth:focus { background: rgba(255,255,255,0.1); border-color: #14c8cc; box-shadow: 0 0 0 3px rgba(20,200,204,0.15); }
+        .input-auth::placeholder { color: rgba(255,255,255,0.25); }
+    </style>
+</head>
+<body class="font-sans text-white antialiased">
+
+    <!-- Header -->
+    <header class="pt-8 pb-4 px-4">
+        <div class="max-w-2xl mx-auto text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-santander/20 text-santander-light text-xs font-medium tracking-wide mb-4">
+                DIRECTORIO EMPRESARIAL DE SANTANDER
+            </div>
+            <h1 class="text-2xl sm:text-3xl font-bold text-white mb-2">Verificar y actualizar datos</h1>
+            <p class="text-white/50 text-sm max-w-md mx-auto">
+                Revisa la ficha de tu empresa. Pulsa <strong class="text-santander-light">Modificar</strong> en cualquier campo para corregirlo.
+            </p>
+        </div>
+    </header>
+
+    <main class="px-4 pb-12">
+        <div class="max-w-2xl mx-auto">
+
+            <!-- Selector de empresa (si no viene por URL) -->
+            <div id="selectorEmpresa" class="glass-card rounded-2xl p-6 mb-6">
+                <label class="block text-xs font-medium text-white/60 mb-2">Selecciona tu empresa</label>
+                <select id="selectEmpresa" class="input-auth w-full" onchange="cargarEmpresa(this.value)">
+                    <option value="">-- Busca tu empresa --</option>
+                </select>
+            </div>
+
+            <!-- Ficha de la empresa (oculta hasta seleccionar) -->
+            <div id="fichaEmpresa" class="hidden space-y-6">
+
+                <!-- Cabecera empresa -->
+                <div class="glass-card rounded-2xl p-6">
+                    <div class="flex items-center gap-4 mb-2">
+                        <div class="w-12 h-12 rounded-xl bg-santander/20 flex items-center justify-center text-2xl" id="fichaEmoji"></div>
+                        <div>
+                            <h2 class="text-lg font-bold text-white" id="fichaNombre"></h2>
+                            <p class="text-sm text-white/40" id="fichaArea"></p>
+                        </div>
+                    </div>
+                    <p class="text-xs text-white/30 mt-3">Estos son los datos que aparecen actualmente en el directorio. Modifica los que necesites corregir.</p>
+                </div>
+
+                <!-- Datos de la empresa -->
+                <div class="glass-card rounded-2xl overflow-hidden">
+                    <div class="px-6 pt-5 pb-3">
+                        <h3 class="text-sm font-semibold text-santander-light flex items-center gap-2">
+                            <span class="w-5 h-5 rounded-full bg-santander/30 flex items-center justify-center text-[10px] font-bold">1</span>
+                            Datos de la empresa
+                        </h3>
+                        <p class="text-white/30 text-xs mt-1">Pulsa "Modificar" en los campos que quieras corregir</p>
+                    </div>
+                    <div class="divide-y divide-white/5" id="camposEmpresa">
+                        <!-- Se rellena por JS -->
+                    </div>
+                </div>
+
+                <!-- Observaciones -->
+                <div class="glass-card rounded-2xl p-6">
+                    <h3 class="text-sm font-semibold text-santander-light flex items-center gap-2 mb-1">
+                        <span class="w-5 h-5 rounded-full bg-santander/30 flex items-center justify-center text-[10px] font-bold">2</span>
+                        Observaciones
+                    </h3>
+                    <p class="text-white/30 text-xs mb-4">Cualquier comentario adicional sobre la ficha, datos que falten o correcciones del spot de audio</p>
+                    <textarea id="observaciones" rows="4" placeholder="Ej: El horario es de L-V 8:00-18:00. El texto del spot tiene un error en el nombre..."
+                        class="input-auth w-full resize-none"></textarea>
+                </div>
+
+                <!-- Datos de verificacion -->
+                <div class="glass-card rounded-2xl p-6">
+                    <h3 class="text-sm font-semibold text-santander-light flex items-center gap-2 mb-1">
+                        <span class="w-5 h-5 rounded-full bg-santander/30 flex items-center justify-center text-[10px] font-bold">3</span>
+                        Datos de verificacion
+                    </h3>
+                    <p class="text-white/30 text-xs mb-4">Para confirmar la autoria de los cambios</p>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-medium text-white/50 mb-1.5">Nombre y apellidos *</label>
+                            <input type="text" id="authNombre" required placeholder="Tu nombre completo" class="input-auth">
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-white/50 mb-1.5">Cargo en la empresa *</label>
+                                <input type="text" id="authCargo" required placeholder="Ej: Gerente, Administrador..." class="input-auth">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-white/50 mb-1.5">Telefono de contacto *</label>
+                                <input type="tel" id="authTelefono" required placeholder="942 XXX XXX / 6XX XXX XXX" class="input-auth">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-white/50 mb-1.5">Email (opcional)</label>
+                            <input type="email" id="authEmail" placeholder="tu@empresa.com" class="input-auth">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resumen y enviar -->
+                <div id="resumenCambios" class="hidden glass-card rounded-2xl p-6">
+                    <h3 class="text-sm font-semibold text-amber-400 flex items-center gap-2 mb-3">
+                        <span class="counter" style="background:#f59e0b;color:#0a1628" id="contadorCambios">0</span>
+                        Campos modificados
+                    </h3>
+                    <div id="listaCambios" class="space-y-2 text-sm"></div>
+                </div>
+
+                <div class="flex flex-col items-center gap-3">
+                    <button type="button" id="btnEnviar" onclick="enviarFormulario()" disabled
+                        class="btn-primary w-full sm:w-auto px-10 py-3.5 rounded-xl text-sm font-semibold text-white tracking-wide">
+                        Enviar cambios para verificacion
+                    </button>
+                    <p class="text-white/30 text-xs text-center">
+                        Revisaremos los cambios y actualizaremos la ficha en 48-72h
+                    </p>
+                </div>
+            </div>
+
+            <!-- Mensaje exito -->
+            <div id="msgExito" class="hidden glass-card rounded-2xl p-8 text-center success-animation">
+                <div class="w-16 h-16 rounded-full bg-emerald-500/20 flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-8 h-8 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">Cambios enviados correctamente</h3>
+                <p class="text-white/50 text-sm mb-6">
+                    Hemos recibido tu solicitud. Verificaremos los datos y actualizaremos la ficha.<br>
+                    Te confirmaremos por telefono o email.
+                </p>
+                <a href="javascript:history.back()" class="px-6 py-2.5 rounded-xl text-sm font-medium text-santander-light border border-santander/30 hover:bg-santander/10 transition inline-block">
+                    Volver al directorio
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="pb-8 px-4 text-center">
+        <p class="text-white/20 text-xs">
+            Concejalía de Empleo, Emprendimiento y Desarrollo Empresarial &mdash; Ayuntamiento de Santander
+        </p>
+    </footer>
+
+    <script src="data.js"></script>
+
+    <script>
+    // ---- Estado ----
+    let empresaActual = null;
+    let valoresOriginales = {};
+    let valoresModificados = {};
+
+    // Definicion de campos editables
+    const CAMPOS = [
+        { key: 'nombre',      label: 'Nombre',             type: 'text' },
+        { key: 'descripcion', label: 'Descripcion',        type: 'text' },
+        { key: 'sector',      label: 'Sector',             type: 'text' },
+        { key: 'actividad',   label: 'Actividad',          type: 'text' },
+        { key: 'direccion',   label: 'Direccion',          type: 'text' },
+        { key: 'nave',        label: 'Nave / Local',       type: 'text' },
+        { key: 'cp',          label: 'Codigo postal',      type: 'text' },
+        { key: 'telefono',    label: 'Telefono',           type: 'tel' },
+        { key: 'email',       label: 'Email',              type: 'email' },
+        { key: 'web',         label: 'Pagina web',         type: 'url' },
+        { key: 'cnae',        label: 'CNAE / Actividad economica', type: 'text' }
+    ];
+
+    const SECTOR_EMOJIS = {
+        'Automocion': '🚗', 'Concesionario': '🏎️', 'Taller': '🔧', 'Almacen': '📦',
+        'Construccion': '🏗️', 'Industria': '🏭', 'Logistica': '🚛', 'Servicios': '💼',
+        'Comercio': '🛒', 'Hosteleria': '🍽️', 'Tecnologia': '💻', 'default': '🏢'
+    };
+
+    // ---- Inicializacion ----
+    (function init() {
+        const select = document.getElementById('selectEmpresa');
+        let lista = [];
+        if (typeof empresas !== 'undefined') {
+            lista = empresas.map(e => ({ id: e.id, nombre: e.nombre, area: e.area || '' }));
+        }
+        lista.sort((a, b) => a.nombre.localeCompare(b.nombre, 'es'));
+        const vistos = new Set();
+        lista = lista.filter(e => { if (vistos.has(e.nombre)) return false; vistos.add(e.nombre); return true; });
+
+        lista.forEach(e => {
+            const opt = document.createElement('option');
+            opt.value = e.id;
+            opt.textContent = e.nombre + (e.area ? ` — ${e.area.replace('Polígono Industrial de ', '')}` : '');
+            select.appendChild(opt);
+        });
+
+        // Pre-seleccionar si viene por URL
+        const params = new URLSearchParams(window.location.search);
+        const empresaParam = params.get('empresa');
+        const idParam = params.get('id');
+
+        if (idParam) {
+            select.value = idParam;
+            cargarEmpresa(idParam);
+        } else if (empresaParam) {
+            const decoded = decodeURIComponent(empresaParam);
+            const emp = lista.find(e => e.nombre === decoded) || lista.find(e => e.nombre.toLowerCase().includes(decoded.toLowerCase()));
+            if (emp) { select.value = emp.id; cargarEmpresa(emp.id); }
+        }
+    })();
+
+    // ---- Cargar empresa ----
+    function cargarEmpresa(idStr) {
+        if (!idStr) return;
+        const id = parseInt(idStr);
+        empresaActual = empresas.find(e => e.id === id);
+        if (!empresaActual) return;
+
+        valoresOriginales = {};
+        valoresModificados = {};
+
+        // Cabecera
+        const emoji = SECTOR_EMOJIS[empresaActual.sector] || SECTOR_EMOJIS.default;
+        document.getElementById('fichaEmoji').textContent = emoji;
+        document.getElementById('fichaNombre').textContent = empresaActual.nombre;
+        document.getElementById('fichaArea').textContent = empresaActual.area;
+
+        // Generar campos
+        const container = document.getElementById('camposEmpresa');
+        container.innerHTML = '';
+
+        CAMPOS.forEach(campo => {
+            const valor = empresaActual[campo.key] || '';
+            valoresOriginales[campo.key] = valor;
+
+            const row = document.createElement('div');
+            row.className = 'field-row';
+            row.id = `row-${campo.key}`;
+            row.innerHTML = renderCampoVista(campo, valor);
+            container.appendChild(row);
+        });
+
+        document.getElementById('fichaEmpresa').classList.remove('hidden');
+        actualizarResumen();
+    }
+
+    // ---- Renderizar campo en modo vista ----
+    function renderCampoVista(campo, valor) {
+        const modificado = valoresModificados.hasOwnProperty(campo.key);
+        const valorMostrar = modificado ? valoresModificados[campo.key] : valor;
+        const isEmpty = !valorMostrar;
+
+        return `
+            <div class="field-label">${campo.label}</div>
+            <div class="field-value ${isEmpty ? 'empty' : ''}">${isEmpty ? 'Sin datos' : escapeHTML(valorMostrar)}${modificado ? '<span class="badge-modified">modificado</span>' : ''}</div>
+            <div class="field-actions">
+                <button class="btn-edit" onclick="editarCampo('${campo.key}')">Modificar</button>
+            </div>`;
+    }
+
+    // ---- Renderizar campo en modo edicion ----
+    function editarCampo(key) {
+        const campo = CAMPOS.find(c => c.key === key);
+        if (!campo) return;
+
+        const row = document.getElementById(`row-${key}`);
+        const valorActual = valoresModificados.hasOwnProperty(key) ? valoresModificados[key] : (valoresOriginales[key] || '');
+
+        row.innerHTML = `
+            <div class="field-label">${campo.label}</div>
+            <div style="flex:1">
+                ${campo.type === 'textarea'
+                    ? `<textarea id="input-${key}" class="field-input" rows="3" placeholder="Introduce ${campo.label.toLowerCase()}...">${escapeHTML(valorActual)}</textarea>`
+                    : `<input id="input-${key}" type="${campo.type}" class="field-input" value="${escapeHTML(valorActual)}" placeholder="Introduce ${campo.label.toLowerCase()}...">`}
+                <div style="display:flex;gap:8px;margin-top:8px">
+                    <button class="btn-edit" onclick="guardarCampo('${key}')" style="background:rgba(16,185,129,0.15);border-color:rgba(16,185,129,0.3);color:#10b981">Guardar</button>
+                    <button class="btn-cancel" onclick="cancelarEdicion('${key}')">Cancelar</button>
+                    ${valoresModificados.hasOwnProperty(key) ? `<button class="btn-cancel" onclick="restaurarCampo('${key}')" style="color:#f59e0b;border-color:rgba(245,158,11,0.3)">Restaurar original</button>` : ''}
+                </div>
+            </div>`;
+
+        const input = document.getElementById(`input-${key}`);
+        input.focus();
+        input.addEventListener('keydown', e => { if (e.key === 'Enter' && campo.type !== 'textarea') guardarCampo(key); if (e.key === 'Escape') cancelarEdicion(key); });
+    }
+
+    // ---- Guardar campo editado ----
+    function guardarCampo(key) {
+        const input = document.getElementById(`input-${key}`);
+        const nuevoValor = input.value.trim();
+        const original = valoresOriginales[key] || '';
+
+        if (nuevoValor === original) {
+            // No cambio, quitar de modificados
+            delete valoresModificados[key];
+        } else {
+            valoresModificados[key] = nuevoValor;
+        }
+
+        // Volver a vista
+        const campo = CAMPOS.find(c => c.key === key);
+        const row = document.getElementById(`row-${key}`);
+        const modificado = valoresModificados.hasOwnProperty(key);
+        row.className = `field-row${modificado ? ' modified' : ''}`;
+        row.innerHTML = renderCampoVista(campo, valoresOriginales[key]);
+        actualizarResumen();
+    }
+
+    // ---- Cancelar edicion ----
+    function cancelarEdicion(key) {
+        const campo = CAMPOS.find(c => c.key === key);
+        const row = document.getElementById(`row-${key}`);
+        const modificado = valoresModificados.hasOwnProperty(key);
+        row.className = `field-row${modificado ? ' modified' : ''}`;
+        row.innerHTML = renderCampoVista(campo, valoresOriginales[key]);
+    }
+
+    // ---- Restaurar valor original ----
+    function restaurarCampo(key) {
+        delete valoresModificados[key];
+        const campo = CAMPOS.find(c => c.key === key);
+        const row = document.getElementById(`row-${key}`);
+        row.className = 'field-row';
+        row.innerHTML = renderCampoVista(campo, valoresOriginales[key]);
+        actualizarResumen();
+    }
+
+    // ---- Actualizar resumen de cambios ----
+    function actualizarResumen() {
+        const keys = Object.keys(valoresModificados);
+        const obs = (document.getElementById('observaciones')?.value || '').trim();
+        const resumen = document.getElementById('resumenCambios');
+        const btn = document.getElementById('btnEnviar');
+
+        if (keys.length === 0 && !obs) {
+            resumen.classList.add('hidden');
+            btn.disabled = true;
+            return;
+        }
+
+        btn.disabled = false;
+
+        if (keys.length > 0) {
+            resumen.classList.remove('hidden');
+            document.getElementById('contadorCambios').textContent = keys.length;
+
+            const lista = document.getElementById('listaCambios');
+            lista.innerHTML = keys.map(key => {
+                const campo = CAMPOS.find(c => c.key === key);
+                const antes = valoresOriginales[key] || '(vacio)';
+                const despues = valoresModificados[key] || '(vacio)';
+                return `<div style="padding:8px 12px;background:rgba(255,255,255,0.03);border-radius:8px">
+                    <div style="font-size:11px;color:rgba(255,255,255,0.4);font-weight:600;text-transform:uppercase;letter-spacing:0.5px">${campo.label}</div>
+                    <div style="font-size:13px;margin-top:4px">
+                        <span style="color:rgba(255,100,100,0.7);text-decoration:line-through">${escapeHTML(antes)}</span>
+                        <span style="color:rgba(255,255,255,0.3);margin:0 6px">→</span>
+                        <span style="color:#14c8cc;font-weight:500">${escapeHTML(despues)}</span>
+                    </div>
+                </div>`;
+            }).join('');
+        } else {
+            resumen.classList.add('hidden');
+        }
+    }
+
+    // Escuchar cambios en observaciones para habilitar boton
+    document.getElementById('observaciones')?.addEventListener('input', actualizarResumen);
+
+    // ---- Enviar ----
+    function enviarFormulario() {
+        const nombre = document.getElementById('authNombre').value.trim();
+        const cargo = document.getElementById('authCargo').value.trim();
+        const tel = document.getElementById('authTelefono').value.trim();
+
+        if (!nombre || !cargo || !tel) {
+            alert('Por favor, rellena los datos de verificacion (nombre, cargo y telefono)');
+            return;
+        }
+
+        const keys = Object.keys(valoresModificados);
+        const obs = (document.getElementById('observaciones')?.value || '').trim();
+
+        if (keys.length === 0 && !obs) {
+            alert('No has realizado ningun cambio ni escrito observaciones');
+            return;
+        }
+
+        // Construir email
+        const asunto = encodeURIComponent(`[Verificacion] ${empresaActual.nombre} — ${keys.length} campo(s) modificado(s)`);
+
+        let cuerpo = `VERIFICACION DE DATOS — DIRECTORIO EMPRESARIAL DE SANTANDER\n`;
+        cuerpo += `${'='.repeat(60)}\n\n`;
+        cuerpo += `EMPRESA: ${empresaActual.nombre}\n`;
+        cuerpo += `AREA: ${empresaActual.area}\n`;
+        cuerpo += `ID: ${empresaActual.id}\n\n`;
+
+        cuerpo += `SOLICITANTE\n${'-'.repeat(40)}\n`;
+        cuerpo += `Nombre: ${nombre}\n`;
+        cuerpo += `Cargo: ${cargo}\n`;
+        cuerpo += `Telefono: ${tel}\n`;
+        const authEmail = document.getElementById('authEmail').value.trim();
+        if (authEmail) cuerpo += `Email: ${authEmail}\n`;
+        cuerpo += `\n`;
+
+        if (keys.length > 0) {
+            cuerpo += `CAMPOS MODIFICADOS (${keys.length})\n${'-'.repeat(40)}\n`;
+            keys.forEach(key => {
+                const campo = CAMPOS.find(c => c.key === key);
+                cuerpo += `\n${campo.label}:\n`;
+                cuerpo += `  Antes:   ${valoresOriginales[key] || '(vacio)'}\n`;
+                cuerpo += `  Despues: ${valoresModificados[key] || '(vacio)'}\n`;
+            });
+            cuerpo += `\n`;
+        }
+
+        if (obs) {
+            cuerpo += `OBSERVACIONES\n${'-'.repeat(40)}\n${obs}\n\n`;
+        }
+
+        cuerpo += `Fecha: ${new Date().toLocaleString('es-ES')}\n`;
+
+        // Guardar en localStorage
+        const registro = {
+            empresaId: empresaActual.id,
+            empresa: empresaActual.nombre,
+            cambios: valoresModificados,
+            observaciones: obs,
+            verificacion: { nombre, cargo, telefono: tel, email: authEmail },
+            fecha: new Date().toISOString()
+        };
+        const historial = JSON.parse(localStorage.getItem('solicitudes_cambios') || '[]');
+        historial.push(registro);
+        localStorage.setItem('solicitudes_cambios', JSON.stringify(historial));
+
+        // Enviar email
+        window.location.href = `mailto:info@clotitec.com?subject=${asunto}&body=${encodeURIComponent(cuerpo)}`;
+
+        // Mostrar exito
+        setTimeout(() => {
+            document.getElementById('fichaEmpresa').classList.add('hidden');
+            document.getElementById('selectorEmpresa').classList.add('hidden');
+            document.getElementById('msgExito').classList.remove('hidden');
+        }, 500);
+    }
+
+    // ---- Utilidades ----
+    function escapeHTML(str) {
+        if (!str) return '';
+        const div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+    }
+    </script>
+
+</body>
+</html>
