@@ -957,6 +957,8 @@ function createCompanyCard(company) {
     const areaShort = company.area.replace('Polígono Industrial de ', '').replace('PI ', '');
     const noSector = t('noSector');
 
+    const desc = company.descripcion ? escapeHTML(company.descripcion.length > 80 ? company.descripcion.slice(0, 77) + '...' : company.descripcion) : '';
+
     return `
     <div class="company-card" onclick="openDetailById(${company.id})" style="border-left: 3px solid ${sectorColor}">
         <div class="company-icon" style="background: linear-gradient(135deg, ${sectorColor}22, ${sectorColor}44)">
@@ -965,6 +967,7 @@ function createCompanyCard(company) {
         <div class="company-info">
             <div class="company-name">${escapeHTML(company.nombre)}</div>
             <div class="company-sector-tag" style="color: ${sectorColor}">${escapeHTML(company.sector || noSector)}</div>
+            ${desc ? `<div class="company-desc-preview">${desc}</div>` : ''}
         </div>
         <svg class="company-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;flex-shrink:0">
             <path d="m9 18 6-6-6-6"/>

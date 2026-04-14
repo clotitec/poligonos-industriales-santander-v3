@@ -539,7 +539,7 @@
 
     const CAMPOS = [
         { key: 'nombre',      label: 'Nombre de la empresa', type: 'text' },
-        { key: 'descripcion', label: 'Descripcion',          type: 'text' },
+        { key: 'descripcion', label: 'Descripcion (max. 240 car.)', type: 'textarea', maxlength: 240 },
         { key: 'sector',      label: 'Sector',               type: 'select', options: 'sector' },
         { key: 'actividad',   label: 'Actividad',            type: 'text' },
         { key: 'area',        label: 'Poligono / Area',      type: 'select', options: 'area' },
@@ -755,6 +755,11 @@
                 <option value="">-- Selecciona --</option>
                 ${opts.map(o => `<option value="${escapeHTML(o.value)}" ${o.value === valorActual ? 'selected' : ''}>${escapeHTML(o.label)}</option>`).join('')}
             </select>`;
+        } else if (campo.type === 'textarea') {
+            const ml = campo.maxlength || 500;
+            const len = valorActual.length;
+            inputHTML = `<textarea id="input-${key}" class="field-input" rows="3" maxlength="${ml}" style="resize:vertical" placeholder="Describe brevemente la empresa (max. ${ml} caracteres)...">${escapeHTML(valorActual)}</textarea>
+            <div id="counter-${key}" style="text-align:right;font-size:11px;margin-top:4px;color:${len > ml * 0.9 ? '#f59e0b' : 'rgba(255,255,255,0.3)'}"><span id="count-${key}">${len}</span> / ${ml}</div>`;
         } else {
             inputHTML = `<input id="input-${key}" type="${campo.type}" class="field-input" value="${escapeHTML(valorActual)}" placeholder="Introduce ${campo.label.toLowerCase()}...">`;
         }
@@ -772,7 +777,15 @@
 
         const input = document.getElementById(`input-${key}`);
         input.focus();
-        if (campo.type !== 'select') {
+        if (campo.type === 'textarea') {
+            input.addEventListener('input', () => {
+                const c = input.value.length;
+                const ml = campo.maxlength || 500;
+                document.getElementById(`count-${key}`).textContent = c;
+                document.getElementById(`counter-${key}`).style.color = c > ml * 0.9 ? '#f59e0b' : 'rgba(255,255,255,0.3)';
+            });
+            input.addEventListener('keydown', e => { if (e.key === 'Escape') cancelarEdicion(key); });
+        } else if (campo.type !== 'select') {
             input.addEventListener('keydown', e => { if (e.key === 'Enter') guardarCampo(key); if (e.key === 'Escape') cancelarEdicion(key); });
         }
     }
