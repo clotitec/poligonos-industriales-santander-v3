@@ -433,10 +433,59 @@
                         class="input-auth w-full resize-none"></textarea>
                 </div>
 
-                <!-- Datos de verificacion -->
+                <!-- Subir fotos del negocio -->
                 <div class="glass-card rounded-2xl p-6">
                     <h3 class="text-sm font-semibold text-santander-light flex items-center gap-2 mb-1">
                         <span class="w-5 h-5 rounded-full bg-santander/30 flex items-center justify-center text-[10px] font-bold">3</span>
+                        Fotos de tu negocio
+                    </h3>
+                    <p class="text-white/30 text-xs mb-4">Sube hasta 6 imagenes. Se comprimiran automaticamente para una carga rapida.</p>
+
+                    <div id="fotosUploadArea" style="border:2px dashed rgba(255,255,255,0.12);border-radius:14px;padding:24px;text-align:center;cursor:pointer;transition:all 0.2s"
+                         onclick="document.getElementById('fotosInput').click()"
+                         ondragover="event.preventDefault();this.style.borderColor='#14c8cc';this.style.background='rgba(20,200,204,0.05)'"
+                         ondragleave="this.style.borderColor='rgba(255,255,255,0.12)';this.style.background='transparent'"
+                         ondrop="event.preventDefault();this.style.borderColor='rgba(255,255,255,0.12)';this.style.background='transparent';handleFotos(event.dataTransfer.files)">
+                        <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" style="margin:0 auto 8px"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                        <div style="font-size:13px;color:rgba(255,255,255,0.4);font-weight:500">Arrastra imagenes aqui o pulsa para seleccionar</div>
+                        <div style="font-size:11px;color:rgba(255,255,255,0.2);margin-top:4px">JPG, PNG o WebP — Max. 6 fotos</div>
+                    </div>
+                    <input type="file" id="fotosInput" multiple accept="image/jpeg,image/png,image/webp" style="display:none" onchange="handleFotos(this.files)">
+
+                    <div id="fotosPreview" class="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-4" style="display:none"></div>
+                    <div id="fotosStats" class="mt-3" style="display:none;font-size:11px;color:rgba(255,255,255,0.3)"></div>
+                </div>
+
+                <!-- Contenido multimedia -->
+                <div class="glass-card rounded-2xl p-6">
+                    <h3 class="text-sm font-semibold text-santander-light flex items-center gap-2 mb-1">
+                        <span class="w-5 h-5 rounded-full bg-santander/30 flex items-center justify-center text-[10px] font-bold">4</span>
+                        Contenido multimedia
+                    </h3>
+                    <p class="text-white/30 text-xs mb-4">Enlaza un tour virtual o un video corporativo de tu empresa</p>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-medium text-white/50 mb-1.5">
+                                <span style="margin-right:4px">🏠</span> Visita virtual interior (URL de Google Street View o tour 360°)
+                            </label>
+                            <input type="url" id="tourVirtualUrl" placeholder="https://www.google.com/maps/embed?pb=..." class="input-auth">
+                            <p style="font-size:10px;color:rgba(255,255,255,0.2);margin-top:4px">Pega la URL embed de Google Maps interior o de un proveedor de tours 360°</p>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-white/50 mb-1.5">
+                                <span style="margin-right:4px">🎬</span> Video corporativo (enlace de YouTube)
+                            </label>
+                            <input type="url" id="videoUrl" placeholder="https://www.youtube.com/watch?v=..." class="input-auth">
+                            <p style="font-size:10px;color:rgba(255,255,255,0.2);margin-top:4px">Enlace de YouTube. Se mostrara como reproductor embebido en tu ficha.</p>
+                        </div>
+                        <div id="videoPreview" style="display:none;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.08)"></div>
+                    </div>
+                </div>
+
+                <!-- Datos de verificacion -->
+                <div class="glass-card rounded-2xl p-6">
+                    <h3 class="text-sm font-semibold text-santander-light flex items-center gap-2 mb-1">
+                        <span class="w-5 h-5 rounded-full bg-santander/30 flex items-center justify-center text-[10px] font-bold">5</span>
                         Datos de verificacion
                     </h3>
                     <p class="text-white/30 text-xs mb-4">Para confirmar la autoria de los cambios</p>
@@ -846,7 +895,10 @@
         const resumen = document.getElementById('resumenCambios');
         const btn = document.getElementById('btnEnviar');
 
-        btn.disabled = (keys.length === 0 && !obs);
+        const hasFotos = fotosComprimidas.length > 0;
+        const hasTour = (document.getElementById('tourVirtualUrl')?.value || '').trim().length > 0;
+        const hasVideo = (document.getElementById('videoUrl')?.value || '').trim().length > 0;
+        btn.disabled = (keys.length === 0 && !obs && !hasFotos && !hasTour && !hasVideo);
 
         if (keys.length > 0) {
             resumen.classList.remove('hidden');
@@ -900,6 +952,14 @@
             cuerpo += `\n`;
         }
         if (obs) cuerpo += `OBSERVACIONES\n${'-'.repeat(40)}\n${obs}\n\n`;
+        if (fotosComprimidas.length > 0) {
+            cuerpo += `FOTOS SUBIDAS: ${fotosComprimidas.length} imagenes comprimidas\n`;
+            cuerpo += `(Las fotos se descargan automaticamente junto con esta solicitud)\n\n`;
+        }
+        const tourUrl = document.getElementById('tourVirtualUrl')?.value.trim();
+        if (tourUrl) cuerpo += `TOUR VIRTUAL: ${tourUrl}\n\n`;
+        const vidUrl = document.getElementById('videoUrl')?.value.trim();
+        if (vidUrl) cuerpo += `VIDEO CORPORATIVO: ${vidUrl}\n\n`;
         cuerpo += `Fecha: ${new Date().toLocaleString('es-ES')}\n`;
 
         // Backup localStorage
@@ -911,11 +971,18 @@
 
         window.location.href = `mailto:info@clotitec.com?subject=${asunto}&body=${encodeURIComponent(cuerpo)}`;
 
+        // Descargar fotos comprimidas si las hay
+        if (fotosComprimidas.length > 0) {
+            setTimeout(() => descargarFotosComprimidas(), 800);
+        }
+
         setTimeout(() => {
             document.getElementById('pasoFicha').classList.add('hidden');
             document.getElementById('msgExito').classList.remove('hidden');
             document.getElementById('pageTitle').textContent = 'Solicitud enviada';
-            document.getElementById('pageSubtitle').textContent = '';
+            document.getElementById('pageSubtitle').textContent = fotosComprimidas.length > 0
+                ? 'Las fotos comprimidas se han descargado. Adjuntalas al email.'
+                : '';
         }, 500);
     }
 
@@ -1060,6 +1127,115 @@
             document.getElementById('pageTitle').textContent = 'Solicitud enviada';
             document.getElementById('pageSubtitle').textContent = '';
         }, 500);
+    }
+
+    // ---- COMPRESIÓN Y SUBIDA DE FOTOS ----
+    let fotosComprimidas = []; // Array de {blob, name, originalSize, compressedSize}
+    const MAX_FOTOS = 6;
+    const MAX_WIDTH = 1200;
+    const JPEG_QUALITY = 0.82;
+
+    function handleFotos(files) {
+        if (!files || !files.length) return;
+        const nuevas = Array.from(files).filter(f => f.type.startsWith('image/'));
+        if (fotosComprimidas.length + nuevas.length > MAX_FOTOS) {
+            alert(`Maximo ${MAX_FOTOS} fotos. Ya tienes ${fotosComprimidas.length}.`);
+            return;
+        }
+        nuevas.forEach(file => comprimirFoto(file));
+    }
+
+    function comprimirFoto(file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const img = new Image();
+            img.onload = function() {
+                const canvas = document.createElement('canvas');
+                let w = img.width, h = img.height;
+                if (w > MAX_WIDTH) { h = Math.round(h * (MAX_WIDTH / w)); w = MAX_WIDTH; }
+                canvas.width = w;
+                canvas.height = h;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, w, h);
+                canvas.toBlob(function(blob) {
+                    fotosComprimidas.push({
+                        blob: blob,
+                        url: URL.createObjectURL(blob),
+                        name: file.name,
+                        originalSize: file.size,
+                        compressedSize: blob.size
+                    });
+                    renderFotosPreview();
+                    actualizarResumen();
+                }, 'image/jpeg', JPEG_QUALITY);
+            };
+            img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+
+    function renderFotosPreview() {
+        const container = document.getElementById('fotosPreview');
+        const stats = document.getElementById('fotosStats');
+        if (fotosComprimidas.length === 0) {
+            container.style.display = 'none';
+            stats.style.display = 'none';
+            return;
+        }
+        container.style.display = 'grid';
+        stats.style.display = 'block';
+
+        container.innerHTML = fotosComprimidas.map((f, i) => `
+            <div style="position:relative;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,0.08)">
+                <img src="${f.url}" alt="${escapeHTML(f.name)}" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block">
+                <button onclick="eliminarFoto(${i})" style="position:absolute;top:6px;right:6px;width:24px;height:24px;border-radius:50%;background:rgba(0,0,0,0.6);color:white;border:none;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center">&times;</button>
+                <div style="position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.6);padding:3px 8px;font-size:10px;color:rgba(255,255,255,0.7)">
+                    ${(f.originalSize/1024).toFixed(0)}KB → <span style="color:#14c8cc;font-weight:600">${(f.compressedSize/1024).toFixed(0)}KB</span>
+                </div>
+            </div>
+        `).join('');
+
+        const totalOrig = fotosComprimidas.reduce((s, f) => s + f.originalSize, 0);
+        const totalComp = fotosComprimidas.reduce((s, f) => s + f.compressedSize, 0);
+        const pct = totalOrig > 0 ? Math.round((1 - totalComp / totalOrig) * 100) : 0;
+        stats.innerHTML = `${fotosComprimidas.length} / ${MAX_FOTOS} fotos · Original: ${(totalOrig/1024/1024).toFixed(1)}MB → Comprimido: <span style="color:#14c8cc;font-weight:600">${(totalComp/1024/1024).toFixed(1)}MB</span> (${pct}% reduccion)`;
+    }
+
+    function eliminarFoto(index) {
+        URL.revokeObjectURL(fotosComprimidas[index].url);
+        fotosComprimidas.splice(index, 1);
+        renderFotosPreview();
+        actualizarResumen();
+    }
+
+    // Descargar fotos comprimidas como ZIP-like (individual downloads)
+    function descargarFotosComprimidas() {
+        fotosComprimidas.forEach((f, i) => {
+            const a = document.createElement('a');
+            a.href = f.url;
+            a.download = `foto_${i + 1}.jpg`;
+            a.click();
+        });
+    }
+
+    // ---- PREVIEW VIDEO YOUTUBE ----
+    document.getElementById('videoUrl')?.addEventListener('input', function() {
+        const url = this.value.trim();
+        const preview = document.getElementById('videoPreview');
+        const ytId = extractYouTubeId(url);
+        if (ytId) {
+            preview.style.display = 'block';
+            preview.innerHTML = `<iframe width="100%" style="aspect-ratio:16/9;border:none" src="https://www.youtube.com/embed/${ytId}" allowfullscreen loading="lazy"></iframe>`;
+        } else {
+            preview.style.display = 'none';
+            preview.innerHTML = '';
+        }
+    });
+
+    function extractYouTubeId(url) {
+        if (!url) return null;
+        const m = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{11})/);
+        return m ? m[1] : null;
     }
 
     // ---- Utilidades ----

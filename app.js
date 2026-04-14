@@ -1074,6 +1074,24 @@ function openDetail(company) {
         }
     }
 
+    // ---- VIDEO CORPORATIVO ----
+    const videoSection = document.getElementById('detailVideoSection');
+    if (videoSection) {
+        if (company.videoUrl) {
+            const ytMatch = company.videoUrl.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{11})/);
+            if (ytMatch) {
+                videoSection.style.display = 'block';
+                document.getElementById('videoIframe').src = `https://www.youtube.com/embed/${ytMatch[1]}`;
+            } else {
+                videoSection.style.display = 'none';
+            }
+        } else {
+            videoSection.style.display = 'none';
+            const vIframe = document.getElementById('videoIframe');
+            if (vIframe) vIframe.src = '';
+        }
+    }
+
     // Panorama 360° — Google Street View Embed API (gratis)
     const panoSection = document.getElementById('detailPanoramaSection');
     const panoIframe = document.getElementById('panoramaIframe');
