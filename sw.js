@@ -1,4 +1,4 @@
-// Service Worker - Polígonos Industriales de Santander
+// Service Worker - Áreas Empresariales e Industriales de Santander
 const CACHE_NAME = 'pi-santander-v8';
 const TILE_CACHE = 'pi-santander-tiles-v2';
 

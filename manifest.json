@@ -1,7 +1,7 @@
 {
-    "name": "Polígonos Industriales de Santander",
-    "short_name": "PI Santander",
-    "description": "Directorio interactivo de empresas en los polígonos industriales de Santander. Explora empresas en 4 áreas industriales.",
+    "name": "Áreas Empresariales e Industriales de Santander",
+    "short_name": "AEI Santander",
+    "description": "Directorio interactivo de empresas en las áreas empresariales e industriales de Santander. Explora empresas en 4 áreas industriales.",
     "start_url": "./index.html",
     "scope": "./",
     "display": "standalone",
