@@ -21,11 +21,19 @@ const Analytics = {
         try {
             const log = JSON.parse(localStorage.getItem('analytics_log') || '[]');
             log.push(payload);
-            if (log.length > 5000) log.splice(0, log.length - 5000);
+            if (log.length > 10000) log.splice(0, log.length - 10000);
             localStorage.setItem('analytics_log', JSON.stringify(log));
         } catch(e) {}
-        // When a real analytics service is configured, send here:
-        // if (window.plausible) plausible(event, { props: params });
+        // Supabase (when configured)
+        if (this._supabaseUrl) {
+            fetch(`${this._supabaseUrl}/rest/v1/analytics_events`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'apikey': this._supabaseKey, 'Authorization': `Bearer ${this._supabaseKey}` },
+                body: JSON.stringify({ event: payload.event, session_id: payload.session, ts: payload.ts, company_id: params.id || null, company_name: params.name || null, area: params.area || null, sector: params.sector || null, query: params.query || null, results: params.results || null, duration: params.duration || null, device: params.device || null, referrer: params.referrer || null, extra: params })
+            }).catch(() => {});
+        }
+        // Plausible
+        if (window.plausible) plausible(event, { props: params });
     }
 };
 
@@ -42,7 +50,7 @@ let currentLang = 'es';
 // ---- SISTEMA i18n ----
 const TRANSLATIONS = {
     es: {
-        title: 'Polígonos Industriales',
+        title: 'Áreas Empresariales e Industriales',
         subtitle: 'Santander',
         loading: 'Cargando directorio empresarial...',
         companies: 'empresas',
@@ -80,6 +88,7 @@ const TRANSLATIONS = {
         audioSeconds: '~30 segundos',
         audioNotAvailable: 'Audio del spot no disponible aún',
         audioError: 'No se pudo reproducir el audio',
+        updateYourData: '¿Eres una empresa? Actualiza tus datos',
         linkCopied: 'Enlace copiado al portapapeles',
         locationError: 'No se pudo obtener la ubicación',
         inSantander: 'en Santander',
@@ -107,14 +116,15 @@ const TRANSLATIONS = {
         dayNames: ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'],
         uv: 'UV',
         weatherIn: 'en Santander',
-        shareTitle: 'Polígonos Industriales Santander',
+        shareTitle: 'Áreas Empresariales e Industriales Santander',
         busStopFallback: 'Parada de bus',
+        streetViewCustom: 'Street View personalizado · Ayuntamiento de Santander 2026',
         panorama360: 'Vista panorámica 360°',
         panoramaDistance: 'Panorama más cercano a {dist} de la empresa',
         panoramaLayer: 'Panoramas 360°'
     },
     en: {
-        title: 'Industrial Estates',
+        title: 'Business & Industrial Areas',
         subtitle: 'Santander',
         loading: 'Loading business directory...',
         companies: 'companies',
@@ -152,6 +162,7 @@ const TRANSLATIONS = {
         audioSeconds: '~30 seconds',
         audioNotAvailable: 'Audio spot not available yet',
         audioError: 'Could not play audio',
+        updateYourData: 'Are you a business? Update your listing',
         linkCopied: 'Link copied to clipboard',
         locationError: 'Could not get location',
         inSantander: 'in Santander',
@@ -181,6 +192,7 @@ const TRANSLATIONS = {
         weatherIn: 'in Santander',
         shareTitle: 'Industrial Estates Santander',
         busStopFallback: 'Bus stop',
+        streetViewCustom: 'Custom Street View · Santander City Council 2026',
         panorama360: '360° Panoramic View',
         panoramaDistance: 'Nearest panorama {dist} from company',
         panoramaLayer: '360° Panoramas'
@@ -325,16 +337,34 @@ const SNAP = {
 };
 let currentSnap = SNAP.COLLAPSED;
 
-const lightStyle = 'https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json';
+const lightStyle = 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json';
 
 // ---- DEEP LINKING ----
+function slugify(str) {
+    return str.toLowerCase()
+        .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-|-$/g, '');
+}
+
+function openDetailBySlug(slug) {
+    const company = empresas.find(c => slugify(c.nombre) === slug);
+    if (company) openDetail(company);
+}
+
 function applyDeepLink() {
     const hash = location.hash.slice(1);
     if (!hash) return;
     const params = new URLSearchParams(hash);
     if (params.get('empresa')) {
-        const id = parseInt(params.get('empresa'));
-        setTimeout(() => openDetailById(id), 500);
+        const val = params.get('empresa');
+        if (/^\d+$/.test(val)) {
+            // Backward compat: numeric ID
+            setTimeout(() => openDetailById(parseInt(val)), 500);
+        } else {
+            // Slug-based
+            setTimeout(() => openDetailBySlug(val), 500);
+        }
     }
     if (params.get('area')) setAreaFilter(params.get('area'));
     if (params.get('sector')) setSectorFilter(params.get('sector'));
@@ -431,8 +461,16 @@ async function initMap() {
         zoom: CONFIG.zoom,
         minZoom: CONFIG.minZoom,
         maxZoom: CONFIG.maxZoom,
+        pitch: 35,
+        bearing: -10,
         attributionControl: false
     });
+
+    // Custom attribution with Clotitec credit
+    map.addControl(new maplibregl.AttributionControl({
+        compact: true,
+        customAttribution: 'Desarrollado por <a href="https://clotitec.com" target="_blank" style="font-weight:600">Clotitec</a>'
+    }));
 
     map.addControl(new maplibregl.AttributionControl({ compact: true }), 'bottom-right');
     await new Promise(resolve => map.on('load', resolve));
@@ -441,37 +479,68 @@ async function initMap() {
 }
 
 // ---- POLÍGONOS ----
+// Chaikin curve smoothing — rounds polygon corners
+function smoothPolygon(coords, iterations) {
+    let pts = coords.slice();
+    for (let iter = 0; iter < iterations; iter++) {
+        const next = [];
+        for (let i = 0; i < pts.length - 1; i++) {
+            const p0 = pts[i], p1 = pts[i + 1];
+            next.push([0.75 * p0[0] + 0.25 * p1[0], 0.75 * p0[1] + 0.25 * p1[1]]);
+            next.push([0.25 * p0[0] + 0.75 * p1[0], 0.25 * p0[1] + 0.75 * p1[1]]);
+        }
+        // Close the polygon
+        next.push(next[0]);
+        pts = next;
+    }
+    return pts;
+}
+
 function addPolygonLayers() {
     poligonos.forEach(poly => {
         const sourceId = `polygon-${poly.id}`;
+        const smoothed = smoothPolygon(poly.coordinates, 3);
 
         map.addSource(sourceId, {
             type: 'geojson',
             data: {
                 type: 'Feature',
                 properties: { name: poly.nombre, areaId: poly.areaId },
-                geometry: { type: 'Polygon', coordinates: [poly.coordinates] }
+                geometry: { type: 'Polygon', coordinates: [smoothed] }
             }
         });
 
-        map.addLayer({
-            id: `${sourceId}-fill`, type: 'fill', source: sourceId,
-            paint: { 'fill-color': poly.color, 'fill-opacity': 0.12 }
-        });
+        // Unified bright cyan color for all industrial areas
+        const areaColor = '#00d4ff';
 
         map.addLayer({
+            id: `${sourceId}-fill`, type: 'fill', source: sourceId,
+            paint: { 'fill-color': areaColor, 'fill-opacity': 0.13 }
+        });
+
+        // Outer glow
+        map.addLayer({
+            id: `${sourceId}-glow`, type: 'line', source: sourceId,
+            layout: { 'line-join': 'round', 'line-cap': 'round' },
+            paint: { 'line-color': areaColor, 'line-width': 10, 'line-opacity': 0.12, 'line-blur': 6 }
+        });
+
+        // Main border
+        map.addLayer({
             id: `${sourceId}-line`, type: 'line', source: sourceId,
-            paint: { 'line-color': poly.color, 'line-width': 2.5, 'line-opacity': 0.6, 'line-dasharray': [2, 1] }
+            layout: { 'line-join': 'round', 'line-cap': 'round' },
+            paint: { 'line-color': areaColor, 'line-width': 3, 'line-opacity': 0.7 }
         });
 
         map.addLayer({
             id: `${sourceId}-label`, type: 'symbol', source: sourceId,
             layout: {
-                'text-field': poly.nombre, 'text-size': 12,
+                'text-field': poly.nombre, 'text-size': 15,
                 'text-font': ['Open Sans Bold', 'Arial Unicode MS Bold'],
-                'text-allow-overlap': false
+                'text-allow-overlap': false,
+                'text-letter-spacing': 0.05
             },
-            paint: { 'text-color': poly.color, 'text-halo-color': '#ffffff', 'text-halo-width': 2, 'text-opacity': 0.8 }
+            paint: { 'text-color': '#006b80', 'text-halo-color': '#ffffff', 'text-halo-width': 2.5, 'text-opacity': 0.95 }
         });
 
         map.on('click', `${sourceId}-fill`, () => {
@@ -510,7 +579,7 @@ function loadCompanyMarkers() {
         id: 'clusters', type: 'circle', source: 'companies',
         filter: ['has', 'point_count'],
         paint: {
-            'circle-color': ['step', ['get', 'point_count'], '#42a5f5', 10, '#1976d2', 30, '#0d47a1'],
+            'circle-color': ['step', ['get', 'point_count'], '#14c8cc', 10, '#00696c', 30, '#004f51'],
             'circle-radius': ['step', ['get', 'point_count'], 18, 10, 24, 30, 30],
             'circle-opacity': 0.85,
             'circle-stroke-width': 3, 'circle-stroke-color': 'rgba(255,255,255,0.8)'
@@ -524,22 +593,130 @@ function loadCompanyMarkers() {
         paint: { 'text-color': '#ffffff' }
     });
 
-    // Individual points — color por sector + borde blanco grueso (visible en satélite)
+    // Individual points — location pin icons por sector
     const colorMatch = ['match', ['get', 'sector']];
     Object.entries(SECTOR_COLORS).forEach(([sector, color]) => {
         if (sector !== 'default') colorMatch.push(sector, color);
     });
     colorMatch.push(SECTOR_COLORS.default);
 
+    // Generate 3D-style pin markers for each sector color
+    const pinColors = new Set(Object.values(SECTOR_COLORS));
+    pinColors.forEach(color => {
+        const imgName = 'pin-' + color.replace('#', '');
+        if (map.hasImage(imgName)) return;
+        const w = 56, h = 76;
+        const canvas = document.createElement('canvas');
+        canvas.width = w;
+        canvas.height = h;
+        const ctx = canvas.getContext('2d');
+        const cx = w / 2, r = 21, pinTop = h - 46;
+
+        // Parse color for gradient manipulation
+        const hex = color.replace('#','');
+        const cr = parseInt(hex.substring(0,2),16);
+        const cg = parseInt(hex.substring(2,4),16);
+        const cb = parseInt(hex.substring(4,6),16);
+        const darken = `rgb(${Math.max(0,cr-50)},${Math.max(0,cg-50)},${Math.max(0,cb-50)})`;
+        const lighten = `rgb(${Math.min(255,cr+60)},${Math.min(255,cg+60)},${Math.min(255,cb+60)})`;
+
+        // Drop shadow — soft ellipse
+        ctx.beginPath();
+        ctx.ellipse(cx, h - 2, 9, 3, 0, 0, Math.PI * 2);
+        const shadowGrad = ctx.createRadialGradient(cx, h - 2, 0, cx, h - 2, 9);
+        shadowGrad.addColorStop(0, 'rgba(0,0,0,0.25)');
+        shadowGrad.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = shadowGrad;
+        ctx.fill();
+
+        // Teardrop path function
+        function drawTeardrop(rr, offsetY) {
+            ctx.beginPath();
+            ctx.moveTo(cx, h - 6 + offsetY);
+            ctx.bezierCurveTo(cx - 5, h - 22 + offsetY, cx - rr - 2, h - 36 + offsetY, cx - rr - 2, pinTop + offsetY);
+            ctx.arc(cx, pinTop + offsetY, rr + 2, Math.PI, 0, false);
+            ctx.bezierCurveTo(cx + rr + 2, h - 36 + offsetY, cx + 5, h - 22 + offsetY, cx, h - 6 + offsetY);
+            ctx.closePath();
+        }
+
+        // White outer border
+        drawTeardrop(r, 0);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
+
+        // Main colored body with 3D gradient
+        ctx.beginPath();
+        ctx.moveTo(cx, h - 9);
+        ctx.bezierCurveTo(cx - 4, h - 23, cx - r, h - 35, cx - r, pinTop);
+        ctx.arc(cx, pinTop, r, Math.PI, 0, false);
+        ctx.bezierCurveTo(cx + r, h - 35, cx + 4, h - 23, cx, h - 9);
+        ctx.closePath();
+        const bodyGrad = ctx.createLinearGradient(cx - r, pinTop - r, cx + r, pinTop + r + 20);
+        bodyGrad.addColorStop(0, lighten);
+        bodyGrad.addColorStop(0.35, color);
+        bodyGrad.addColorStop(1, darken);
+        ctx.fillStyle = bodyGrad;
+        ctx.fill();
+
+        // Glossy highlight arc (top-left shine)
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(cx, pinTop, r - 1, Math.PI, 0, false);
+        ctx.closePath();
+        ctx.clip();
+        const shineGrad = ctx.createRadialGradient(cx - 6, pinTop - 8, 0, cx, pinTop, r);
+        shineGrad.addColorStop(0, 'rgba(255,255,255,0.45)');
+        shineGrad.addColorStop(0.5, 'rgba(255,255,255,0.08)');
+        shineGrad.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = shineGrad;
+        ctx.fillRect(cx - r, pinTop - r, r * 2, r * 2);
+        ctx.restore();
+
+        // Inner white circle with subtle shadow
+        ctx.beginPath();
+        ctx.arc(cx, pinTop, 8, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255,255,255,0.95)';
+        ctx.fill();
+
+        // Inner dot (sector color)
+        ctx.beginPath();
+        ctx.arc(cx, pinTop, 4, 0, Math.PI * 2);
+        ctx.fillStyle = color;
+        ctx.fill();
+
+        map.addImage(imgName, { width: w, height: h, data: ctx.getImageData(0, 0, w, h).data }, { pixelRatio: 2 });
+    });
+
+    // Build icon-image match expression
+    const iconMatch = ['match', ['get', 'sector']];
+    Object.entries(SECTOR_COLORS).forEach(([sector, color]) => {
+        if (sector !== 'default') iconMatch.push(sector, 'pin-' + color.replace('#', ''));
+    });
+    iconMatch.push('pin-' + SECTOR_COLORS.default.replace('#', ''));
+
     map.addLayer({
-        id: 'company-points', type: 'circle', source: 'companies',
+        id: 'company-points', type: 'symbol', source: 'companies',
         filter: ['!', ['has', 'point_count']],
+        layout: {
+            'icon-image': iconMatch,
+            'icon-size': 1,
+            'icon-allow-overlap': true,
+            'icon-anchor': 'bottom',
+            'icon-offset': [0, 4],
+            'text-field': ['get', 'nombre'],
+            'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
+            'text-size': ['interpolate', ['linear'], ['zoom'], 15, 0, 15.5, 10, 17, 11.5],
+            'text-anchor': 'left',
+            'text-offset': [1.2, -1.8],
+            'text-max-width': 12,
+            'text-allow-overlap': false,
+            'text-optional': true
+        },
         paint: {
-            'circle-color': colorMatch,
-            'circle-radius': 8,
-            'circle-stroke-width': 3,
-            'circle-stroke-color': '#ffffff',
-            'circle-opacity': 0.9
+            'text-color': '#1a2332',
+            'text-halo-color': '#ffffff',
+            'text-halo-width': 1.8,
+            'text-opacity': ['interpolate', ['linear'], ['zoom'], 15, 0, 15.5, 0.85, 17, 1]
         }
     });
 
@@ -646,33 +823,29 @@ function loadPanoramaLayer() {
         type: 'circle',
         source: 'panoramas',
         minzoom: 16,
+        layout: {
+            'visibility': 'none'
+        },
         paint: {
             'circle-color': '#4CAF50',
-            'circle-radius': 5,
-            'circle-opacity': 0.6,
-            'circle-stroke-width': 1.5,
+            'circle-radius': 3.5,
+            'circle-opacity': 0.5,
+            'circle-stroke-width': 1,
             'circle-stroke-color': '#ffffff',
-            'circle-stroke-opacity': 0.8
+            'circle-stroke-opacity': 0.7
         }
     });
-
-    const panoPopup = new maplibregl.Popup({ closeButton: false, closeOnClick: false, offset: 8 });
 
     map.on('click', 'panorama-points', () => {
         window.open(TOUR_URL, '_blank');
     });
 
-    map.on('mouseenter', 'panorama-points', (e) => {
+    map.on('mouseenter', 'panorama-points', () => {
         map.getCanvas().style.cursor = 'pointer';
-        const coords = e.features[0].geometry.coordinates.slice();
-        panoPopup.setLngLat(coords)
-            .setHTML(`<strong style="font-size:12px">${t('panorama360')}</strong><br><span style="color:#4CAF50;font-size:11px">${t('panoramaLayer')}</span>`)
-            .addTo(map);
     });
 
     map.on('mouseleave', 'panorama-points', () => {
         map.getCanvas().style.cursor = '';
-        panoPopup.remove();
     });
 }
 
@@ -777,36 +950,20 @@ function renderList() {
 
 function createCompanyCard(company) {
     const sectorColor = SECTOR_COLORS[company.sector] || SECTOR_COLORS.default;
-    const iconName = SECTOR_ICONS[company.sector] || SECTOR_ICONS.default;
-    const iconSVG = ICON_PATHS[iconName] || ICON_PATHS.building;
+    const emoji = SECTOR_EMOJIS[company.sector] || SECTOR_EMOJIS.default;
     const areaShort = company.area.replace('Polígono Industrial de ', '').replace('PI ', '');
     const noSector = t('noSector');
 
-    const svBadge = company.streetView
-        ? '<span class="sv-badge" title="Street View disponible"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg></span>'
-        : '';
-
-    const quickCall = company.telefono
-        ? `<button class="quick-call-btn" onclick="event.stopPropagation();window.location.href='tel:${company.telefono}'" title="${t('call')} ${company.telefono}">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          </button>`
-        : '';
-
     return `
-    <div class="company-card" onclick="openDetailById(${company.id})">
-        <div class="company-icon" style="background: linear-gradient(135deg, ${sectorColor}, ${sectorColor}dd); box-shadow: 0 4px 12px ${sectorColor}44">
-            <svg viewBox="0 0 24 24">${iconSVG}</svg>
+    <div class="company-card" onclick="openDetailById(${company.id})" style="border-left: 3px solid ${sectorColor}">
+        <div class="company-icon" style="background: linear-gradient(135deg, ${sectorColor}22, ${sectorColor}44)">
+            <span class="company-emoji">${emoji}</span>
         </div>
         <div class="company-info">
-            <div class="company-name">${escapeHTML(company.nombre)}${svBadge}</div>
-            <div class="company-meta">
-                <span>${escapeHTML(company.sector || noSector)}</span>
-                <span class="separator">|</span>
-                <span>${escapeHTML(areaShort)}</span>
-            </div>
+            <div class="company-name">${escapeHTML(company.nombre)}</div>
+            <div class="company-sector-tag" style="color: ${sectorColor}">${escapeHTML(company.sector || noSector)}</div>
         </div>
-        ${quickCall}
-        <svg class="company-arrow w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <svg class="company-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;flex-shrink:0">
             <path d="m9 18 6-6-6-6"/>
         </svg>
     </div>`;
@@ -822,8 +979,8 @@ function openDetail(company) {
     selectedCompany = company;
     addToRecent(company.id);
     Analytics.track('company_view', { id: company.id, name: company.nombre, sector: company.sector, area: company.areaId });
-    // Update URL with company
-    history.replaceState(null, '', `#empresa=${company.id}`);
+    // Update URL with company slug for readable sharing
+    history.replaceState(null, '', `#empresa=${slugify(company.nombre)}`);
     stopAudio();
 
     const modal = document.getElementById('detailModal');
@@ -831,34 +988,35 @@ function openDetail(company) {
     // Header
     document.getElementById('detailTitle').textContent = company.nombre;
     const sectorColor = SECTOR_COLORS[company.sector] || SECTOR_COLORS.default;
-    const iconName = SECTOR_ICONS[company.sector] || SECTOR_ICONS.default;
-    const iconSVG = ICON_PATHS[iconName] || ICON_PATHS.building;
+    const emoji = SECTOR_EMOJIS[company.sector] || SECTOR_EMOJIS.default;
     document.getElementById('detailSector').innerHTML = `
-        <svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:white;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round">${iconSVG}</svg>
+        <span style="font-size:13px">${emoji}</span>
         ${escapeHTML(company.sector || t('unclassified'))}
     `;
     document.getElementById('detailArea').innerHTML = `
-        <svg style="width:12px;height:12px;display:inline;vertical-align:-1px;stroke:currentColor;stroke-width:2;fill:none" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span style="font-size:12px">📍</span>
         ${escapeHTML(company.area)}
     `;
 
-    // Street View Photo Preview (facade thumbnail)
-    const photoSection = document.getElementById('detailPhotoSection');
-    const svPhotoIframe = document.getElementById('svPhotoIframe');
-    const svPhotoCard = document.getElementById('svPhotoCard');
+    // Street View Hero (background image behind header)
+    const heroSV = document.getElementById('detailHeroSV');
+    const svHeroIframe = document.getElementById('svHeroIframe');
+    const detailCard = document.querySelector('.detail-card');
     if (company.streetView) {
-        photoSection.style.display = 'block';
-        svPhotoIframe.src = company.streetView;
-        // Click to scroll to full 360° Street View section
-        svPhotoCard.onclick = function() {
-            const svFullSection = document.getElementById('detailStreetViewSection');
-            if (svFullSection && svFullSection.style.display !== 'none') {
-                svFullSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
-        };
+        heroSV.style.display = 'block';
+        svHeroIframe.src = company.streetView;
+        Analytics.track('streetview_open', { id: company.id, name: company.nombre, area: company.areaId });
+        detailCard.classList.add('has-hero');
+        // Fill hero overlays
+        document.getElementById('heroTitle').textContent = company.nombre;
+        document.getElementById('heroSector').innerHTML = `
+            <span style="font-size:12px;margin-right:3px">${emoji}</span>
+            ${escapeHTML(company.sector || t('unclassified'))}`;
+        document.getElementById('heroArea').textContent = company.area;
     } else {
-        photoSection.style.display = 'none';
-        svPhotoIframe.src = '';
+        heroSV.style.display = 'none';
+        svHeroIframe.src = '';
+        detailCard.classList.remove('has-hero');
     }
 
     // Audio section
@@ -943,15 +1101,15 @@ function openDetail(company) {
     }
     if (company.web) {
         const webUrl = company.web.startsWith('http') ? company.web : 'https://' + company.web;
+        const safeName = escapeHTML(company.nombre).replace(/'/g, '&#39;');
+        const safeUrl = webUrl.replace(/'/g, '%27');
         infoHTML += createInfoRow('web', t('web'),
-            `<a href="${webUrl}" target="_blank" rel="noopener">${escapeHTML(company.web)}</a>`);
+            `<a href="#" onclick="event.preventDefault();openWebModal('${safeUrl}','${safeName}')" style="cursor:pointer">${escapeHTML(company.web)}</a>`);
     }
     if (company.actividad) {
         infoHTML += createInfoRow('activity', t('activity'), escapeHTML(company.actividad));
     }
-    if (company.cif) {
-        infoHTML += createInfoRow('id', 'CIF', escapeHTML(company.cif));
-    }
+    // CIF removed from public display
     document.getElementById('detailInfo').innerHTML = infoHTML;
 
     // Transporte público cercano
@@ -1014,27 +1172,32 @@ function openDetail(company) {
     // Action buttons
     let actionsHTML = `
         <button class="action-btn action-btn-primary" onclick="navigateToCompany()">
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+            <span style="font-size:15px">🧭</span>
             ${t('directions')}
         </button>
         <button class="action-btn action-btn-secondary" onclick="shareCompany()">
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.59 13.51 6.83 3.98M15.41 6.51l-6.82 3.98"/></svg>
+            <span style="font-size:15px">🔗</span>
             ${t('share')}
         </button>`;
     if (company.telefono) {
         actionsHTML += `
         <button class="action-btn action-btn-secondary" onclick="callCompany()">
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span style="font-size:15px">📞</span>
             ${t('call')}
         </button>`;
     }
     if (company.email) {
         actionsHTML += `
         <button class="action-btn action-btn-secondary" onclick="emailCompany()">
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            <span style="font-size:15px">✉️</span>
             ${t('email')}
         </button>`;
     }
+    actionsHTML += `
+        <button class="action-btn action-btn-secondary" onclick="solicitarCambios()" title="${currentLang === 'en' ? 'Request changes to your listing' : 'Solicita cambios en tu ficha'}">
+            <span style="font-size:15px">✏️</span>
+            ${currentLang === 'en' ? 'Update data' : 'Actualizar datos'}
+        </button>`;
     document.getElementById('detailActions').innerHTML = actionsHTML;
 
     // Show modal
@@ -1051,19 +1214,19 @@ function openDetail(company) {
 }
 
 function createInfoRow(type, label, value) {
-    const icons = {
-        location: '<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>',
-        phone: '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>',
-        email: '<rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>',
-        web: '<circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/>',
-        activity: '<path d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z"/><path d="M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/><path d="M12 2v2M12 20v2m-8-10h2m16 0h2"/>',
-        id: '<rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>'
+    const emojis = {
+        location: '📍',
+        phone: '📞',
+        email: '✉️',
+        web: '🌐',
+        activity: '🏷️',
+        id: '🔒'
     };
 
     return `
     <div class="detail-info-row">
         <div class="detail-info-icon">
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${icons[type] || icons.activity}</svg>
+            <span style="font-size:16px">${emojis[type] || emojis.activity}</span>
         </div>
         <div class="detail-info-content">
             <div class="detail-info-label">${label}</div>
@@ -1082,9 +1245,46 @@ function closeDetail() {
     // Limpiar iframes Street View
     const svIframe = document.getElementById('streetViewIframe');
     if (svIframe) svIframe.src = '';
-    const svPhotoIframe = document.getElementById('svPhotoIframe');
-    if (svPhotoIframe) svPhotoIframe.src = '';
+    const svHero = document.getElementById('svHeroIframe');
+    if (svHero) svHero.src = '';
+    // Remove scroll listener
+    const card = document.querySelector('.detail-card');
+    if (card) card.removeEventListener('scroll', _heroScrollHandler);
 }
+
+// Hero fade-on-scroll handler
+function _heroScrollHandler() {
+    const hero = document.getElementById('detailHeroSV');
+    if (!hero || hero.style.display === 'none') return;
+    const card = document.querySelector('.detail-card');
+    const scrollY = card.scrollTop;
+    const heroH = hero.offsetHeight;
+    // Fade out as user scrolls — fully gone at 1.5x hero height
+    const opacity = Math.max(0, 1 - scrollY / (heroH * 1.2));
+    hero.style.opacity = opacity;
+}
+
+// Attach scroll listener when detail opens
+(function() {
+    const _origOpen = typeof openDetail === 'function' ? null : null;
+    const observer = new MutationObserver(() => {
+        const modal = document.getElementById('detailModal');
+        if (modal && modal.classList.contains('active')) {
+            const card = document.querySelector('.detail-card');
+            if (card) {
+                card.scrollTop = 0;
+                card.removeEventListener('scroll', _heroScrollHandler);
+                card.addEventListener('scroll', _heroScrollHandler, { passive: true });
+                const hero = document.getElementById('detailHeroSV');
+                if (hero) hero.style.opacity = 1;
+            }
+        }
+    });
+    document.addEventListener('DOMContentLoaded', () => {
+        const modal = document.getElementById('detailModal');
+        if (modal) observer.observe(modal, { attributes: true, attributeFilter: ['class'] });
+    });
+})();
 
 // ---- MINI-MAPA ----
 function initMiniMap(lat, lng, nombre) {
@@ -1105,7 +1305,7 @@ function initMiniMap(lat, lng, nombre) {
         });
 
         miniMap.on('load', () => {
-            new maplibregl.Marker({ color: '#1976d2' })
+            new maplibregl.Marker({ color: '#00696c' })
                 .setLngLat([lng, lat])
                 .addTo(miniMap);
         });
@@ -1119,18 +1319,20 @@ function destroyMiniMap() {
     }
 }
 
-// ---- AUDIO PLAYER + WEB AUDIO API WAVEFORM ----
+// ---- AUDIO PLAYER + WEB AUDIO API WAVEFORM + BOTTOM BAR ----
 let audioCtx = null;
 let analyser = null;
 let audioSourceNode = null;
 let waveAnimFrame = null;
+let bottomBarWaveFrame = null;
+let audioProgressFrame = null;
 
 function initAudioContext() {
     if (audioCtx) return;
     try {
         audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         analyser = audioCtx.createAnalyser();
-        analyser.fftSize = 64;
+        analyser.fftSize = 128;
         const player = document.getElementById('audioPlayer');
         audioSourceNode = audioCtx.createMediaElementSource(player);
         audioSourceNode.connect(analyser);
@@ -1150,9 +1352,7 @@ function drawWaveform() {
     function draw() {
         waveAnimFrame = requestAnimationFrame(draw);
         analyser.getByteFrequencyData(dataArray);
-
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-
         const barCount = 6;
         const barWidth = 4;
         const gap = 3;
@@ -1160,14 +1360,12 @@ function drawWaveform() {
         const startX = (canvas.width - totalWidth) / 2;
         const maxBarHeight = canvas.height * 0.75;
         const minBarHeight = 4;
-
         for (let i = 0; i < barCount; i++) {
             const dataIndex = Math.floor((i / barCount) * bufferLength);
             const value = dataArray[dataIndex] / 255;
             const barHeight = minBarHeight + value * (maxBarHeight - minBarHeight);
             const x = startX + i * (barWidth + gap);
             const y = (canvas.height - barHeight) / 2;
-
             ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
             ctx.beginPath();
             ctx.roundRect(x, y, barWidth, barHeight, 2);
@@ -1175,6 +1373,56 @@ function drawWaveform() {
         }
     }
     draw();
+}
+
+// Bottom bar waveform — wide frequency bars
+function drawBottomBarWaveform() {
+    const canvas = document.getElementById('audioBottomWaveCanvas');
+    if (!canvas || !analyser) return;
+    const ctx = canvas.getContext('2d');
+    const bufferLength = analyser.frequencyBinCount;
+    const dataArray = new Uint8Array(bufferLength);
+    const dpr = window.devicePixelRatio || 1;
+    const rect = canvas.getBoundingClientRect();
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+    ctx.scale(dpr, dpr);
+    const w = rect.width;
+    const h = rect.height;
+
+    function draw() {
+        bottomBarWaveFrame = requestAnimationFrame(draw);
+        analyser.getByteFrequencyData(dataArray);
+        ctx.clearRect(0, 0, w, h);
+
+        const barCount = Math.floor(w / 5);
+        const barW = 3;
+        const gap = (w - barCount * barW) / (barCount - 1);
+        const minH = 2;
+        const maxH = h * 0.85;
+
+        for (let i = 0; i < barCount; i++) {
+            const di = Math.floor((i / barCount) * bufferLength);
+            const val = dataArray[di] / 255;
+            const bh = minH + val * (maxH - minH);
+            const x = i * (barW + gap);
+            const y = (h - bh) / 2;
+
+            const alpha = 0.35 + val * 0.6;
+            ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
+            ctx.beginPath();
+            ctx.roundRect(x, y, barW, bh, 1.5);
+            ctx.fill();
+        }
+    }
+    draw();
+}
+
+function stopBottomBarWaveform() {
+    if (bottomBarWaveFrame) {
+        cancelAnimationFrame(bottomBarWaveFrame);
+        bottomBarWaveFrame = null;
+    }
 }
 
 function stopWaveform() {
@@ -1187,6 +1435,57 @@ function stopWaveform() {
         const ctx = canvas.getContext('2d');
         ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
+}
+
+// Format seconds as m:ss
+function formatAudioTime(sec) {
+    if (!sec || !isFinite(sec)) return '0:00';
+    const m = Math.floor(sec / 60);
+    const s = Math.floor(sec % 60);
+    return `${m}:${s.toString().padStart(2, '0')}`;
+}
+
+// Show/hide bottom bar
+function showAudioBottomBar() {
+    const bar = document.getElementById('audioBottomBar');
+    if (bar) bar.classList.add('visible');
+}
+function hideAudioBottomBar() {
+    const bar = document.getElementById('audioBottomBar');
+    if (bar) bar.classList.remove('visible');
+    stopBottomBarWaveform();
+    stopAudioProgress();
+}
+
+// Update progress overlay & time displays
+function startAudioProgress() {
+    const player = document.getElementById('audioPlayer');
+    function tick() {
+        audioProgressFrame = requestAnimationFrame(tick);
+        if (!player || !player.duration) return;
+        const pct = (player.currentTime / player.duration) * 100;
+        const prog = document.getElementById('audioBottomProgress');
+        if (prog) prog.style.width = pct + '%';
+        const cur = document.getElementById('audioBottomCurrent');
+        if (cur) cur.textContent = formatAudioTime(player.currentTime);
+        const dur = document.getElementById('audioBottomDuration');
+        if (dur) dur.textContent = formatAudioTime(player.duration);
+    }
+    tick();
+}
+function stopAudioProgress() {
+    if (audioProgressFrame) {
+        cancelAnimationFrame(audioProgressFrame);
+        audioProgressFrame = null;
+    }
+}
+
+// Update bottom bar play/pause icons
+function updateBottomBarIcons(playing) {
+    const playIcon = document.getElementById('audioBottomPlayIcon');
+    const pauseIcon = document.getElementById('audioBottomPauseIcon');
+    if (playIcon) playIcon.style.display = playing ? 'none' : 'block';
+    if (pauseIcon) pauseIcon.style.display = playing ? 'block' : 'none';
 }
 
 function toggleAudio() {
@@ -1202,19 +1501,30 @@ function toggleAudio() {
         player.pause();
         btn.classList.remove('playing');
         stopWaveform();
+        stopBottomBarWaveform();
+        stopAudioProgress();
+        updateBottomBarIcons(false);
         audioPlaying = false;
     } else {
         initAudioContext();
         if (audioCtx && audioCtx.state === 'suspended') {
             audioCtx.resume();
         }
+        // Set bottom bar title
+        const titleEl = document.getElementById('audioBottomTitle');
+        if (titleEl && selectedCompany) titleEl.textContent = selectedCompany.nombre;
+
         player.play().then(() => {
             btn.classList.add('playing');
             audioPlaying = true;
             Analytics.track('audio_play', { id: selectedCompany.id, name: selectedCompany.nombre });
             if (analyser) {
                 drawWaveform();
+                drawBottomBarWaveform();
             }
+            showAudioBottomBar();
+            startAudioProgress();
+            updateBottomBarIcons(true);
         }).catch(() => {
             showToast(t('audioError'));
         });
@@ -1230,19 +1540,45 @@ function stopAudio() {
     }
     if (btn) btn.classList.remove('playing');
     stopWaveform();
+    hideAudioBottomBar();
+    updateBottomBarIcons(false);
     audioPlaying = false;
 }
 
-// Audio ended event
+// Audio ended event + bottom bar interactivity
 document.addEventListener('DOMContentLoaded', () => {
     const player = document.getElementById('audioPlayer');
     if (player) {
         player.addEventListener('ended', () => {
             document.getElementById('audioPlayBtn')?.classList.remove('playing');
             stopWaveform();
+            stopBottomBarWaveform();
+            stopAudioProgress();
+            updateBottomBarIcons(false);
             audioPlaying = false;
+            // Keep bar visible briefly, then hide
+            setTimeout(() => { if (!audioPlaying) hideAudioBottomBar(); }, 1500);
         });
     }
+
+    // Bottom bar close button
+    document.getElementById('audioBottomClose')?.addEventListener('click', () => {
+        stopAudio();
+    });
+
+    // Bottom bar play/pause button
+    document.getElementById('audioBottomPlayBtn')?.addEventListener('click', () => {
+        toggleAudio();
+    });
+
+    // Click on waveform to seek
+    document.getElementById('audioBottomWaveCanvas')?.addEventListener('click', (e) => {
+        const player = document.getElementById('audioPlayer');
+        if (!player || !player.duration) return;
+        const rect = e.currentTarget.getBoundingClientRect();
+        const pct = (e.clientX - rect.left) / rect.width;
+        player.currentTime = pct * player.duration;
+    });
 });
 
 // ---- ACCIONES ----
@@ -1268,6 +1604,12 @@ function emailCompany() {
     window.location.href = `mailto:${selectedCompany.email}`;
 }
 
+function solicitarCambios() {
+    if (!selectedCompany) return;
+    const empresa = encodeURIComponent(selectedCompany.nombre);
+    window.open(`formulario-empresas.html?empresa=${empresa}`, '_blank');
+}
+
 function shareCompany() {
     if (!selectedCompany) return;
     Analytics.track('action_share', { id: selectedCompany.id, name: selectedCompany.nombre });
@@ -1280,6 +1622,67 @@ function shareCompany() {
             showToast(t('linkCopied'));
         }).catch(() => {});
     }
+}
+
+// ---- WEB MODAL (iframe in-app browser) ----
+function openWebModal(url, companyName) {
+    // Remove existing modal if any
+    const existing = document.getElementById('webModal');
+    if (existing) existing.remove();
+
+    const modal = document.createElement('div');
+    modal.id = 'webModal';
+    modal.style.cssText = 'position:fixed;inset:0;z-index:99990;display:flex;flex-direction:column;background:rgba(0,20,22,.6);animation:fadeIn .2s';
+
+    const header = document.createElement('div');
+    header.style.cssText = 'display:flex;align-items:center;gap:12px;padding:10px 16px;background:#00696c;color:white;flex-shrink:0';
+
+    const title = document.createElement('div');
+    title.style.cssText = 'flex:1;font-size:.9rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:Inter,system-ui,sans-serif';
+    title.textContent = companyName;
+
+    const urlLabel = document.createElement('div');
+    urlLabel.style.cssText = 'font-size:.7rem;opacity:.7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px;font-family:Inter,system-ui,sans-serif';
+    urlLabel.textContent = url.replace(/^https?:\/\//, '');
+
+    const openExtBtn = document.createElement('button');
+    openExtBtn.style.cssText = 'padding:6px 14px;border-radius:8px;border:1px solid rgba(255,255,255,.3);background:transparent;color:white;font-size:.75rem;font-weight:600;cursor:pointer;white-space:nowrap;font-family:Inter,system-ui,sans-serif';
+    openExtBtn.textContent = 'Abrir en navegador';
+    openExtBtn.onclick = () => window.open(url, '_blank');
+
+    const closeBtn = document.createElement('button');
+    closeBtn.style.cssText = 'width:36px;height:36px;border-radius:50%;border:none;background:rgba(255,255,255,.15);color:white;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0';
+    closeBtn.innerHTML = '✕';
+    closeBtn.onclick = () => modal.remove();
+
+    header.appendChild(title);
+    header.appendChild(urlLabel);
+    header.appendChild(openExtBtn);
+    header.appendChild(closeBtn);
+
+    const iframe = document.createElement('iframe');
+    iframe.src = url;
+    iframe.style.cssText = 'flex:1;border:none;background:white;border-radius:0 0 0 0';
+    iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-forms allow-popups');
+    iframe.setAttribute('loading', 'lazy');
+
+    // Loading indicator
+    const loader = document.createElement('div');
+    loader.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:white;font-size:.9rem;font-family:Inter,system-ui,sans-serif';
+    loader.textContent = 'Cargando web...';
+    iframe.onload = () => loader.remove();
+
+    modal.appendChild(header);
+    modal.appendChild(loader);
+    modal.appendChild(iframe);
+
+    // Close on Escape
+    const escHandler = (e) => {
+        if (e.key === 'Escape') { modal.remove(); document.removeEventListener('keydown', escHandler); }
+    };
+    document.addEventListener('keydown', escHandler);
+
+    document.body.appendChild(modal);
 }
 
 function showToast(msg) {
@@ -1369,7 +1772,6 @@ function updateStats() {
 function toggleSatellite() {
     isSatellite = !isSatellite;
     const btn = document.getElementById('btnSatellite');
-    // Toggle class para adaptar estilo de floating pills
     document.querySelector('.flex-1.relative')?.classList.toggle('satellite-active', isSatellite);
     if (isSatellite) {
         if (!map.getSource('satellite')) {
@@ -1380,8 +1782,11 @@ function toggleSatellite() {
             });
         }
         if (!map.getLayer('satellite-layer')) {
-            const firstPolyLayer = `polygon-${poligonos[0].id}-fill`;
-            map.addLayer({ id: 'satellite-layer', type: 'raster', source: 'satellite', paint: { 'raster-opacity': 0.85 } }, firstPolyLayer);
+            // Insert at the very bottom so all polygons, markers, labels stay on top
+            const allLayers = map.getStyle().layers;
+            const firstCustomLayer = allLayers.find(l => l.id.startsWith('polygon-') || l.id === 'clusters' || l.id === 'company-points');
+            const beforeId = firstCustomLayer ? firstCustomLayer.id : undefined;
+            map.addLayer({ id: 'satellite-layer', type: 'raster', source: 'satellite', paint: { 'raster-opacity': 0.9 } }, beforeId);
         }
         btn.classList.add('active');
     } else {
@@ -1396,7 +1801,7 @@ function locateUser() {
         (pos) => {
             const { latitude, longitude } = pos.coords;
             map.flyTo({ center: [longitude, latitude], zoom: 16, duration: 1000 });
-            new maplibregl.Marker({ color: '#1976d2' }).setLngLat([longitude, latitude]).addTo(map);
+            new maplibregl.Marker({ color: '#00696c' }).setLngLat([longitude, latitude]).addTo(map);
             // Sort companies by proximity
             window._userLat = pos.coords.latitude;
             window._userLng = pos.coords.longitude;
@@ -1409,13 +1814,17 @@ function locateUser() {
     );
 }
 
+function resetNorth() {
+    map.easeTo({ bearing: 0, pitch: 35, duration: 600 });
+}
+
 function resetView() {
     activeAreaFilter = 'all';
     activeSectorFilter = 'all';
     searchTerm = '';
     document.getElementById('searchDesktop').value = '';
     document.getElementById('searchMobile').value = '';
-    map.flyTo({ center: CONFIG.center, zoom: CONFIG.zoom, duration: 800 });
+    map.flyTo({ center: CONFIG.center, zoom: CONFIG.zoom, pitch: 35, bearing: -10, duration: 800 });
     renderFilters(); renderList(); loadCompanyMarkers(); updateStats();
 }
 
@@ -1508,10 +1917,11 @@ function addPOIMarkers() {
         const el = document.createElement('div');
         el.className = 'poi-marker-enhanced';
         el.style.cssText = 'width:0;height:0;overflow:visible;';
+        const poiEmoji = POI_EMOJIS[poi.icon] || '📍';
         el.innerHTML = `
             <div class="poi-marker-body">
                 <div class="poi-marker-pin" style="--pin-color:${poi.color}">
-                    <svg viewBox="0 0 24 24" style="width:20px;height:20px;stroke:white;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round">${ICON_PATHS[poi.icon] || ICON_PATHS.building}</svg>
+                    <span style="font-size:20px;line-height:1">${poiEmoji}</span>
                 </div>
                 <div class="poi-marker-stem"></div>
             </div>
@@ -1577,10 +1987,11 @@ function renderPOIDistancesPanel() {
             <div class="poi-distance-list">
                 ${distances.map(d => {
                     const poiName = currentLang === 'en' && d.nombre_en ? d.nombre_en : d.nombre;
+                    const poiEmoji = POI_EMOJIS[d.icon] || '📍';
                     return `
                     <div class="poi-distance-item">
                         <div class="poi-distance-icon" style="background:${d.color}18;color:${d.color}">
-                            <svg viewBox="0 0 24 24">${ICON_PATHS[d.icon] || ICON_PATHS.building}</svg>
+                            <span style="font-size:16px">${poiEmoji}</span>
                         </div>
                         <span class="poi-distance-name">${escapeHTML(poiName)}</span>
                         <span class="poi-distance-value">${formatDistance(d.distance)}</span>
@@ -1919,6 +2330,24 @@ function toggleParcelas() {
 }
 
 // ============================================================
+// STREET VIEW 360° LAYER TOGGLE
+// ============================================================
+let streetViewLayerVisible = false;
+function toggleStreetViewLayer() {
+    streetViewLayerVisible = !streetViewLayerVisible;
+    if (map.getLayer('panorama-points')) {
+        map.setLayoutProperty('panorama-points', 'visibility', streetViewLayerVisible ? 'visible' : 'none');
+    }
+    document.getElementById('btnStreetViewFloat')?.classList.toggle('active', streetViewLayerVisible);
+    if (streetViewLayerVisible) {
+        // Zoom in to see the points (minzoom 16)
+        if (map.getZoom() < 16) {
+            map.flyTo({ zoom: 16.5, duration: 800 });
+        }
+    }
+}
+
+// ============================================================
 // FEATURE V3: PUNTOS DE ACCESO (DGT ROAD SIGNS)
 // ============================================================
 
@@ -1938,20 +2367,17 @@ function addAccessPointMarkers() {
                              acc.vehiculos === 'ligeros' ? t('lightVehicles') : t('allVehicles');
         const tipoText = acc.tipo === 'entrada' ? t('entrance') : acc.tipo === 'salida' ? t('exit') : t('entranceExit');
 
-        // Vehicle type icon
-        const vehicleIcon = acc.vehiculos === 'pesados'
-            ? '<svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:white;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>'
-            : acc.vehiculos === 'ligeros'
-            ? '<svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:white;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg>'
-            : '<svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:white;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg>';
+        // Vehicle type emoji
+        const vehicleEmoji = acc.vehiculos === 'pesados' ? '🚛'
+            : acc.vehiculos === 'ligeros' ? '🚗' : '🚗';
 
-        // Type badge: IN / OUT / IN-OUT
-        const tipoBadge = acc.tipo === 'entrada' ? 'IN' : acc.tipo === 'salida' ? 'OUT' : 'IN/OUT';
+        // Type badge: localised label
+        const tipoBadge = acc.tipo === 'entrada' ? t('entrance').toUpperCase() : acc.tipo === 'salida' ? t('exit').toUpperCase() : t('entranceExit').toUpperCase();
 
         el.innerHTML = `
             <div class="access-marker-body">
                 <div class="access-marker-icon">
-                    ${vehicleIcon}
+                    <span style="font-size:18px;line-height:1">${vehicleEmoji}</span>
                 </div>
             </div>
             <span class="access-marker-label">${tipoBadge}</span>
@@ -2006,9 +2432,7 @@ function addCustomTransportStops() {
     paradasTransporte.forEach(stop => {
         const el = document.createElement('div');
         el.className = `transport-marker ${stop.tipo}`;
-        const svgIcon = stop.tipo === 'tren'
-            ? `<svg viewBox="0 0 24 24" style="width:20px;height:20px;stroke:white;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round">${ICON_PATHS.train}</svg>`
-            : `<svg viewBox="0 0 24 24" style="width:20px;height:20px;stroke:white;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round">${ICON_PATHS.bus}</svg>`;
+        const transportEmoji = stop.tipo === 'tren' ? '🚆' : '🚌';
         el.style.cssText = 'width:0;height:0;overflow:visible;';
 
         const stopName = currentLang === 'en' && stop.nombre_en ? stop.nombre_en : stop.nombre;
@@ -2018,7 +2442,7 @@ function addCustomTransportStops() {
         el.innerHTML = `
             <div class="transport-marker-body">
                 <div class="transport-marker-pin">
-                    ${svgIcon}
+                    <span style="font-size:20px;line-height:1">${transportEmoji}</span>
                 </div>
                 <div class="transport-marker-stem"></div>
             </div>
