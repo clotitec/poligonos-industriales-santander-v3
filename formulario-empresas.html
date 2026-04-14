@@ -308,17 +308,15 @@
         { key: 'cnae',        label: 'CNAE / Actividad economica', type: 'text' }
     ];
 
-    const SECTOR_EMOJIS = {
-        'Automocion': '🚗', 'Concesionario': '🏎️', 'Taller': '🔧', 'Almacen': '📦', 'Almacén': '📦',
-        'Construccion': '🏗️', 'Oficios / Construcción': '🏗️', 'Oficios / Construccion': '🏗️',
-        'Industria': '🏭', 'Logistica': '🚛', 'Servicios': '💼', 'Comercio': '🛒',
-        'Hosteleria': '🍽️', 'Hostelería': '🍽️', 'Tecnologia': '💻', 'Tienda': '🛒',
-        'Alquiler': '🔑', 'Fábrica': '🏭', 'Fabrica': '🏭', 'Repuestos': '⚙️',
-        'Gasolinera': '⛽', 'Transporte': '🚛', 'Gimnasio': '💪', 'Gestion': '📋',
-        'Distribuidor': '📦', 'default': '🏢'
-    };
+    // SECTOR_EMOJIS y SECTOR_COLORS ya vienen declarados en data.js
+    // Solo definimos fallbacks por si alguno falta
+    const _EMOJIS = (typeof SECTOR_EMOJIS !== 'undefined') ? SECTOR_EMOJIS : {};
+    const _COLORS = (typeof SECTOR_COLORS !== 'undefined') ? SECTOR_COLORS : {};
+    const _DEFAULT_EMOJI = '🏢';
+    const _DEFAULT_COLOR = '#64748b';
 
-    const SECTOR_COLORS = (typeof window.SECTOR_COLORS !== 'undefined') ? window.SECTOR_COLORS : {};
+    function getEmoji(sector) { return _EMOJIS[sector] || _DEFAULT_EMOJI; }
+    function getColor(sector) { return _COLORS[sector] || _DEFAULT_COLOR; }
 
     const AREA_LABELS = {
         'candina': 'Candina',
@@ -408,8 +406,8 @@
 
         sinRes.classList.add('hidden');
         container.innerHTML = lista.map(e => {
-            const emoji = SECTOR_EMOJIS[e.sector] || SECTOR_EMOJIS.default;
-            const color = SECTOR_COLORS[e.sector] || '#64748b';
+            const emoji = getEmoji(e.sector);
+            const color = getColor(e.sector);
             const areaShort = AREA_LABELS[e.areaId] || e.area || '';
             return `<div class="empresa-item" onclick="cargarEmpresa(${e.id})">
                 <div class="emp-emoji" style="background:${color}18;color:${color}">${emoji}</div>
@@ -431,7 +429,7 @@
         valoresModificados = {};
 
         // Cabecera
-        const emoji = SECTOR_EMOJIS[empresaActual.sector] || SECTOR_EMOJIS.default;
+        const emoji = getEmoji(empresaActual.sector);
         document.getElementById('fichaEmoji').textContent = emoji;
         document.getElementById('fichaNombre').textContent = empresaActual.nombre;
         document.getElementById('fichaArea').textContent = empresaActual.area;
