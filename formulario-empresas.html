@@ -28,6 +28,32 @@
         body { background: linear-gradient(135deg, #0a1628 0%, #0f2035 50%, #0a1628 100%); min-height: 100vh; }
         .glass-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(20px); }
 
+        /* Buscador y directorio */
+        .search-box { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 14px;
+                       padding: 12px 16px 12px 44px; font-size: 15px; color: white; width: 100%; outline: none; transition: all 0.2s; font-family: inherit; }
+        .search-box:focus { background: rgba(255,255,255,0.1); border-color: #14c8cc; box-shadow: 0 0 0 3px rgba(20,200,204,0.15); }
+        .search-box::placeholder { color: rgba(255,255,255,0.3); }
+
+        .filter-chip { display: inline-flex; align-items: center; gap: 4px; padding: 6px 14px; border-radius: 99px; font-size: 12px;
+                        font-weight: 500; cursor: pointer; transition: all 0.2s; border: 1px solid rgba(255,255,255,0.1);
+                        background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.5); white-space: nowrap; }
+        .filter-chip:hover { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.7); }
+        .filter-chip.active { background: rgba(20,200,204,0.15); border-color: rgba(20,200,204,0.3); color: #14c8cc; }
+
+        .empresa-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 12px;
+                         cursor: pointer; transition: all 0.15s; border: 1px solid transparent; }
+        .empresa-item:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.08); }
+        .empresa-item .emp-emoji { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center;
+                                    justify-content: center; font-size: 18px; flex-shrink: 0; }
+        .empresa-item .emp-name { font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.85); }
+        .empresa-item .emp-meta { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 1px; }
+
+        .directorio-list { max-height: 420px; overflow-y: auto; scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.1) transparent; }
+        .directorio-list::-webkit-scrollbar { width: 6px; }
+        .directorio-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+
+        .results-count { font-size: 11px; color: rgba(255,255,255,0.3); padding: 4px 16px; }
+
         /* Campo editable */
         .field-row { display: flex; align-items: flex-start; gap: 12px; padding: 12px 16px; border-radius: 12px; transition: background 0.2s; }
         .field-row:hover { background: rgba(255,255,255,0.03); }
@@ -45,7 +71,6 @@
         .field-input:focus { border-color: #14c8cc; box-shadow: 0 0 0 3px rgba(20,200,204,0.15); background: rgba(255,255,255,0.1); }
         .field-input::placeholder { color: rgba(255,255,255,0.25); }
 
-        /* Campo modificado */
         .field-row.modified { background: rgba(20,200,204,0.06); border-left: 3px solid #14c8cc; }
         .field-row.modified .field-value { color: #14c8cc; font-weight: 500; }
         .badge-modified { display: inline-block; font-size: 10px; background: rgba(20,200,204,0.2); color: #14c8cc;
@@ -62,8 +87,6 @@
         .counter { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%;
                     background: #14c8cc; color: #0a1628; font-size: 11px; font-weight: 700; }
 
-        select option { background: #1a2a3a; color: white; }
-
         .success-animation { animation: successPulse 0.6s ease; }
         @keyframes successPulse { 0% { transform: scale(0.8); opacity: 0; } 50% { transform: scale(1.05); } 100% { transform: scale(1); opacity: 1; } }
 
@@ -71,6 +94,10 @@
                        padding: 10px 14px; font-size: 14px; color: white; width: 100%; outline: none; transition: all 0.2s; font-family: inherit; }
         .input-auth:focus { background: rgba(255,255,255,0.1); border-color: #14c8cc; box-shadow: 0 0 0 3px rgba(20,200,204,0.15); }
         .input-auth::placeholder { color: rgba(255,255,255,0.25); }
+
+        .btn-back { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: rgba(255,255,255,0.4);
+                     cursor: pointer; padding: 6px 12px; border-radius: 8px; transition: all 0.2s; border: none; background: none; }
+        .btn-back:hover { color: #14c8cc; background: rgba(20,200,204,0.08); }
     </style>
 </head>
 <body class="font-sans text-white antialiased">
@@ -81,9 +108,9 @@
             <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-santander/20 text-santander-light text-xs font-medium tracking-wide mb-4">
                 DIRECTORIO EMPRESARIAL DE SANTANDER
             </div>
-            <h1 class="text-2xl sm:text-3xl font-bold text-white mb-2">Verificar y actualizar datos</h1>
-            <p class="text-white/50 text-sm max-w-md mx-auto">
-                Revisa la ficha de tu empresa. Pulsa <strong class="text-santander-light">Modificar</strong> en cualquier campo para corregirlo.
+            <h1 class="text-2xl sm:text-3xl font-bold text-white mb-2" id="pageTitle">Verificar y actualizar datos</h1>
+            <p class="text-white/50 text-sm max-w-md mx-auto" id="pageSubtitle">
+                Busca tu empresa, revisa los datos y corrige lo que necesites.
             </p>
         </div>
     </header>
@@ -91,16 +118,61 @@
     <main class="px-4 pb-12">
         <div class="max-w-2xl mx-auto">
 
-            <!-- Selector de empresa (si no viene por URL) -->
-            <div id="selectorEmpresa" class="glass-card rounded-2xl p-6 mb-6">
-                <label class="block text-xs font-medium text-white/60 mb-2">Selecciona tu empresa</label>
-                <select id="selectEmpresa" class="input-auth w-full" onchange="cargarEmpresa(this.value)">
-                    <option value="">-- Busca tu empresa --</option>
-                </select>
+            <!-- ========== PASO 1: DIRECTORIO ========== -->
+            <div id="pasoDirectorio">
+
+                <!-- Buscador -->
+                <div class="glass-card rounded-2xl p-5 mb-4">
+                    <div style="position:relative">
+                        <svg style="position:absolute;left:14px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:rgba(255,255,255,0.3)" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+                        </svg>
+                        <input type="text" id="inputBuscar" class="search-box" placeholder="Buscar empresa por nombre..." oninput="filtrarEmpresas()">
+                    </div>
+                </div>
+
+                <!-- Filtros -->
+                <div class="mb-4">
+                    <div class="flex items-center gap-2 mb-2 px-1">
+                        <span style="font-size:11px;color:rgba(255,255,255,0.3);font-weight:600;text-transform:uppercase;letter-spacing:0.5px">Poligono</span>
+                    </div>
+                    <div class="flex flex-wrap gap-2 mb-3" id="filtrosArea">
+                        <button class="filter-chip active" data-area="todos" onclick="setFiltroArea('todos')">Todos</button>
+                        <button class="filter-chip" data-area="candina" onclick="setFiltroArea('candina')">Candina</button>
+                        <button class="filter-chip" data-area="campon" onclick="setFiltroArea('campon')">El Campon</button>
+                        <button class="filter-chip" data-area="parayas-sur" onclick="setFiltroArea('parayas-sur')">Parayas Sur</button>
+                        <button class="filter-chip" data-area="parayas-norte" onclick="setFiltroArea('parayas-norte')">Parayas Norte</button>
+                    </div>
+
+                    <div class="flex items-center gap-2 mb-2 px-1">
+                        <span style="font-size:11px;color:rgba(255,255,255,0.3);font-weight:600;text-transform:uppercase;letter-spacing:0.5px">Sector</span>
+                    </div>
+                    <div class="flex flex-wrap gap-2" id="filtrosSector">
+                        <button class="filter-chip active" data-sector="todos" onclick="setFiltroSector('todos')">Todos</button>
+                    </div>
+                </div>
+
+                <!-- Lista de empresas -->
+                <div class="glass-card rounded-2xl overflow-hidden">
+                    <div class="results-count" id="contadorResultados"></div>
+                    <div class="directorio-list" id="listaEmpresas">
+                        <!-- Se rellena por JS -->
+                    </div>
+                    <div id="sinResultados" class="hidden" style="padding:40px 20px;text-align:center">
+                        <div style="font-size:32px;margin-bottom:8px">🔍</div>
+                        <p style="font-size:14px;color:rgba(255,255,255,0.4)">No se encontraron empresas con esos filtros</p>
+                    </div>
+                </div>
             </div>
 
-            <!-- Ficha de la empresa (oculta hasta seleccionar) -->
-            <div id="fichaEmpresa" class="hidden space-y-6">
+            <!-- ========== PASO 2: FICHA + FORMULARIO ========== -->
+            <div id="pasoFicha" class="hidden space-y-6">
+
+                <!-- Boton volver -->
+                <button class="btn-back" onclick="volverDirectorio()">
+                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+                    Volver al directorio
+                </button>
 
                 <!-- Cabecera empresa -->
                 <div class="glass-card rounded-2xl p-6">
@@ -111,7 +183,7 @@
                             <p class="text-sm text-white/40" id="fichaArea"></p>
                         </div>
                     </div>
-                    <p class="text-xs text-white/30 mt-3">Estos son los datos que aparecen actualmente en el directorio. Modifica los que necesites corregir.</p>
+                    <p class="text-xs text-white/30 mt-3">Estos son los datos que aparecen en el directorio. Pulsa <strong style="color:#14c8cc">Modificar</strong> en los que quieras corregir.</p>
                 </div>
 
                 <!-- Datos de la empresa -->
@@ -121,11 +193,8 @@
                             <span class="w-5 h-5 rounded-full bg-santander/30 flex items-center justify-center text-[10px] font-bold">1</span>
                             Datos de la empresa
                         </h3>
-                        <p class="text-white/30 text-xs mt-1">Pulsa "Modificar" en los campos que quieras corregir</p>
                     </div>
-                    <div class="divide-y divide-white/5" id="camposEmpresa">
-                        <!-- Se rellena por JS -->
-                    </div>
+                    <div class="divide-y divide-white/5" id="camposEmpresa"></div>
                 </div>
 
                 <!-- Observaciones -->
@@ -134,8 +203,8 @@
                         <span class="w-5 h-5 rounded-full bg-santander/30 flex items-center justify-center text-[10px] font-bold">2</span>
                         Observaciones
                     </h3>
-                    <p class="text-white/30 text-xs mb-4">Cualquier comentario adicional sobre la ficha, datos que falten o correcciones del spot de audio</p>
-                    <textarea id="observaciones" rows="4" placeholder="Ej: El horario es de L-V 8:00-18:00. El texto del spot tiene un error en el nombre..."
+                    <p class="text-white/30 text-xs mb-4">Comentarios adicionales, datos que falten o correcciones del spot de audio</p>
+                    <textarea id="observaciones" rows="4" placeholder="Ej: El horario es L-V 8:00-18:00. El spot tiene un error en el nombre..."
                         class="input-auth w-full resize-none"></textarea>
                 </div>
 
@@ -168,7 +237,7 @@
                     </div>
                 </div>
 
-                <!-- Resumen y enviar -->
+                <!-- Resumen de cambios -->
                 <div id="resumenCambios" class="hidden glass-card rounded-2xl p-6">
                     <h3 class="text-sm font-semibold text-amber-400 flex items-center gap-2 mb-3">
                         <span class="counter" style="background:#f59e0b;color:#0a1628" id="contadorCambios">0</span>
@@ -177,6 +246,7 @@
                     <div id="listaCambios" class="space-y-2 text-sm"></div>
                 </div>
 
+                <!-- Enviar -->
                 <div class="flex flex-col items-center gap-3">
                     <button type="button" id="btnEnviar" onclick="enviarFormulario()" disabled
                         class="btn-primary w-full sm:w-auto px-10 py-3.5 rounded-xl text-sm font-semibold text-white tracking-wide">
@@ -188,7 +258,7 @@
                 </div>
             </div>
 
-            <!-- Mensaje exito -->
+            <!-- ========== EXITO ========== -->
             <div id="msgExito" class="hidden glass-card rounded-2xl p-8 text-center success-animation">
                 <div class="w-16 h-16 rounded-full bg-emerald-500/20 flex items-center justify-center mx-auto mb-4">
                     <svg class="w-8 h-8 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -217,69 +287,144 @@
 
     <script>
     // ---- Estado ----
+    let todasEmpresas = [];
     let empresaActual = null;
     let valoresOriginales = {};
     let valoresModificados = {};
+    let filtroArea = 'todos';
+    let filtroSector = 'todos';
 
-    // Definicion de campos editables
     const CAMPOS = [
-        { key: 'nombre',      label: 'Nombre',             type: 'text' },
-        { key: 'descripcion', label: 'Descripcion',        type: 'text' },
-        { key: 'sector',      label: 'Sector',             type: 'text' },
-        { key: 'actividad',   label: 'Actividad',          type: 'text' },
-        { key: 'direccion',   label: 'Direccion',          type: 'text' },
-        { key: 'nave',        label: 'Nave / Local',       type: 'text' },
-        { key: 'cp',          label: 'Codigo postal',      type: 'text' },
-        { key: 'telefono',    label: 'Telefono',           type: 'tel' },
-        { key: 'email',       label: 'Email',              type: 'email' },
-        { key: 'web',         label: 'Pagina web',         type: 'url' },
+        { key: 'nombre',      label: 'Nombre de la empresa', type: 'text' },
+        { key: 'descripcion', label: 'Descripcion',          type: 'text' },
+        { key: 'sector',      label: 'Sector',               type: 'text' },
+        { key: 'actividad',   label: 'Actividad',            type: 'text' },
+        { key: 'direccion',   label: 'Direccion',            type: 'text' },
+        { key: 'nave',        label: 'Nave / Local',         type: 'text' },
+        { key: 'cp',          label: 'Codigo postal',        type: 'text' },
+        { key: 'telefono',    label: 'Telefono',             type: 'tel' },
+        { key: 'email',       label: 'Email',                type: 'email' },
+        { key: 'web',         label: 'Pagina web',           type: 'url' },
         { key: 'cnae',        label: 'CNAE / Actividad economica', type: 'text' }
     ];
 
     const SECTOR_EMOJIS = {
-        'Automocion': '🚗', 'Concesionario': '🏎️', 'Taller': '🔧', 'Almacen': '📦',
-        'Construccion': '🏗️', 'Industria': '🏭', 'Logistica': '🚛', 'Servicios': '💼',
-        'Comercio': '🛒', 'Hosteleria': '🍽️', 'Tecnologia': '💻', 'default': '🏢'
+        'Automocion': '🚗', 'Concesionario': '🏎️', 'Taller': '🔧', 'Almacen': '📦', 'Almacén': '📦',
+        'Construccion': '🏗️', 'Oficios / Construcción': '🏗️', 'Oficios / Construccion': '🏗️',
+        'Industria': '🏭', 'Logistica': '🚛', 'Servicios': '💼', 'Comercio': '🛒',
+        'Hosteleria': '🍽️', 'Hostelería': '🍽️', 'Tecnologia': '💻', 'Tienda': '🛒',
+        'Alquiler': '🔑', 'Fábrica': '🏭', 'Fabrica': '🏭', 'Repuestos': '⚙️',
+        'Gasolinera': '⛽', 'Transporte': '🚛', 'Gimnasio': '💪', 'Gestion': '📋',
+        'Distribuidor': '📦', 'default': '🏢'
+    };
+
+    const SECTOR_COLORS = (typeof window.SECTOR_COLORS !== 'undefined') ? window.SECTOR_COLORS : {};
+
+    const AREA_LABELS = {
+        'candina': 'Candina',
+        'campon': 'El Campon',
+        'parayas-sur': 'Parayas Sur',
+        'parayas-norte': 'Parayas Norte'
     };
 
     // ---- Inicializacion ----
     (function init() {
-        const select = document.getElementById('selectEmpresa');
-        let lista = [];
         if (typeof empresas !== 'undefined') {
-            lista = empresas.map(e => ({ id: e.id, nombre: e.nombre, area: e.area || '' }));
+            todasEmpresas = empresas.slice().sort((a, b) => a.nombre.localeCompare(b.nombre, 'es'));
         }
-        lista.sort((a, b) => a.nombre.localeCompare(b.nombre, 'es'));
-        const vistos = new Set();
-        lista = lista.filter(e => { if (vistos.has(e.nombre)) return false; vistos.add(e.nombre); return true; });
 
-        lista.forEach(e => {
-            const opt = document.createElement('option');
-            opt.value = e.id;
-            opt.textContent = e.nombre + (e.area ? ` — ${e.area.replace('Polígono Industrial de ', '')}` : '');
-            select.appendChild(opt);
+        // Generar chips de sector dinamicamente
+        const sectores = {};
+        todasEmpresas.forEach(e => { if (e.sector) sectores[e.sector] = (sectores[e.sector] || 0) + 1; });
+        const sectoresOrdenados = Object.entries(sectores).sort((a, b) => b[1] - a[1]);
+
+        const contenedorSector = document.getElementById('filtrosSector');
+        sectoresOrdenados.forEach(([sector, count]) => {
+            if (count >= 3) { // Solo sectores con 3+ empresas
+                const btn = document.createElement('button');
+                btn.className = 'filter-chip';
+                btn.dataset.sector = sector;
+                btn.onclick = () => setFiltroSector(sector);
+                btn.textContent = `${sector} (${count})`;
+                contenedorSector.appendChild(btn);
+            }
         });
 
-        // Pre-seleccionar si viene por URL
+        renderDirectorio();
+
+        // Si viene con ID o nombre por URL, cargar directamente
         const params = new URLSearchParams(window.location.search);
-        const empresaParam = params.get('empresa');
         const idParam = params.get('id');
+        const empresaParam = params.get('empresa');
 
         if (idParam) {
-            select.value = idParam;
-            cargarEmpresa(idParam);
+            cargarEmpresa(parseInt(idParam));
         } else if (empresaParam) {
             const decoded = decodeURIComponent(empresaParam);
-            const emp = lista.find(e => e.nombre === decoded) || lista.find(e => e.nombre.toLowerCase().includes(decoded.toLowerCase()));
-            if (emp) { select.value = emp.id; cargarEmpresa(emp.id); }
+            const emp = todasEmpresas.find(e => e.nombre === decoded) ||
+                        todasEmpresas.find(e => e.nombre.toLowerCase().includes(decoded.toLowerCase()));
+            if (emp) cargarEmpresa(emp.id);
         }
     })();
 
+    // ---- Filtros ----
+    function setFiltroArea(area) {
+        filtroArea = area;
+        document.querySelectorAll('#filtrosArea .filter-chip').forEach(c => c.classList.toggle('active', c.dataset.area === area));
+        filtrarEmpresas();
+    }
+
+    function setFiltroSector(sector) {
+        filtroSector = sector;
+        document.querySelectorAll('#filtrosSector .filter-chip').forEach(c => c.classList.toggle('active', c.dataset.sector === sector));
+        filtrarEmpresas();
+    }
+
+    function filtrarEmpresas() {
+        const texto = document.getElementById('inputBuscar').value.trim().toLowerCase();
+        const filtradas = todasEmpresas.filter(e => {
+            if (filtroArea !== 'todos' && e.areaId !== filtroArea) return false;
+            if (filtroSector !== 'todos' && e.sector !== filtroSector) return false;
+            if (texto && !e.nombre.toLowerCase().includes(texto)) return false;
+            return true;
+        });
+        renderDirectorio(filtradas);
+    }
+
+    // ---- Render directorio ----
+    function renderDirectorio(lista) {
+        if (!lista) lista = todasEmpresas;
+        const container = document.getElementById('listaEmpresas');
+        const sinRes = document.getElementById('sinResultados');
+        const contador = document.getElementById('contadorResultados');
+
+        contador.textContent = `${lista.length} empresa${lista.length !== 1 ? 's' : ''}`;
+
+        if (lista.length === 0) {
+            container.innerHTML = '';
+            sinRes.classList.remove('hidden');
+            return;
+        }
+
+        sinRes.classList.add('hidden');
+        container.innerHTML = lista.map(e => {
+            const emoji = SECTOR_EMOJIS[e.sector] || SECTOR_EMOJIS.default;
+            const color = SECTOR_COLORS[e.sector] || '#64748b';
+            const areaShort = AREA_LABELS[e.areaId] || e.area || '';
+            return `<div class="empresa-item" onclick="cargarEmpresa(${e.id})">
+                <div class="emp-emoji" style="background:${color}18;color:${color}">${emoji}</div>
+                <div style="flex:1;min-width:0">
+                    <div class="emp-name">${escapeHTML(e.nombre)}</div>
+                    <div class="emp-meta">${escapeHTML(e.sector || 'Sin sector')} · ${escapeHTML(areaShort)}</div>
+                </div>
+                <svg style="width:16px;height:16px;color:rgba(255,255,255,0.2);flex-shrink:0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+            </div>`;
+        }).join('');
+    }
+
     // ---- Cargar empresa ----
-    function cargarEmpresa(idStr) {
-        if (!idStr) return;
-        const id = parseInt(idStr);
-        empresaActual = empresas.find(e => e.id === id);
+    function cargarEmpresa(id) {
+        empresaActual = todasEmpresas.find(e => e.id === id);
         if (!empresaActual) return;
 
         valoresOriginales = {};
@@ -294,11 +439,9 @@
         // Generar campos
         const container = document.getElementById('camposEmpresa');
         container.innerHTML = '';
-
         CAMPOS.forEach(campo => {
             const valor = empresaActual[campo.key] || '';
             valoresOriginales[campo.key] = valor;
-
             const row = document.createElement('div');
             row.className = 'field-row';
             row.id = `row-${campo.key}`;
@@ -306,8 +449,21 @@
             container.appendChild(row);
         });
 
-        document.getElementById('fichaEmpresa').classList.remove('hidden');
+        // Mostrar ficha, ocultar directorio
+        document.getElementById('pasoDirectorio').classList.add('hidden');
+        document.getElementById('pasoFicha').classList.remove('hidden');
+        document.getElementById('pageTitle').textContent = empresaActual.nombre;
+        document.getElementById('pageSubtitle').textContent = 'Revisa los datos y modifica lo que necesites';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         actualizarResumen();
+    }
+
+    function volverDirectorio() {
+        document.getElementById('pasoFicha').classList.add('hidden');
+        document.getElementById('pasoDirectorio').classList.remove('hidden');
+        document.getElementById('pageTitle').textContent = 'Verificar y actualizar datos';
+        document.getElementById('pageSubtitle').textContent = 'Busca tu empresa, revisa los datos y corrige lo que necesites.';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     // ---- Renderizar campo en modo vista ----
@@ -315,7 +471,6 @@
         const modificado = valoresModificados.hasOwnProperty(campo.key);
         const valorMostrar = modificado ? valoresModificados[campo.key] : valor;
         const isEmpty = !valorMostrar;
-
         return `
             <div class="field-label">${campo.label}</div>
             <div class="field-value ${isEmpty ? 'empty' : ''}">${isEmpty ? 'Sin datos' : escapeHTML(valorMostrar)}${modificado ? '<span class="badge-modified">modificado</span>' : ''}</div>
@@ -324,64 +479,48 @@
             </div>`;
     }
 
-    // ---- Renderizar campo en modo edicion ----
+    // ---- Modo edicion ----
     function editarCampo(key) {
         const campo = CAMPOS.find(c => c.key === key);
         if (!campo) return;
-
         const row = document.getElementById(`row-${key}`);
         const valorActual = valoresModificados.hasOwnProperty(key) ? valoresModificados[key] : (valoresOriginales[key] || '');
 
         row.innerHTML = `
             <div class="field-label">${campo.label}</div>
             <div style="flex:1">
-                ${campo.type === 'textarea'
-                    ? `<textarea id="input-${key}" class="field-input" rows="3" placeholder="Introduce ${campo.label.toLowerCase()}...">${escapeHTML(valorActual)}</textarea>`
-                    : `<input id="input-${key}" type="${campo.type}" class="field-input" value="${escapeHTML(valorActual)}" placeholder="Introduce ${campo.label.toLowerCase()}...">`}
+                <input id="input-${key}" type="${campo.type}" class="field-input" value="${escapeHTML(valorActual)}" placeholder="Introduce ${campo.label.toLowerCase()}...">
                 <div style="display:flex;gap:8px;margin-top:8px">
                     <button class="btn-edit" onclick="guardarCampo('${key}')" style="background:rgba(16,185,129,0.15);border-color:rgba(16,185,129,0.3);color:#10b981">Guardar</button>
                     <button class="btn-cancel" onclick="cancelarEdicion('${key}')">Cancelar</button>
-                    ${valoresModificados.hasOwnProperty(key) ? `<button class="btn-cancel" onclick="restaurarCampo('${key}')" style="color:#f59e0b;border-color:rgba(245,158,11,0.3)">Restaurar original</button>` : ''}
+                    ${valoresModificados.hasOwnProperty(key) ? `<button class="btn-cancel" onclick="restaurarCampo('${key}')" style="color:#f59e0b;border-color:rgba(245,158,11,0.3)">Restaurar</button>` : ''}
                 </div>
             </div>`;
 
         const input = document.getElementById(`input-${key}`);
         input.focus();
-        input.addEventListener('keydown', e => { if (e.key === 'Enter' && campo.type !== 'textarea') guardarCampo(key); if (e.key === 'Escape') cancelarEdicion(key); });
+        input.addEventListener('keydown', e => { if (e.key === 'Enter') guardarCampo(key); if (e.key === 'Escape') cancelarEdicion(key); });
     }
 
-    // ---- Guardar campo editado ----
     function guardarCampo(key) {
         const input = document.getElementById(`input-${key}`);
         const nuevoValor = input.value.trim();
         const original = valoresOriginales[key] || '';
-
-        if (nuevoValor === original) {
-            // No cambio, quitar de modificados
-            delete valoresModificados[key];
-        } else {
-            valoresModificados[key] = nuevoValor;
-        }
-
-        // Volver a vista
+        if (nuevoValor === original) { delete valoresModificados[key]; } else { valoresModificados[key] = nuevoValor; }
         const campo = CAMPOS.find(c => c.key === key);
         const row = document.getElementById(`row-${key}`);
-        const modificado = valoresModificados.hasOwnProperty(key);
-        row.className = `field-row${modificado ? ' modified' : ''}`;
+        row.className = `field-row${valoresModificados.hasOwnProperty(key) ? ' modified' : ''}`;
         row.innerHTML = renderCampoVista(campo, valoresOriginales[key]);
         actualizarResumen();
     }
 
-    // ---- Cancelar edicion ----
     function cancelarEdicion(key) {
         const campo = CAMPOS.find(c => c.key === key);
         const row = document.getElementById(`row-${key}`);
-        const modificado = valoresModificados.hasOwnProperty(key);
-        row.className = `field-row${modificado ? ' modified' : ''}`;
+        row.className = `field-row${valoresModificados.hasOwnProperty(key) ? ' modified' : ''}`;
         row.innerHTML = renderCampoVista(campo, valoresOriginales[key]);
     }
 
-    // ---- Restaurar valor original ----
     function restaurarCampo(key) {
         delete valoresModificados[key];
         const campo = CAMPOS.find(c => c.key === key);
@@ -391,27 +530,19 @@
         actualizarResumen();
     }
 
-    // ---- Actualizar resumen de cambios ----
+    // ---- Resumen ----
     function actualizarResumen() {
         const keys = Object.keys(valoresModificados);
         const obs = (document.getElementById('observaciones')?.value || '').trim();
         const resumen = document.getElementById('resumenCambios');
         const btn = document.getElementById('btnEnviar');
 
-        if (keys.length === 0 && !obs) {
-            resumen.classList.add('hidden');
-            btn.disabled = true;
-            return;
-        }
-
-        btn.disabled = false;
+        btn.disabled = (keys.length === 0 && !obs);
 
         if (keys.length > 0) {
             resumen.classList.remove('hidden');
             document.getElementById('contadorCambios').textContent = keys.length;
-
-            const lista = document.getElementById('listaCambios');
-            lista.innerHTML = keys.map(key => {
+            document.getElementById('listaCambios').innerHTML = keys.map(key => {
                 const campo = CAMPOS.find(c => c.key === key);
                 const antes = valoresOriginales[key] || '(vacio)';
                 const despues = valoresModificados[key] || '(vacio)';
@@ -419,7 +550,7 @@
                     <div style="font-size:11px;color:rgba(255,255,255,0.4);font-weight:600;text-transform:uppercase;letter-spacing:0.5px">${campo.label}</div>
                     <div style="font-size:13px;margin-top:4px">
                         <span style="color:rgba(255,100,100,0.7);text-decoration:line-through">${escapeHTML(antes)}</span>
-                        <span style="color:rgba(255,255,255,0.3);margin:0 6px">→</span>
+                        <span style="color:rgba(255,255,255,0.3);margin:0 6px">&rarr;</span>
                         <span style="color:#14c8cc;font-weight:500">${escapeHTML(despues)}</span>
                     </div>
                 </div>`;
@@ -429,7 +560,6 @@
         }
     }
 
-    // Escuchar cambios en observaciones para habilitar boton
     document.getElementById('observaciones')?.addEventListener('input', actualizarResumen);
 
     // ---- Enviar ----
@@ -438,32 +568,16 @@
         const cargo = document.getElementById('authCargo').value.trim();
         const tel = document.getElementById('authTelefono').value.trim();
 
-        if (!nombre || !cargo || !tel) {
-            alert('Por favor, rellena los datos de verificacion (nombre, cargo y telefono)');
-            return;
-        }
+        if (!nombre || !cargo || !tel) { alert('Por favor, rellena los datos de verificacion (nombre, cargo y telefono)'); return; }
 
         const keys = Object.keys(valoresModificados);
         const obs = (document.getElementById('observaciones')?.value || '').trim();
+        if (keys.length === 0 && !obs) { alert('No has realizado ningun cambio ni escrito observaciones'); return; }
 
-        if (keys.length === 0 && !obs) {
-            alert('No has realizado ningun cambio ni escrito observaciones');
-            return;
-        }
-
-        // Construir email
         const asunto = encodeURIComponent(`[Verificacion] ${empresaActual.nombre} — ${keys.length} campo(s) modificado(s)`);
-
-        let cuerpo = `VERIFICACION DE DATOS — DIRECTORIO EMPRESARIAL DE SANTANDER\n`;
-        cuerpo += `${'='.repeat(60)}\n\n`;
-        cuerpo += `EMPRESA: ${empresaActual.nombre}\n`;
-        cuerpo += `AREA: ${empresaActual.area}\n`;
-        cuerpo += `ID: ${empresaActual.id}\n\n`;
-
-        cuerpo += `SOLICITANTE\n${'-'.repeat(40)}\n`;
-        cuerpo += `Nombre: ${nombre}\n`;
-        cuerpo += `Cargo: ${cargo}\n`;
-        cuerpo += `Telefono: ${tel}\n`;
+        let cuerpo = `VERIFICACION DE DATOS — DIRECTORIO EMPRESARIAL DE SANTANDER\n${'='.repeat(60)}\n\n`;
+        cuerpo += `EMPRESA: ${empresaActual.nombre}\nAREA: ${empresaActual.area}\nID: ${empresaActual.id}\n\n`;
+        cuerpo += `SOLICITANTE\n${'-'.repeat(40)}\nNombre: ${nombre}\nCargo: ${cargo}\nTelefono: ${tel}\n`;
         const authEmail = document.getElementById('authEmail').value.trim();
         if (authEmail) cuerpo += `Email: ${authEmail}\n`;
         cuerpo += `\n`;
@@ -472,40 +586,27 @@
             cuerpo += `CAMPOS MODIFICADOS (${keys.length})\n${'-'.repeat(40)}\n`;
             keys.forEach(key => {
                 const campo = CAMPOS.find(c => c.key === key);
-                cuerpo += `\n${campo.label}:\n`;
-                cuerpo += `  Antes:   ${valoresOriginales[key] || '(vacio)'}\n`;
-                cuerpo += `  Despues: ${valoresModificados[key] || '(vacio)'}\n`;
+                cuerpo += `\n${campo.label}:\n  Antes:   ${valoresOriginales[key] || '(vacio)'}\n  Despues: ${valoresModificados[key] || '(vacio)'}\n`;
             });
             cuerpo += `\n`;
         }
-
-        if (obs) {
-            cuerpo += `OBSERVACIONES\n${'-'.repeat(40)}\n${obs}\n\n`;
-        }
-
+        if (obs) cuerpo += `OBSERVACIONES\n${'-'.repeat(40)}\n${obs}\n\n`;
         cuerpo += `Fecha: ${new Date().toLocaleString('es-ES')}\n`;
 
-        // Guardar en localStorage
-        const registro = {
-            empresaId: empresaActual.id,
-            empresa: empresaActual.nombre,
-            cambios: valoresModificados,
-            observaciones: obs,
-            verificacion: { nombre, cargo, telefono: tel, email: authEmail },
-            fecha: new Date().toISOString()
-        };
+        // Backup localStorage
+        const registro = { empresaId: empresaActual.id, empresa: empresaActual.nombre, cambios: valoresModificados, observaciones: obs,
+                           verificacion: { nombre, cargo, telefono: tel, email: authEmail }, fecha: new Date().toISOString() };
         const historial = JSON.parse(localStorage.getItem('solicitudes_cambios') || '[]');
         historial.push(registro);
         localStorage.setItem('solicitudes_cambios', JSON.stringify(historial));
 
-        // Enviar email
         window.location.href = `mailto:info@clotitec.com?subject=${asunto}&body=${encodeURIComponent(cuerpo)}`;
 
-        // Mostrar exito
         setTimeout(() => {
-            document.getElementById('fichaEmpresa').classList.add('hidden');
-            document.getElementById('selectorEmpresa').classList.add('hidden');
+            document.getElementById('pasoFicha').classList.add('hidden');
             document.getElementById('msgExito').classList.remove('hidden');
+            document.getElementById('pageTitle').textContent = 'Solicitud enviada';
+            document.getElementById('pageSubtitle').textContent = '';
         }, 500);
     }
 
