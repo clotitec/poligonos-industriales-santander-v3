@@ -83,7 +83,7 @@
         <!-- Datos clave -->
         <div class="landing-stats">
             <div class="landing-stat">
-                <div class="landing-stat-number">355+</div>
+                <div class="landing-stat-number">158</div>
                 <div class="landing-stat-label">Empresas registradas</div>
             </div>
             <div class="landing-stat">
@@ -173,6 +173,15 @@
             </div>
             <p class="landing-footer-text">© 2026 Ayuntamiento de Santander · Concejalía de Empleo, Emprendimiento y Desarrollo Empresarial</p>
             <p class="landing-footer-text" style="margin-top:6px">Desarrollado por <a href="https://clotitec.com" target="_blank" style="color:rgba(255,255,255,.7);text-decoration:none;font-weight:600">Clotitec</a></p>
+            <p class="landing-footer-text" style="margin-top:10px;font-size:11px;">
+                <a href="aviso-legal.html" style="color:rgba(255,255,255,.35);text-decoration:none;">Aviso Legal</a>
+                <span style="color:rgba(255,255,255,.15);margin:0 6px;">·</span>
+                <a href="politica-privacidad.html" style="color:rgba(255,255,255,.35);text-decoration:none;">Privacidad</a>
+                <span style="color:rgba(255,255,255,.15);margin:0 6px;">·</span>
+                <a href="politica-cookies.html" style="color:rgba(255,255,255,.35);text-decoration:none;">Cookies</a>
+                <span style="color:rgba(255,255,255,.15);margin:0 6px;">·</span>
+                <a href="accesibilidad.html" style="color:rgba(255,255,255,.35);text-decoration:none;">Accesibilidad</a>
+            </p>
         </div>
     </div>
 
@@ -210,7 +219,7 @@
                 <div class="stats-bar">
                     <span class="stat-badge">
                         <span style="font-size:13px">🏢</span>
-                        <span id="statsTotal">355 empresas</span>
+                        <span id="statsTotal">158 empresas</span>
                     </span>
                     <span class="stat-badge">
                         <span style="font-size:13px">📍</span>
@@ -342,11 +351,11 @@
                     <img src="areas-industriales-logo.svg" alt="Áreas Industriales" class="mobile-logo-areas">
                     <div>
                         <h2>Áreas Empresariales e Industriales</h2>
-                        <p id="mobileStats">355 empresas en Santander</p>
+                        <p id="mobileStats">158 empresas en Santander</p>
                     </div>
                 </div>
                 <div class="stat-badge" style="background: var(--santander-pale); color: var(--santander);">
-                    <span id="mobileCount">355</span>
+                    <span id="mobileCount">158</span>
                 </div>
             </div>
         </div>
@@ -811,6 +820,105 @@
                 setTimeout(() => startTutorial(), 1200);
             }
         }, 400);
+    }
+    </script>
+
+    <!-- ========== BANNER CONSENTIMIENTO COOKIES / ALMACENAMIENTO LOCAL ========== -->
+    <div id="cookieBanner" role="dialog" aria-label="Aviso sobre uso de almacenamiento local" aria-live="polite" style="
+        display: none;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 99999;
+        padding: 16px 20px;
+        background: rgba(10, 18, 40, 0.97);
+        border-top: 1px solid rgba(20, 200, 204, 0.2);
+        backdrop-filter: blur(20px);
+        box-shadow: 0 -4px 32px rgba(0,0,0,0.5);
+        font-family: Inter, system-ui, sans-serif;
+    ">
+        <div style="max-width: 900px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; gap: 16px;">
+            <div style="flex: 1; min-width: 260px;">
+                <p style="font-size: 13px; color: rgba(255,255,255,0.75); line-height: 1.6; margin: 0;">
+                    <span style="font-weight: 600; color: rgba(255,255,255,0.9);">Almacenamiento local.</span>
+                    Este sitio utiliza <strong>localStorage</strong> para guardar tu historial de empresas visitadas y estadísticas de uso anónimas del directorio. No se usan cookies de seguimiento ni publicitarias.
+                    <a href="politica-privacidad.html" style="color: #14c8cc; text-decoration: none; font-weight: 500;">Privacidad</a>
+                    &nbsp;·&nbsp;
+                    <a href="politica-cookies.html" style="color: #14c8cc; text-decoration: none; font-weight: 500;">Más información</a>
+                </p>
+            </div>
+            <div style="display: flex; gap: 10px; flex-shrink: 0; flex-wrap: wrap;">
+                <button id="cookieBannerReject" onclick="cookieConsentDecide(false)" style="
+                    padding: 9px 20px;
+                    border-radius: 10px;
+                    font-size: 13px;
+                    font-weight: 600;
+                    cursor: pointer;
+                    background: transparent;
+                    border: 1px solid rgba(255,255,255,0.2);
+                    color: rgba(255,255,255,0.55);
+                    font-family: inherit;
+                    transition: all 0.2s;
+                    white-space: nowrap;
+                " onmouseover="this.style.borderColor='rgba(255,255,255,0.4)';this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.2)';this.style.color='rgba(255,255,255,0.55)'">
+                    Rechazar analítica
+                </button>
+                <button id="cookieBannerAccept" onclick="cookieConsentDecide(true)" style="
+                    padding: 9px 20px;
+                    border-radius: 10px;
+                    font-size: 13px;
+                    font-weight: 600;
+                    cursor: pointer;
+                    background: linear-gradient(135deg, #00696c, #14c8cc);
+                    border: none;
+                    color: white;
+                    font-family: inherit;
+                    transition: all 0.2s;
+                    white-space: nowrap;
+                    box-shadow: 0 4px 15px rgba(20,200,204,0.25);
+                " onmouseover="this.style.transform='translateY(-1px)';this.style.boxShadow='0 6px 20px rgba(20,200,204,0.35)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 15px rgba(20,200,204,0.25)'">
+                    Aceptar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // ---- GESTIÓN CONSENTIMIENTO ANALÍTICA LOCAL ----
+    (function() {
+        var consent = localStorage.getItem('analytics_consent');
+        if (!consent) {
+            // Mostrar banner tras un breve retraso para no interrumpir la carga inicial
+            setTimeout(function() {
+                var banner = document.getElementById('cookieBanner');
+                if (banner) banner.style.display = 'block';
+            }, 1200);
+        } else if (consent === 'rejected') {
+            // Consentimiento denegado previamente: limpiar analytics_log y no inicializar analítica
+            try { localStorage.removeItem('analytics_log'); } catch(e) {}
+        }
+        // Si consent === 'accepted', Analytics.init() ya se habrá llamado normalmente por app.js
+    })();
+
+    function cookieConsentDecide(accepted) {
+        var banner = document.getElementById('cookieBanner');
+
+        if (accepted) {
+            localStorage.setItem('analytics_consent', 'accepted');
+        } else {
+            localStorage.setItem('analytics_consent', 'rejected');
+            // Eliminar cualquier dato de analítica ya almacenado
+            try { localStorage.removeItem('analytics_log'); } catch(e) {}
+        }
+
+        // Ocultar banner con animación
+        if (banner) {
+            banner.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+            banner.style.opacity = '0';
+            banner.style.transform = 'translateY(8px)';
+            setTimeout(function() { banner.style.display = 'none'; }, 320);
+        }
     }
     </script>
 </body>

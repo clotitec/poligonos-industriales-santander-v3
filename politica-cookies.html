@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0a1628">
+    <title>Política de Cookies | Directorio Empresarial de Santander</title>
+    <meta name="robots" content="noindex, follow">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+                    colors: {
+                        santander: { DEFAULT: '#00696c', light: '#14c8cc', dark: '#004f51', accent: '#3c4949', glow: '#14c8cc', pale: '#e0f7fa' }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background: linear-gradient(135deg, #0a1628 0%, #0f2035 50%, #0a1628 100%); min-height: 100vh; }
+        .glass-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(20px); }
+        .legal-h2 { font-size: 17px; font-weight: 700; color: #14c8cc; margin-top: 2rem; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 8px; }
+        .legal-h2::before { content: ''; display: inline-block; width: 3px; height: 18px; background: #14c8cc; border-radius: 2px; flex-shrink: 0; }
+        .legal-h3 { font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.85); margin-top: 1.25rem; margin-bottom: 0.5rem; }
+        .legal-p { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.75; margin-bottom: 0.75rem; }
+        .legal-ul { list-style: none; padding: 0; margin-bottom: 0.75rem; }
+        .legal-ul li { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.75; padding-left: 1.25rem; position: relative; }
+        .legal-ul li::before { content: '–'; position: absolute; left: 0; color: #14c8cc; }
+        .divider { border: none; border-top: 1px solid rgba(255,255,255,0.06); margin: 1.5rem 0; }
+        .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: rgba(255,255,255,0.4); cursor: pointer; padding: 6px 12px; border-radius: 8px; transition: all 0.2s; text-decoration: none; }
+        .back-link:hover { color: #14c8cc; background: rgba(20,200,204,0.08); }
+
+        /* Tabla de almacenamiento */
+        .storage-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 13px; }
+        .storage-table th { text-align: left; padding: 8px 12px; font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid rgba(255,255,255,0.08); }
+        .storage-table td { padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.05); vertical-align: top; color: rgba(255,255,255,0.7); line-height: 1.5; }
+        .storage-table td:first-child { font-family: 'Courier New', monospace; font-size: 12px; color: #14c8cc; white-space: nowrap; }
+        .storage-table tr:last-child td { border-bottom: none; }
+
+        /* Badges de tipo -->
+        .badge { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: 99px; font-size: 11px; font-weight: 600; white-space: nowrap; }
+        .badge-func { background: rgba(20,200,204,0.15); color: #14c8cc; border: 1px solid rgba(20,200,204,0.25); }
+        .badge-analytics { background: rgba(99,102,241,0.15); color: #818cf8; border: 1px solid rgba(99,102,241,0.25); }
+        .badge-session { background: rgba(245,158,11,0.12); color: #fbbf24; border: 1px solid rgba(245,158,11,0.2); }
+
+        /* Terceros -->
+        .third-party-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; }
+        .third-party-name { font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.85); margin-bottom: 4px; }
+        .third-party-meta { font-size: 11px; color: rgba(255,255,255,0.35); margin-bottom: 6px; }
+        .third-party-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.6; }
+
+        /* Instrucciones por navegador -->
+        .browser-row { display: flex; align-items: flex-start; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .browser-row:last-child { border-bottom: none; }
+        .browser-name { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.75); min-width: 110px; flex-shrink: 0; }
+        .browser-path { font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.6; }
+
+        .info-box { background: rgba(20,200,204,0.06); border: 1px solid rgba(20,200,204,0.15); border-radius: 12px; padding: 14px 16px; margin: 0.75rem 0; }
+        .info-box p { font-size: 13px; color: rgba(20,200,204,0.85); line-height: 1.6; margin: 0; }
+    </style>
+</head>
+<body class="font-sans text-white antialiased">
+
+    <!-- Header -->
+    <header class="pt-8 pb-4 px-4">
+        <div class="max-w-3xl mx-auto text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-santander/20 text-santander-light text-xs font-medium tracking-wide mb-4">
+                DIRECTORIO EMPRESARIAL DE SANTANDER
+            </div>
+            <h1 class="text-2xl sm:text-3xl font-bold text-white mb-2">Política de Cookies y Almacenamiento Local</h1>
+            <p class="text-white/40 text-sm">LSSI-CE art. 22.2 · RGPD (UE) 2016/679</p>
+        </div>
+    </header>
+
+    <main class="px-4 pb-12">
+        <div class="max-w-3xl mx-auto">
+
+            <div class="mb-6">
+                <a href="index.html" class="back-link">
+                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+                    Volver al directorio
+                </a>
+            </div>
+
+            <div class="glass-card rounded-2xl p-6 sm:p-8">
+
+                <p class="legal-p">El <strong>Directorio de Áreas Empresariales e Industriales de Santander</strong> está desarrollado por el Ayuntamiento de Santander con especial atención a la privacidad de sus usuarios. La presente política describe con precisión qué tecnologías de almacenamiento utiliza este sitio web, con qué finalidad y cómo puede gestionarlas.</p>
+
+                <!-- 1. Cookies tradicionales -->
+                <div class="legal-h2">Sobre las cookies tradicionales</div>
+                <div class="info-box">
+                    <p>Este sitio web <strong>no utiliza cookies propias</strong> de seguimiento, publicitarias ni de perfilado. No se instalan cookies en su navegador por parte del servidor de este sitio.</p>
+                </div>
+                <p class="legal-p" style="margin-top:0.75rem;">Las cookies son pequeños ficheros de texto que los servidores web pueden almacenar en el navegador del usuario. A diferencia de otros sitios web, este directorio ha sido diseñado para no depender de cookies para ninguna de sus funcionalidades principales.</p>
+
+                <hr class="divider">
+
+                <!-- 2. Almacenamiento local -->
+                <div class="legal-h2">Almacenamiento local (localStorage)</div>
+                <p class="legal-p">Este sitio web utiliza el <strong>almacenamiento local del navegador</strong> (localStorage), una tecnología estándar del navegador que funciona de forma similar a las cookies pero con diferencias importantes:</p>
+                <ul class="legal-ul">
+                    <li>Los datos se almacenan exclusivamente en su dispositivo y no se envían automáticamente al servidor con cada petición.</li>
+                    <li>La información permanece en su navegador hasta que usted la elimine o expire el tiempo de retención configurado.</li>
+                    <li>A diferencia de las cookies, el almacenamiento local no tiene fecha de caducidad automática.</li>
+                </ul>
+
+                <div class="legal-h3">Detalle de los elementos almacenados</div>
+
+                <div style="overflow-x:auto; margin: 1rem 0;">
+                    <table class="storage-table">
+                        <thead>
+                            <tr>
+                                <th>Clave (key)</th>
+                                <th>Tipo</th>
+                                <th>Finalidad</th>
+                                <th>Datos almacenados</th>
+                                <th>Duración</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>analytics_log</td>
+                                <td><span class="badge badge-analytics">Analítica</span></td>
+                                <td>Registro local de interacciones para análisis estadístico del uso del directorio (empresas consultadas, búsquedas realizadas, filtros usados).</td>
+                                <td>Array de hasta 10.000 eventos: tipo de acción, identificador de empresa, marca de tiempo, sector.</td>
+                                <td>Hasta que se limpie el almacenamiento del navegador. Máximo 12 meses.</td>
+                            </tr>
+                            <tr>
+                                <td>analytics_consent</td>
+                                <td><span class="badge badge-func">Funcional</span></td>
+                                <td>Almacena la decisión del usuario sobre el consentimiento para el uso de analítica local, evitando mostrar el banner de consentimiento en cada visita.</td>
+                                <td>Cadena de texto: "accepted" o "rejected".</td>
+                                <td>Permanente hasta que se limpie el almacenamiento.</td>
+                            </tr>
+                            <tr>
+                                <td>solicitudes_cambios</td>
+                                <td><span class="badge badge-session">Copia seguridad</span></td>
+                                <td>Copia de seguridad local de los formularios de solicitud de modificación de datos enviados, para referencia del usuario en caso de necesidad.</td>
+                                <td>Array de objetos con: nombre, cargo, teléfono, empresa concernida, tipo de solicitud, fecha de envío. Sin contraseñas ni datos bancarios.</td>
+                                <td>Permanente hasta que se limpie el almacenamiento.</td>
+                            </tr>
+                            <tr>
+                                <td>recent_companies</td>
+                                <td><span class="badge badge-func">Funcional</span></td>
+                                <td>Lista de las últimas empresas consultadas en el directorio para facilitar el acceso rápido a fichas visitadas recientemente.</td>
+                                <td>Array de hasta 8 identificadores numéricos de empresas.</td>
+                                <td>Permanente hasta que se limpie el almacenamiento.</td>
+                            </tr>
+                            <tr>
+                                <td>dash_auth</td>
+                                <td><span class="badge badge-func">Funcional</span></td>
+                                <td>Almacena el estado de autenticación de acceso al panel de gestión del directorio (uso exclusivo de los gestores del Ayuntamiento).</td>
+                                <td>Token de sesión de gestión. No contiene datos personales de usuarios públicos.</td>
+                                <td>Sesión del navegador o hasta cierre de sesión.</td>
+                            </tr>
+                            <tr>
+                                <td>tutorial_seen</td>
+                                <td><span class="badge badge-func">Funcional</span></td>
+                                <td>Registra si el usuario ya ha visualizado el tutorial de uso del mapa interactivo, para no mostrarlo en visitas posteriores.</td>
+                                <td>Cadena de texto: "1".</td>
+                                <td>Permanente hasta que se limpie el almacenamiento.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <hr class="divider">
+
+                <!-- 3. Plausible -->
+                <div class="legal-h2">Analítica web: Plausible Analytics</div>
+                <p class="legal-p">Este sitio web utiliza <strong>Plausible Analytics</strong>, una herramienta de análisis web respetuosa con la privacidad que ha sido seleccionada específicamente por no utilizar cookies ni recopilar datos personales identificables.</p>
+                <ul class="legal-ul">
+                    <li>Plausible <strong>no instala ninguna cookie</strong> en su navegador.</li>
+                    <li>Plausible <strong>no recopila ni almacena datos personales</strong>: no registra su dirección IP completa, no utiliza identificadores de usuario ni fingerprinting del dispositivo.</li>
+                    <li>Los datos recopilados son estadísticas anonimizadas: número de visitas, páginas consultadas, país de origen (a nivel de país, sin precisión geográfica), tipo de dispositivo y navegador.</li>
+                    <li>No está sujeto a las obligaciones de consentimiento del artículo 22.2 LSSI-CE ni del RGPD para herramientas de analítica sin cookies.</li>
+                    <li>Más información en la política de privacidad de Plausible: <a href="https://plausible.io/privacy" target="_blank" style="color:#14c8cc;text-decoration:none;">plausible.io/privacy</a></li>
+                </ul>
+
+                <hr class="divider">
+
+                <!-- 4. Recursos de terceros -->
+                <div class="legal-h2">Recursos de terceros</div>
+                <p class="legal-p">El sitio web carga recursos de los siguientes servicios de terceros, que pueden establecer sus propias cookies o registrar datos técnicos de acceso conforme a sus respectivas políticas:</p>
+
+                <div class="third-party-card">
+                    <div class="third-party-name">Google Fonts</div>
+                    <div class="third-party-meta">fonts.googleapis.com · fonts.gstatic.com</div>
+                    <div class="third-party-desc">Se carga la tipografía Inter para la interfaz del directorio. Google puede registrar datos técnicos de conexión (dirección IP, agente de usuario) conforme a su política de privacidad. Política: <a href="https://policies.google.com/privacy" target="_blank" style="color:#14c8cc;text-decoration:none;">policies.google.com/privacy</a></div>
+                </div>
+
+                <div class="third-party-card">
+                    <div class="third-party-name">MapLibre GL / OpenStreetMap</div>
+                    <div class="third-party-meta">unpkg.com · openstreetmap.org tiles</div>
+                    <div class="third-party-desc">Librería de mapas de código abierto para el mapa interactivo del directorio. Las teselas del mapa se cargan desde servidores de OpenStreetMap, que pueden registrar accesos técnicos. Política: <a href="https://wiki.osmfoundation.org/wiki/Privacy_Policy" target="_blank" style="color:#14c8cc;text-decoration:none;">osmfoundation.org/wiki/Privacy_Policy</a></div>
+                </div>
+
+                <div class="third-party-card">
+                    <div class="third-party-name">Tailwind CSS CDN</div>
+                    <div class="third-party-meta">cdn.tailwindcss.com</div>
+                    <div class="third-party-desc">Marco de estilos CSS cargado desde la CDN oficial de Tailwind. Puede registrar datos técnicos de conexión. Se utiliza únicamente para el estilo visual de la interfaz.</div>
+                </div>
+
+                <div class="third-party-card">
+                    <div class="third-party-name">Iframes de Street View / Panoramas 360°</div>
+                    <div class="third-party-meta">Contenido embebido bajo demanda del usuario</div>
+                    <div class="third-party-desc">Cuando el usuario accede a la vista panorámica de una empresa, se carga un iframe externo con el Street View o panorama correspondiente. Estos recursos solo se cargan cuando el usuario hace clic explícitamente en "Ver Street View". El servicio de Street View puede establecer sus propias cookies. Política de Google: <a href="https://policies.google.com/privacy" target="_blank" style="color:#14c8cc;text-decoration:none;">policies.google.com/privacy</a></div>
+                </div>
+
+                <hr class="divider">
+
+                <!-- 5. Cómo gestionar -->
+                <div class="legal-h2">Cómo gestionar y eliminar el almacenamiento local</div>
+                <p class="legal-p">Puede eliminar todos los datos almacenados localmente por este sitio web siguiendo las instrucciones de su navegador:</p>
+
+                <div class="browser-row">
+                    <div class="browser-name">Google Chrome</div>
+                    <div class="browser-path">Configuración (⋮) → Más herramientas → Herramientas para desarrolladores → Application → Local Storage → Seleccionar el dominio → Clic derecho → Clear. O bien: Configuración → Privacidad y seguridad → Borrar datos de navegación → Cookies y otros datos de sitios.</div>
+                </div>
+                <div class="browser-row">
+                    <div class="browser-name">Mozilla Firefox</div>
+                    <div class="browser-path">Herramientas → Información del sitio web → Almacenamiento → Almacenamiento local. O bien: Configuración → Privacidad y seguridad → Cookies y datos del sitio → Borrar datos.</div>
+                </div>
+                <div class="browser-row">
+                    <div class="browser-name">Microsoft Edge</div>
+                    <div class="browser-path">Configuración (···) → Configuración → Privacidad, búsqueda y servicios → Borrar datos de exploración → Cookies y otros datos de sitios.</div>
+                </div>
+                <div class="browser-row">
+                    <div class="browser-name">Safari</div>
+                    <div class="browser-path">Preferencias → Privacidad → Administrar datos de sitios web → Eliminar. O bien: Preferencias → Avanzado → Mostrar menú Desarrollo → Desarrollo → Vaciar cachés.</div>
+                </div>
+
+                <p class="legal-p" style="margin-top:1rem;">Eliminar el almacenamiento local de este sitio no afectará a su navegación general. Únicamente perderá el historial de empresas visitadas recientemente, la preferencia de consentimiento (se mostrará de nuevo el banner) y el registro de analítica local.</p>
+
+                <hr class="divider">
+
+                <!-- 6. Consentimiento y retirada -->
+                <div class="legal-h2">Consentimiento y retirada del consentimiento</div>
+                <p class="legal-p">Cuando visite por primera vez este sitio web, se le mostrará un banner informándole sobre el uso del almacenamiento local para analítica. Puede aceptar o rechazar dicho uso:</p>
+                <ul class="legal-ul">
+                    <li><strong>Si acepta:</strong> Se activará el registro de analítica local (analytics_log). Siempre podrá cambiar su decisión eliminando la clave <code style="font-size:11px;background:rgba(255,255,255,0.08);padding:1px 5px;border-radius:4px;">analytics_consent</code> del almacenamiento local de su navegador.</li>
+                    <li><strong>Si rechaza:</strong> No se almacenará ningún registro de analítica. Las funcionalidades básicas del directorio (mapa, búsqueda, fichas de empresa) seguirán funcionando con total normalidad.</li>
+                </ul>
+                <p class="legal-p">El consentimiento para el almacenamiento funcional (empresas recientes, preferencias de interfaz) es necesario para el correcto funcionamiento de estas características. Puede suprimirlo en cualquier momento eliminando los datos de almacenamiento local de su navegador según las instrucciones anteriores.</p>
+
+                <hr class="divider">
+
+                <!-- 7. Actualizaciones -->
+                <div class="legal-h2">Actualizaciones de esta política</div>
+                <p class="legal-p">El Ayuntamiento de Santander puede actualizar la presente Política de Cookies y Almacenamiento Local cuando se incorporen nuevas funcionalidades al sitio web o cuando cambien los servicios de terceros utilizados. Le recomendamos revisar periódicamente esta página.</p>
+                <p class="legal-p">Para cualquier consulta sobre esta política, puede contactar con el Delegado de Protección de Datos en <a href="mailto:dpd@santander.es" style="color:#14c8cc;text-decoration:none;">dpd@santander.es</a>.</p>
+
+                <hr class="divider">
+
+                <p class="text-xs text-white/25 text-right">Última actualización: abril de 2026</p>
+
+            </div>
+
+            <!-- Navegación entre páginas legales -->
+            <div class="glass-card rounded-2xl p-4 mt-4 flex flex-wrap gap-3 justify-center">
+                <a href="aviso-legal.html" class="text-xs text-white/40 hover:text-santander-light transition-colors">Aviso Legal</a>
+                <span class="text-white/15 text-xs">·</span>
+                <a href="politica-privacidad.html" class="text-xs text-white/40 hover:text-santander-light transition-colors">Política de Privacidad</a>
+                <span class="text-white/15 text-xs">·</span>
+                <a href="accesibilidad.html" class="text-xs text-white/40 hover:text-santander-light transition-colors">Declaración de Accesibilidad</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="pb-8 px-4 text-center">
+        <p class="text-white/20 text-xs">
+            Concejalía de Empleo, Emprendimiento y Desarrollo Empresarial &mdash; Ayuntamiento de Santander
+        </p>
+        <p class="text-white/15 text-xs mt-1">
+            Desarrollado por <a href="https://clotitec.com" target="_blank" style="color:rgba(255,255,255,.3);text-decoration:none;font-weight:600">Clotitec</a>
+        </p>
+    </footer>
+
+</body>
+</html>

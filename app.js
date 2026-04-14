@@ -443,7 +443,10 @@ window.addEventListener('load', async () => {
     addAccessPointMarkers();
 
     // Analytics, deep linking & recent companies
-    Analytics.init();
+    // Only initialise local analytics if user has not rejected consent
+    if (localStorage.getItem('analytics_consent') !== 'rejected') {
+        Analytics.init();
+    }
     applyDeepLink();
     renderRecentBar();
 
@@ -1662,7 +1665,7 @@ function openWebModal(url, companyName) {
     const iframe = document.createElement('iframe');
     iframe.src = url;
     iframe.style.cssText = 'flex:1;border:none;background:white;border-radius:0 0 0 0';
-    iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-forms allow-popups');
+    iframe.setAttribute('sandbox', 'allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox');
     iframe.setAttribute('loading', 'lazy');
 
     // Loading indicator

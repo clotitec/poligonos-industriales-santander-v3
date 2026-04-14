@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0a1628">
+    <title>Declaración de Accesibilidad | Directorio Empresarial de Santander</title>
+    <meta name="robots" content="noindex, follow">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+                    colors: {
+                        santander: { DEFAULT: '#00696c', light: '#14c8cc', dark: '#004f51', accent: '#3c4949', glow: '#14c8cc', pale: '#e0f7fa' }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background: linear-gradient(135deg, #0a1628 0%, #0f2035 50%, #0a1628 100%); min-height: 100vh; }
+        .glass-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(20px); }
+        .legal-h2 { font-size: 17px; font-weight: 700; color: #14c8cc; margin-top: 2rem; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 8px; }
+        .legal-h2::before { content: ''; display: inline-block; width: 3px; height: 18px; background: #14c8cc; border-radius: 2px; flex-shrink: 0; }
+        .legal-h3 { font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.85); margin-top: 1.25rem; margin-bottom: 0.5rem; }
+        .legal-p { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.75; margin-bottom: 0.75rem; }
+        .legal-ul { list-style: none; padding: 0; margin-bottom: 0.75rem; }
+        .legal-ul li { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.75; padding-left: 1.25rem; position: relative; }
+        .legal-ul li::before { content: '–'; position: absolute; left: 0; color: #14c8cc; }
+        .divider { border: none; border-top: 1px solid rgba(255,255,255,0.06); margin: 1.5rem 0; }
+        .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: rgba(255,255,255,0.4); cursor: pointer; padding: 6px 12px; border-radius: 8px; transition: all 0.2s; text-decoration: none; }
+        .back-link:hover { color: #14c8cc; background: rgba(20,200,204,0.08); }
+        .data-table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; }
+        .data-table td { padding: 8px 12px; font-size: 13px; border-bottom: 1px solid rgba(255,255,255,0.06); vertical-align: top; }
+        .data-table td:first-child { color: rgba(255,255,255,0.45); font-weight: 500; width: 40%; white-space: nowrap; }
+        .data-table td:last-child { color: rgba(255,255,255,0.8); }
+
+        /* Nivel de conformidad -->
+        .conformance-badge { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 12px; font-size: 14px; font-weight: 600; }
+        .conformance-partial { background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.25); color: #fbbf24; }
+
+        /* Tarjetas de problema de accesibilidad -->
+        .issue-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; }
+        .issue-criterion { font-size: 11px; font-family: 'Courier New', monospace; color: rgba(20,200,204,0.7); font-weight: 600; margin-bottom: 4px; }
+        .issue-title { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.8); margin-bottom: 4px; }
+        .issue-desc { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.6; }
+        .issue-plan { font-size: 11px; color: rgba(20,200,204,0.6); margin-top: 6px; }
+
+        /* Formulario de contacto accesibilidad -->
+        .contact-box { background: rgba(20,200,204,0.06); border: 1px solid rgba(20,200,204,0.15); border-radius: 14px; padding: 20px; }
+    </style>
+</head>
+<body class="font-sans text-white antialiased">
+
+    <!-- Header -->
+    <header class="pt-8 pb-4 px-4">
+        <div class="max-w-3xl mx-auto text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-santander/20 text-santander-light text-xs font-medium tracking-wide mb-4">
+                DIRECTORIO EMPRESARIAL DE SANTANDER
+            </div>
+            <h1 class="text-2xl sm:text-3xl font-bold text-white mb-2">Declaración de Accesibilidad</h1>
+            <p class="text-white/40 text-sm">Real Decreto 1112/2018, de 7 de septiembre, sobre accesibilidad de los sitios web</p>
+        </div>
+    </header>
+
+    <main class="px-4 pb-12">
+        <div class="max-w-3xl mx-auto">
+
+            <div class="mb-6">
+                <a href="index.html" class="back-link">
+                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+                    Volver al directorio
+                </a>
+            </div>
+
+            <div class="glass-card rounded-2xl p-6 sm:p-8">
+
+                <!-- Nivel de conformidad -->
+                <div class="legal-h2">Estado de cumplimiento</div>
+                <div class="conformance-badge conformance-partial" style="margin-bottom:1rem;">
+                    <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg>
+                    Conformidad parcial con WCAG 2.1, nivel AA
+                </div>
+                <p class="legal-p">El <strong>Directorio de Áreas Empresariales e Industriales de Santander</strong>, gestionado por el Ayuntamiento de Santander, presenta una <strong>conformidad parcial</strong> con la norma <a href="https://www.w3.org/TR/WCAG21/" target="_blank" style="color:#14c8cc;text-decoration:none;">WCAG 2.1, nivel AA</a>, en virtud de las excepciones y el contenido no conforme que se detallan a continuación.</p>
+                <p class="legal-p">El Real Decreto 1112/2018, de 7 de septiembre, sobre accesibilidad de los sitios web y aplicaciones para dispositivos móviles del sector público (transposición de la Directiva (UE) 2016/2102), establece la obligación de las administraciones públicas de garantizar la accesibilidad de sus sitios web.</p>
+
+                <hr class="divider">
+
+                <!-- Información del sitio -->
+                <div class="legal-h2">Información sobre el sitio web</div>
+                <table class="data-table">
+                    <tbody>
+                        <tr><td>Nombre del sitio</td><td>Directorio de Áreas Empresariales e Industriales de Santander</td></tr>
+                        <tr><td>URL</td><td>https://poligonos-santander.es</td></tr>
+                        <tr><td>Organismo responsable</td><td>Ayuntamiento de Santander — Concejalía de Empleo, Emprendimiento y Desarrollo Empresarial</td></tr>
+                        <tr><td>Desarrollo técnico</td><td>Clotitec (info@clotitec.com)</td></tr>
+                        <tr><td>Tecnologías utilizadas</td><td>HTML5, CSS3, JavaScript, MapLibre GL, Livewire</td></tr>
+                        <tr><td>Estándar de referencia</td><td>WCAG 2.1, nivel AA (ISO/IEC 40500)</td></tr>
+                        <tr><td>Herramientas de evaluación</td><td>WAVE Accessibility Tool, axe DevTools, revisión manual</td></tr>
+                    </tbody>
+                </table>
+
+                <hr class="divider">
+
+                <!-- Contenido accesible -->
+                <div class="legal-h2">Aspectos de accesibilidad implementados</div>
+                <p class="legal-p">El sitio web incorpora los siguientes elementos de accesibilidad:</p>
+                <ul class="legal-ul">
+                    <li>Atributos <code style="font-size:11px;background:rgba(255,255,255,0.08);padding:1px 5px;border-radius:4px;">lang="es"</code> y <code style="font-size:11px;background:rgba(255,255,255,0.08);padding:1px 5px;border-radius:4px;">lang="en"</code> correctamente declarados en el idioma activo del sitio.</li>
+                    <li>Estructura semántica con elementos HTML5 (<code style="font-size:11px;background:rgba(255,255,255,0.08);padding:1px 5px;border-radius:4px;">header</code>, <code style="font-size:11px;background:rgba(255,255,255,0.08);padding:1px 5px;border-radius:4px;">main</code>, <code style="font-size:11px;background:rgba(255,255,255,0.08);padding:1px 5px;border-radius:4px;">aside</code>, <code style="font-size:11px;background:rgba(255,255,255,0.08);padding:1px 5px;border-radius:4px;">footer</code>).</li>
+                    <li>Atributos <code style="font-size:11px;background:rgba(255,255,255,0.08);padding:1px 5px;border-radius:4px;">role</code> y <code style="font-size:11px;background:rgba(255,255,255,0.08);padding:1px 5px;border-radius:4px;">aria-label</code> en elementos de navegación clave.</li>
+                    <li>Alternativas de texto (<code style="font-size:11px;background:rgba(255,255,255,0.08);padding:1px 5px;border-radius:4px;">alt</code>) en imágenes corporativas.</li>
+                    <li>Contraste de color superior a 4.5:1 en elementos de texto sobre fondo en la mayoría de los componentes.</li>
+                    <li>Diseño responsive adaptado a dispositivos móviles, tabletas y escritorio.</li>
+                    <li>Soporte para gestos táctiles en dispositivos móviles.</li>
+                    <li>Indicadores visuales de foco en elementos interactivos.</li>
+                    <li>Etiquetas descriptivas en controles de formulario del formulario de empresas.</li>
+                    <li>Reproductor de audio con controles visibles y accesibles.</li>
+                </ul>
+
+                <hr class="divider">
+
+                <!-- Problemas conocidos -->
+                <div class="legal-h2">Contenido no accesible — Problemas conocidos</div>
+                <p class="legal-p">Se han identificado los siguientes contenidos y funcionalidades que no cumplen plenamente con los criterios WCAG 2.1 nivel AA:</p>
+
+                <div class="issue-card">
+                    <div class="issue-criterion">WCAG 2.1 — Criterio 1.1.1 (Nivel A) · Contenido no textual</div>
+                    <div class="issue-title">Mapa interactivo: contenido sin alternativa textual completa</div>
+                    <div class="issue-desc">El mapa interactivo de MapLibre GL no proporciona una alternativa textual completa que describa la ubicación de todas las empresas. Los usuarios de lectores de pantalla pueden acceder al listado de empresas en el panel lateral, pero la información visual del mapa no está completamente disponible en formato alternativo.</div>
+                    <div class="issue-plan">Plan de mejora: se estudiará la integración de una vista de tabla alternativa al mapa y mejora de los atributos ARIA del componente de mapa.</div>
+                </div>
+
+                <div class="issue-card">
+                    <div class="issue-criterion">WCAG 2.1 — Criterio 1.2.1 (Nivel A) · Solo audio o solo vídeo (pregrabado)</div>
+                    <div class="issue-title">Spots de audio sin transcripción textual</div>
+                    <div class="issue-desc">Los spots publicitarios de audio de las empresas no disponen de transcripción textual. Los usuarios con discapacidad auditiva no pueden acceder al contenido de estos audios.</div>
+                    <div class="issue-plan">Plan de mejora: se evaluará la incorporación de transcripciones textuales generadas automáticamente para los spots de audio disponibles.</div>
+                </div>
+
+                <div class="issue-card">
+                    <div class="issue-criterion">WCAG 2.1 — Criterio 2.1.1 (Nivel A) · Teclado</div>
+                    <div class="issue-title">Navegación parcialmente limitada por teclado en el mapa</div>
+                    <div class="issue-desc">Algunas interacciones del mapa interactivo (arrastre, zoom con gestos) no son completamente accesibles mediante teclado. Las funcionalidades principales de búsqueda y consulta de fichas son accesibles por teclado a través del panel lateral.</div>
+                    <div class="issue-plan">Plan de mejora: se revisará la navegación por teclado del componente de mapa en futuras versiones.</div>
+                </div>
+
+                <div class="issue-card">
+                    <div class="issue-criterion">WCAG 2.1 — Criterio 2.4.3 (Nivel A) · Orden del foco</div>
+                    <div class="issue-title">Orden de foco en el panel móvil deslizable</div>
+                    <div class="issue-desc">En la versión móvil, cuando se abre el panel de detalle de empresa desde la posición inferior, el orden de foco del teclado puede no seguir la secuencia visual esperada.</div>
+                    <div class="issue-plan">Plan de mejora: se revisará la gestión del foco en los paneles modales y deslizables de la versión móvil.</div>
+                </div>
+
+                <div class="issue-card">
+                    <div class="issue-criterion">WCAG 2.1 — Criterio 3.3.2 (Nivel A) · Etiquetas o instrucciones</div>
+                    <div class="issue-title">Algunos campos del formulario de empresas sin etiqueta visible asociada</div>
+                    <div class="issue-desc">Algunos campos del formulario de actualización de datos de empresas utilizan únicamente placeholder como indicación del contenido esperado, sin etiqueta label visible programáticamente asociada.</div>
+                    <div class="issue-plan">Plan de mejora: se añadirán etiquetas label correctamente asociadas a todos los campos del formulario.</div>
+                </div>
+
+                <div class="issue-card">
+                    <div class="issue-criterion">WCAG 2.1 — Criterio 1.4.3 (Nivel AA) · Contraste mínimo</div>
+                    <div class="issue-title">Textos secundarios con contraste inferior al requerido</div>
+                    <div class="issue-desc">Algunos textos informativos secundarios (metadatos, etiquetas de campos, textos de ayuda) con opacidad reducida pueden no alcanzar el ratio de contraste mínimo de 4.5:1 sobre el fondo oscuro en todas las configuraciones de pantalla.</div>
+                    <div class="issue-plan">Plan de mejora: se revisará el contraste de los elementos de texto secundario y se ajustará la opacidad mínima para garantizar el cumplimiento del criterio.</div>
+                </div>
+
+                <hr class="divider">
+
+                <!-- Excepciones -->
+                <div class="legal-h2">Excepciones contempladas</div>
+                <p class="legal-p">El Real Decreto 1112/2018 establece que determinados tipos de contenidos quedan exentos de las obligaciones de accesibilidad. Los siguientes contenidos del directorio se acogen a estas excepciones:</p>
+                <ul class="legal-ul">
+                    <li><strong>Iframes de Street View:</strong> Los panoramas de Street View son contenido de terceros (Google) sobre el que el Ayuntamiento no tiene control editorial ni técnico, y están exentos conforme al artículo 2.4 del Real Decreto 1112/2018.</li>
+                    <li><strong>Imágenes de panoramas 360°:</strong> Las imágenes panorámicas geolocalizadas son contenido que, por su naturaleza visual georreferenciada, no admite una alternativa textual equivalente completa.</li>
+                </ul>
+
+                <hr class="divider">
+
+                <!-- Contacto accesibilidad -->
+                <div class="legal-h2">Contacto y comunicación de problemas de accesibilidad</div>
+                <p class="legal-p">Si encuentra barreras de accesibilidad que le impidan utilizar este sitio web, o si desea comunicarnos algún problema de accesibilidad no recogido en esta declaración, puede ponerse en contacto con nosotros:</p>
+
+                <div class="contact-box">
+                    <div class="legal-h3" style="margin-top:0;">Formulario de comunicación de accesibilidad</div>
+                    <p class="legal-p" style="margin-bottom:0.5rem;">Envíe su comunicación incluyendo:</p>
+                    <ul class="legal-ul" style="margin-bottom:1rem;">
+                        <li>Descripción del problema de accesibilidad encontrado.</li>
+                        <li>Tecnología de asistencia utilizada (lector de pantalla, ampliador, etc.) si aplica.</li>
+                        <li>Navegador y sistema operativo utilizados.</li>
+                        <li>URL o sección concreta donde se encuentra la barrera.</li>
+                    </ul>
+                    <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center;">
+                        <a href="mailto:info@santander.es?subject=Accesibilidad%20Directorio%20Empresarial%20Santander" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white transition-all duration-200" style="background:linear-gradient(135deg,#00696c,#14c8cc);">
+                            <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                            Enviar comunicación por email
+                        </a>
+                        <span class="text-white/35 text-sm">info@santander.es</span>
+                    </div>
+                </div>
+
+                <p class="legal-p" style="margin-top:1rem;">Nos comprometemos a responder a las solicitudes de información sobre accesibilidad en un plazo máximo de <strong>72 horas hábiles</strong>. En caso de que la respuesta no sea satisfactoria, puede acudir al procedimiento de aplicación indicado a continuación.</p>
+
+                <hr class="divider">
+
+                <!-- Procedimiento de aplicación -->
+                <div class="legal-h2">Procedimiento de aplicación</div>
+                <p class="legal-p">Si la respuesta del Ayuntamiento no resulta satisfactoria, o si en el plazo de veinte días hábiles no recibe respuesta, puede iniciar el <strong>procedimiento de reclamación</strong> previsto en el artículo 12 del Real Decreto 1112/2018, dirigiéndose a la Unidad responsable de accesibilidad del Ministerio competente en materia de Administración Pública:</p>
+
+                <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:14px 16px;margin:1rem 0;">
+                    <p class="legal-p" style="margin-bottom:0.5rem;"><strong>Ministerio para la Transformación Digital y de la Función Pública</strong></p>
+                    <p class="legal-p" style="margin-bottom:0.5rem;">Dirección General de Gobernanza Pública</p>
+                    <p class="legal-p" style="margin-bottom:0.5rem;">
+                        <a href="https://administracion.gob.es/pag_Home/atencionCiudadana/accesibilidad.html" target="_blank" style="color:#14c8cc;text-decoration:none;font-size:13px;">
+                            Formulario de reclamación de accesibilidad — administracion.gob.es
+                        </a>
+                    </p>
+                    <p class="legal-p" style="margin-bottom:0;">
+                        <a href="https://www.administracion.gob.es/pag_Home/atencionCiudadana/accesibilidad/Informacion-sobre-accesibilidad.html" target="_blank" style="color:#14c8cc;text-decoration:none;font-size:13px;">
+                            Información sobre accesibilidad en la Administración
+                        </a>
+                    </p>
+                </div>
+
+                <hr class="divider">
+
+                <!-- Compromiso y revisión -->
+                <div class="legal-h2">Compromiso de mejora continua</div>
+                <p class="legal-p">El Ayuntamiento de Santander se compromete a mejorar progresivamente la accesibilidad del <strong>Directorio de Áreas Empresariales e Industriales de Santander</strong> y a subsanar los incumplimientos identificados en la presente declaración en el menor plazo posible.</p>
+                <p class="legal-p">La presente declaración de accesibilidad será revisada y actualizada anualmente, o con mayor frecuencia si se producen cambios significativos en el sitio web.</p>
+
+                <hr class="divider">
+
+                <table class="data-table">
+                    <tbody>
+                        <tr><td>Fecha de la declaración</td><td>Abril de 2026</td></tr>
+                        <tr><td>Fecha de última revisión</td><td>Abril de 2026</td></tr>
+                        <tr><td>Próxima revisión prevista</td><td>Abril de 2027</td></tr>
+                        <tr><td>Método de evaluación</td><td>Autoevaluación y revisión manual</td></tr>
+                    </tbody>
+                </table>
+
+                <p class="text-xs text-white/25 text-right">Última actualización: abril de 2026</p>
+
+            </div>
+
+            <!-- Navegación entre páginas legales -->
+            <div class="glass-card rounded-2xl p-4 mt-4 flex flex-wrap gap-3 justify-center">
+                <a href="aviso-legal.html" class="text-xs text-white/40 hover:text-santander-light transition-colors">Aviso Legal</a>
+                <span class="text-white/15 text-xs">·</span>
+                <a href="politica-privacidad.html" class="text-xs text-white/40 hover:text-santander-light transition-colors">Política de Privacidad</a>
+                <span class="text-white/15 text-xs">·</span>
+                <a href="politica-cookies.html" class="text-xs text-white/40 hover:text-santander-light transition-colors">Política de Cookies</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="pb-8 px-4 text-center">
+        <p class="text-white/20 text-xs">
+            Concejalía de Empleo, Emprendimiento y Desarrollo Empresarial &mdash; Ayuntamiento de Santander
+        </p>
+        <p class="text-white/15 text-xs mt-1">
+            Desarrollado por <a href="https://clotitec.com" target="_blank" style="color:rgba(255,255,255,.3);text-decoration:none;font-weight:600">Clotitec</a>
+        </p>
+    </footer>
+
+</body>
+</html>
