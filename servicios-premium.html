@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#0a1628">
+    <title>Servicios Premium | Directorio Empresarial de Santander</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+                    colors: {
+                        santander: { DEFAULT: '#00696c', light: '#14c8cc', dark: '#004f51', accent: '#3c4949', glow: '#14c8cc', pale: '#e0f7fa' }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background: linear-gradient(135deg, #0a1628 0%, #0f2035 50%, #0a1628 100%); min-height: 100vh; }
+        .glass-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(20px); }
+        .glow-border { border: 1px solid rgba(20,200,204,0.25); box-shadow: 0 0 30px rgba(20,200,204,0.08); }
+        .feature-icon { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
+        .btn-cta { background: linear-gradient(135deg, #00696c, #14c8cc); padding: 14px 32px; border-radius: 14px; font-size: 15px; font-weight: 700;
+                    color: white; border: none; cursor: pointer; transition: all 0.3s; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; }
+        .btn-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 35px rgba(20,200,204,0.3); }
+        .btn-outline { padding: 12px 28px; border-radius: 14px; font-size: 14px; font-weight: 600;
+                        color: #14c8cc; border: 1.5px solid rgba(20,200,204,0.3); cursor: pointer; transition: all 0.3s; display: inline-flex; align-items: center; gap: 8px;
+                        text-decoration: none; background: rgba(20,200,204,0.05); }
+        .btn-outline:hover { background: rgba(20,200,204,0.12); }
+        .badge-convenio { display: inline-flex; align-items: center; gap: 6px; background: rgba(16,185,129,0.12); border: 1px solid rgba(16,185,129,0.25);
+                           color: #10b981; font-size: 11px; font-weight: 700; padding: 5px 14px; border-radius: 99px; letter-spacing: 0.3px; }
+        .example-img { border-radius: 12px; width: 100%; aspect-ratio: 16/9; object-fit: cover; border: 1px solid rgba(255,255,255,0.08); }
+        .slider-demo { position: relative; border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
+        .slider-demo img { width: 100%; aspect-ratio: 16/9; object-fit: cover; }
+        .price-tag { font-size: 28px; font-weight: 800; color: #14c8cc; }
+        .price-period { font-size: 13px; color: rgba(255,255,255,0.4); font-weight: 400; }
+        .check-item { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: rgba(255,255,255,0.7); }
+        .check-icon { width: 20px; height: 20px; border-radius: 50%; background: rgba(16,185,129,0.15); color: #10b981;
+                       display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; font-size: 12px; }
+    </style>
+</head>
+<body class="font-sans text-white antialiased">
+
+    <!-- Header -->
+    <header class="pt-10 pb-6 px-4">
+        <div class="max-w-3xl mx-auto text-center">
+            <div class="badge-convenio mx-auto mb-6">
+                <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                CONVENIO AYUNTAMIENTO DE SANTANDER
+            </div>
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-white mb-4 leading-tight">
+                Destaca tu empresa en el<br><span style="color:#14c8cc">Directorio de Santander</span>
+            </h1>
+            <p class="text-white/50 text-base max-w-xl mx-auto leading-relaxed">
+                Servicio exclusivo de contenido visual para empresas de las areas empresariales e industriales de Santander.
+                Fotos profesionales, tours virtuales 360° y fichas enriquecidas.
+            </p>
+        </div>
+    </header>
+
+    <main class="px-4 pb-16">
+        <div class="max-w-3xl mx-auto space-y-8">
+
+            <!-- Ejemplo visual -->
+            <div class="glass-card glow-border rounded-2xl p-6">
+                <div style="font-size:11px;color:rgba(255,255,255,0.3);font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px">Ejemplo real — Kia Numar Motor</div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <img src="fotos/numar-motor/1.jpg" alt="Kia Numar Motor exterior" class="example-img">
+                    </div>
+                    <div>
+                        <img src="fotos/numar-motor/4.jpg" alt="Kia Numar Motor interior" class="example-img">
+                    </div>
+                </div>
+                <p style="font-size:12px;color:rgba(255,255,255,0.35);margin-top:10px;text-align:center">Galeria de fotos + visita virtual 360° integradas en la ficha del directorio</p>
+            </div>
+
+            <!-- Servicios -->
+            <div class="space-y-4">
+                <h2 class="text-xl font-bold text-white text-center mb-2">Servicios disponibles</h2>
+
+                <!-- Servicio 1: Fotos -->
+                <div class="glass-card rounded-2xl p-6">
+                    <div class="flex items-start gap-4">
+                        <div class="feature-icon" style="background:rgba(20,200,204,0.12)">📸</div>
+                        <div class="flex-1">
+                            <h3 style="font-size:16px;font-weight:700;color:white;margin-bottom:4px">Galeria de fotos profesionales</h3>
+                            <p style="font-size:13px;color:rgba(255,255,255,0.45);line-height:1.6;margin-bottom:12px">
+                                Hasta 6 fotografias de alta calidad de tu negocio: fachada, interior, productos, equipo, instalaciones.
+                                Optimizadas para carga rapida y visibles en la ficha de tu empresa.
+                            </p>
+                            <div class="space-y-2">
+                                <div class="check-item"><div class="check-icon">&#10003;</div> Sesion fotografica en tu negocio</div>
+                                <div class="check-item"><div class="check-icon">&#10003;</div> Edicion y optimizacion profesional</div>
+                                <div class="check-item"><div class="check-icon">&#10003;</div> Publicacion directa en el directorio</div>
+                                <div class="check-item"><div class="check-icon">&#10003;</div> Entrega de originales en alta resolucion</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Servicio 2: Tour virtual -->
+                <div class="glass-card rounded-2xl p-6">
+                    <div class="flex items-start gap-4">
+                        <div class="feature-icon" style="background:rgba(168,85,247,0.12)">🏠</div>
+                        <div class="flex-1">
+                            <h3 style="font-size:16px;font-weight:700;color:white;margin-bottom:4px">Tour virtual 360° interior</h3>
+                            <p style="font-size:13px;color:rgba(255,255,255,0.45);line-height:1.6;margin-bottom:12px">
+                                Visita virtual inmersiva del interior de tu empresa. Tus clientes pueden recorrer tus instalaciones
+                                antes de visitarte, directamente desde la ficha del directorio.
+                            </p>
+                            <div class="space-y-2">
+                                <div class="check-item"><div class="check-icon">&#10003;</div> Captura 360° profesional en tus instalaciones</div>
+                                <div class="check-item"><div class="check-icon">&#10003;</div> Publicacion en Google Street View + directorio</div>
+                                <div class="check-item"><div class="check-icon">&#10003;</div> Navegacion interactiva para el usuario</div>
+                                <div class="check-item"><div class="check-icon">&#10003;</div> Compatible con movil, tablet y escritorio</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Servicio 3: Pack completo -->
+                <div class="glass-card glow-border rounded-2xl p-6">
+                    <div class="flex items-start gap-4">
+                        <div class="feature-icon" style="background:rgba(245,158,11,0.12)">⭐</div>
+                        <div class="flex-1">
+                            <h3 style="font-size:16px;font-weight:700;color:white;margin-bottom:4px">Pack completo: Fotos + Tour + Spot de audio</h3>
+                            <p style="font-size:13px;color:rgba(255,255,255,0.45);line-height:1.6;margin-bottom:12px">
+                                El paquete integral para maximizar la presencia de tu empresa: galeria de fotos, tour virtual 360°
+                                y un spot de audio personalizado narrado profesionalmente.
+                            </p>
+                            <div class="space-y-2">
+                                <div class="check-item"><div class="check-icon">&#10003;</div> Todo lo incluido en fotos y tour virtual</div>
+                                <div class="check-item"><div class="check-icon">&#10003;</div> Spot de audio profesional (locutado con IA de alta calidad)</div>
+                                <div class="check-item"><div class="check-icon">&#10003;</div> Revision y actualizacion anual incluida</div>
+                                <div class="check-item"><div class="check-icon">&#10003;</div> Soporte prioritario</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ventajas convenio -->
+            <div class="glass-card rounded-2xl p-6 text-center">
+                <div class="badge-convenio mx-auto mb-4">
+                    <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                    PRECIO EXCLUSIVO
+                </div>
+                <h3 style="font-size:18px;font-weight:700;color:white;margin-bottom:8px">Precio especial para empresas del directorio</h3>
+                <p style="font-size:13px;color:rgba(255,255,255,0.4);max-width:480px;margin:0 auto 20px;line-height:1.6">
+                    Gracias al convenio de colaboracion con el Ayuntamiento de Santander, ofrecemos condiciones
+                    exclusivas para todas las empresas de las areas empresariales e industriales.
+                </p>
+                <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:20px">
+                    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:8px 16px">
+                        <div style="font-size:11px;color:rgba(255,255,255,0.35);margin-bottom:2px">Puntual</div>
+                        <div style="font-size:14px;font-weight:600;color:white">Precio por servicio</div>
+                    </div>
+                    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:8px 16px">
+                        <div style="font-size:11px;color:rgba(255,255,255,0.35);margin-bottom:2px">Recurrente</div>
+                        <div style="font-size:14px;font-weight:600;color:white">Mantenimiento anual</div>
+                    </div>
+                </div>
+                <p style="font-size:12px;color:rgba(255,255,255,0.3)">Contacta para recibir un presupuesto personalizado sin compromiso</p>
+            </div>
+
+            <!-- CTA -->
+            <div class="text-center space-y-4">
+                <a href="mailto:info@clotitec.com?subject=Servicios%20premium%20-%20Directorio%20Santander&body=Hola%2C%20me%20gustar%C3%ADa%20recibir%20informaci%C3%B3n%20sobre%20los%20servicios%20de%20fotos%2C%20tour%20virtual%20y%2Fo%20pack%20completo%20para%20mi%20empresa%20en%20el%20directorio%20de%20Santander.%0A%0ANombre%20empresa%3A%20%0AContacto%3A%20%0ATel%C3%A9fono%3A%20" class="btn-cta">
+                    Solicitar presupuesto sin compromiso
+                    <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+                </a>
+                <br>
+                <a href="tel:+34942000000" class="btn-outline">
+                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                    Llamar a Clotitec
+                </a>
+            </div>
+
+            <!-- Sobre Clotitec -->
+            <div class="glass-card rounded-2xl p-6 text-center">
+                <img src="areas-industriales-logo.svg" alt="Areas Industriales" style="height:36px;margin:0 auto 16px;opacity:0.6">
+                <p style="font-size:13px;color:rgba(255,255,255,0.4);line-height:1.6;max-width:480px;margin:0 auto">
+                    <strong style="color:rgba(255,255,255,0.7)">Clotitec</strong> es la empresa encargada del desarrollo y mantenimiento de la
+                    plataforma digital de areas empresariales e industriales de Santander, en colaboracion con la
+                    Concejalía de Empleo, Emprendimiento y Desarrollo Empresarial del Ayuntamiento.
+                </p>
+                <div style="margin-top:16px;display:flex;justify-content:center;gap:16px;flex-wrap:wrap">
+                    <a href="https://clotitec.com" target="_blank" style="font-size:12px;color:#14c8cc;text-decoration:none;font-weight:600">clotitec.com</a>
+                    <span style="color:rgba(255,255,255,0.1)">|</span>
+                    <a href="mailto:info@clotitec.com" style="font-size:12px;color:#14c8cc;text-decoration:none;font-weight:600">info@clotitec.com</a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+</body>
+</html>

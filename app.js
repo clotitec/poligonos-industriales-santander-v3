@@ -1045,6 +1045,35 @@ function openDetail(company) {
         descSection.style.display = 'none';
     }
 
+    // ---- GALERÍA DE FOTOS ----
+    const fotosSection = document.getElementById('detailFotosSection');
+    if (fotosSection) {
+        if (company.fotos && company.fotos.length > 0) {
+            fotosSection.style.display = 'block';
+            const slider = document.getElementById('fotosSlider');
+            const counter = document.getElementById('fotosCounter');
+            slider.innerHTML = company.fotos.map((url, i) => `<img src="${url}" alt="${escapeHTML(company.nombre)} - Foto ${i+1}" class="foto-slide${i === 0 ? ' active' : ''}" loading="lazy">`).join('');
+            counter.textContent = `1 / ${company.fotos.length}`;
+            window._fotoIndex = 0;
+            window._fotoTotal = company.fotos.length;
+        } else {
+            fotosSection.style.display = 'none';
+        }
+    }
+
+    // ---- TOUR VIRTUAL INTERIOR ----
+    const tourSection = document.getElementById('detailTourSection');
+    if (tourSection) {
+        if (company.tourVirtual) {
+            tourSection.style.display = 'block';
+            document.getElementById('tourIframe').src = company.tourVirtual;
+        } else {
+            tourSection.style.display = 'none';
+            const tourIframe = document.getElementById('tourIframe');
+            if (tourIframe) tourIframe.src = '';
+        }
+    }
+
     // Panorama 360° — Google Street View Embed API (gratis)
     const panoSection = document.getElementById('detailPanoramaSection');
     const panoIframe = document.getElementById('panoramaIframe');
@@ -1608,6 +1637,16 @@ function emailCompany() {
     if (!selectedCompany?.email) return;
     Analytics.track('action_email', { id: selectedCompany.id, name: selectedCompany.nombre });
     window.location.href = `mailto:${selectedCompany.email}`;
+}
+
+// ---- SLIDER FOTOS ----
+function fotoNav(dir) {
+    const slides = document.querySelectorAll('.foto-slide');
+    if (!slides.length) return;
+    slides[window._fotoIndex].classList.remove('active');
+    window._fotoIndex = (window._fotoIndex + dir + window._fotoTotal) % window._fotoTotal;
+    slides[window._fotoIndex].classList.add('active');
+    document.getElementById('fotosCounter').textContent = `${window._fotoIndex + 1} / ${window._fotoTotal}`;
 }
 
 function solicitarCambios() {

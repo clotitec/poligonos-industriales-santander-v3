@@ -1029,6 +1029,43 @@ button, .company-card, .filter-pill, .action-btn {
    ============================================================ */
 
 /* ---- PANORAMA 360° EMBEBIDO ---- */
+/* ---- GALERÍA DE FOTOS ---- */
+.fotos-slider-wrapper {
+    position: relative; border-radius: 16px; overflow: hidden;
+    border: 1.5px solid var(--border-color); background: #0a1628;
+}
+.fotos-slider { position: relative; width: 100%; aspect-ratio: 16/9; }
+.foto-slide {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; opacity: 0; transition: opacity 0.4s ease;
+}
+.foto-slide.active { opacity: 1; }
+.foto-nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    background: rgba(0,0,0,0.5); color: white; border: none;
+    width: 36px; height: 36px; border-radius: 50%; font-size: 22px;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s; z-index: 2; line-height: 1;
+}
+.foto-nav:hover { background: rgba(0,0,0,0.75); }
+.foto-nav-prev { left: 10px; }
+.foto-nav-next { right: 10px; }
+.fotos-counter {
+    position: absolute; bottom: 10px; right: 12px;
+    background: rgba(0,0,0,0.6); color: white; font-size: 11px;
+    font-weight: 600; padding: 3px 10px; border-radius: 99px; z-index: 2;
+}
+
+/* ---- TOUR VIRTUAL ---- */
+.tour-embed-container {
+    border-radius: 16px; overflow: hidden;
+    border: 1.5px solid var(--border-color);
+    position: relative; background: #f1f5f9;
+}
+.tour-iframe {
+    width: 100%; aspect-ratio: 4/3; border: none; display: block;
+}
+
 .panorama-embed-container {
     border-radius: 16px; overflow: hidden;
     border: 1.5px solid var(--border-color);

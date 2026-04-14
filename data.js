@@ -3448,6 +3448,8 @@ const empresas = [
         streetView: 'https://www.google.com/maps/embed?pb=!4v1775468485439!6m8!1m7!1sCAoSHENJQUJJaEFETjBFNDV2aUdSa3dpRzZjaHVuVTM.!2m2!1d43.44849414203568!2d-3.831408360867251!3f258.5537659171554!4f0.8032378882054303!5f0.4000000000000002',
         googleMapsUrl: 'https://maps.app.goo.gl/hfpBiZ9VzwFKVwkz9',
         audioUrl: './audio/SPOT_156_KIA_NUMAR_MOTOR.mp3',
+        fotos: ['./fotos/numar-motor/1.jpg','./fotos/numar-motor/2.jpg','./fotos/numar-motor/3.jpg','./fotos/numar-motor/4.jpg','./fotos/numar-motor/5.jpg','./fotos/numar-motor/6.jpg'],
+        tourVirtual: 'https://www.google.com/maps/embed?pb=!4v1776160297057!6m8!1m7!1sCAoSFkNJSE0wb2dLRUlDQWdJQ2JyNFRiQVE.!2m2!1d43.44863363747135!2d-3.831609086538577!3f346.00036581528536!4f-26.849765680618468!5f0.5724879276199174',
         lat: 43.44849414203568,
         lng: -3.831408360867251
     },

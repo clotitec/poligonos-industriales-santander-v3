@@ -446,6 +446,25 @@
                     <div class="detail-description" id="detailDesc"></div>
                 </div>
 
+                <!-- Galería de fotos -->
+                <div class="detail-section" id="detailFotosSection" style="display:none">
+                    <div class="detail-section-title"><span style="font-size:14px;margin-right:4px">📸</span> Galería de fotos</div>
+                    <div class="fotos-slider-wrapper">
+                        <div class="fotos-slider" id="fotosSlider"></div>
+                        <button class="foto-nav foto-nav-prev" onclick="fotoNav(-1)" aria-label="Foto anterior">‹</button>
+                        <button class="foto-nav foto-nav-next" onclick="fotoNav(1)" aria-label="Foto siguiente">›</button>
+                        <div class="fotos-counter" id="fotosCounter">1 / 1</div>
+                    </div>
+                </div>
+
+                <!-- Tour virtual interior -->
+                <div class="detail-section" id="detailTourSection" style="display:none">
+                    <div class="detail-section-title"><span style="font-size:14px;margin-right:4px">🏠</span> Visita virtual interior</div>
+                    <div class="tour-embed-container">
+                        <iframe id="tourIframe" src="" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="tour-iframe"></iframe>
+                    </div>
+                </div>
+
                 <!-- Panorama 360° (Google Street View Embed API) -->
                 <div class="detail-section" id="detailPanoramaSection" style="display:none">
                     <div class="detail-section-title">
