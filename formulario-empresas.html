@@ -70,6 +70,8 @@
                         padding: 8px 12px; font-size: 14px; color: white; width: 100%; outline: none; transition: all 0.2s; font-family: inherit; }
         .field-input:focus { border-color: #14c8cc; box-shadow: 0 0 0 3px rgba(20,200,204,0.15); background: rgba(255,255,255,0.1); }
         .field-input::placeholder { color: rgba(255,255,255,0.25); }
+        select.field-input option { background: #1a2a3a; color: white; }
+        select.field-input option:checked { background: #00696c; color: white; }
 
         .field-row.modified { background: rgba(20,200,204,0.06); border-left: 3px solid #14c8cc; }
         .field-row.modified .field-value { color: #14c8cc; font-weight: 500; }
@@ -526,11 +528,21 @@
     let filtroArea = 'todos';
     let filtroSector = 'todos';
 
+    // Opciones fijas para sector (se generan dinamicamente desde data.js)
+    let SECTOR_OPTIONS = [];
+    const AREA_OPTIONS = [
+        { value: 'Polígono Industrial de Candina', label: 'Candina' },
+        { value: 'El Campón - Peñacastillo', label: 'El Campón - Peñacastillo' },
+        { value: 'Parayas Sur', label: 'Parayas Sur' },
+        { value: 'Parayas Norte', label: 'Parayas Norte' }
+    ];
+
     const CAMPOS = [
         { key: 'nombre',      label: 'Nombre de la empresa', type: 'text' },
         { key: 'descripcion', label: 'Descripcion',          type: 'text' },
-        { key: 'sector',      label: 'Sector',               type: 'text' },
+        { key: 'sector',      label: 'Sector',               type: 'select', options: 'sector' },
         { key: 'actividad',   label: 'Actividad',            type: 'text' },
+        { key: 'area',        label: 'Poligono / Area',      type: 'select', options: 'area' },
         { key: 'direccion',   label: 'Direccion',            type: 'text' },
         { key: 'nave',        label: 'Nave / Local',         type: 'text' },
         { key: 'cp',          label: 'Codigo postal',        type: 'text' },
@@ -563,10 +575,11 @@
             todasEmpresas = empresas.slice().sort((a, b) => a.nombre.localeCompare(b.nombre, 'es'));
         }
 
-        // Generar chips de sector dinamicamente
+        // Generar chips de sector dinamicamente + opciones para select
         const sectores = {};
         todasEmpresas.forEach(e => { if (e.sector) sectores[e.sector] = (sectores[e.sector] || 0) + 1; });
         const sectoresOrdenados = Object.entries(sectores).sort((a, b) => b[1] - a[1]);
+        SECTOR_OPTIONS = sectoresOrdenados.map(([s]) => ({ value: s, label: s }));
 
         const contenedorSector = document.getElementById('filtrosSector');
         sectoresOrdenados.forEach(([sector, count]) => {
@@ -723,16 +736,33 @@
     }
 
     // ---- Modo edicion ----
+    function getOptionsForField(campo) {
+        if (campo.options === 'sector') return SECTOR_OPTIONS;
+        if (campo.options === 'area') return AREA_OPTIONS;
+        return [];
+    }
+
     function editarCampo(key) {
         const campo = CAMPOS.find(c => c.key === key);
         if (!campo) return;
         const row = document.getElementById(`row-${key}`);
         const valorActual = valoresModificados.hasOwnProperty(key) ? valoresModificados[key] : (valoresOriginales[key] || '');
 
+        let inputHTML;
+        if (campo.type === 'select') {
+            const opts = getOptionsForField(campo);
+            inputHTML = `<select id="input-${key}" class="field-input">
+                <option value="">-- Selecciona --</option>
+                ${opts.map(o => `<option value="${escapeHTML(o.value)}" ${o.value === valorActual ? 'selected' : ''}>${escapeHTML(o.label)}</option>`).join('')}
+            </select>`;
+        } else {
+            inputHTML = `<input id="input-${key}" type="${campo.type}" class="field-input" value="${escapeHTML(valorActual)}" placeholder="Introduce ${campo.label.toLowerCase()}...">`;
+        }
+
         row.innerHTML = `
             <div class="field-label">${campo.label}</div>
             <div style="flex:1">
-                <input id="input-${key}" type="${campo.type}" class="field-input" value="${escapeHTML(valorActual)}" placeholder="Introduce ${campo.label.toLowerCase()}...">
+                ${inputHTML}
                 <div style="display:flex;gap:8px;margin-top:8px">
                     <button class="btn-edit" onclick="guardarCampo('${key}')" style="background:rgba(16,185,129,0.15);border-color:rgba(16,185,129,0.3);color:#10b981">Guardar</button>
                     <button class="btn-cancel" onclick="cancelarEdicion('${key}')">Cancelar</button>
@@ -742,7 +772,9 @@
 
         const input = document.getElementById(`input-${key}`);
         input.focus();
-        input.addEventListener('keydown', e => { if (e.key === 'Enter') guardarCampo(key); if (e.key === 'Escape') cancelarEdicion(key); });
+        if (campo.type !== 'select') {
+            input.addEventListener('keydown', e => { if (e.key === 'Enter') guardarCampo(key); if (e.key === 'Escape') cancelarEdicion(key); });
+        }
     }
 
     function guardarCampo(key) {
