@@ -98,6 +98,18 @@
         .btn-back { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: rgba(255,255,255,0.4);
                      cursor: pointer; padding: 6px 12px; border-radius: 8px; transition: all 0.2s; border: none; background: none; }
         .btn-back:hover { color: #14c8cc; background: rgba(20,200,204,0.08); }
+
+        .action-top-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 12px;
+                           font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; border: 1px solid; }
+        .action-top-btn.alta { background: rgba(16,185,129,0.1); border-color: rgba(16,185,129,0.25); color: #10b981; }
+        .action-top-btn.alta:hover { background: rgba(16,185,129,0.2); }
+        .action-top-btn.baja { background: rgba(239,68,68,0.1); border-color: rgba(239,68,68,0.25); color: #ef4444; }
+        .action-top-btn.baja:hover { background: rgba(239,68,68,0.2); }
+
+        .form-section-title { font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.85); margin-bottom: 4px; }
+        .form-section-desc { font-size: 12px; color: rgba(255,255,255,0.35); margin-bottom: 16px; }
+        .aviso-box { background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.2); border-radius: 12px;
+                      padding: 12px 16px; font-size: 12px; color: rgba(245,158,11,0.8); line-height: 1.5; }
     </style>
 </head>
 <body class="font-sans text-white antialiased">
@@ -117,6 +129,215 @@
 
     <main class="px-4 pb-12">
         <div class="max-w-2xl mx-auto">
+
+            <!-- Botones de accion superiores -->
+            <div id="botonesAccion" class="flex flex-wrap justify-center gap-3 mb-6">
+                <button class="action-top-btn alta" onclick="mostrarFormAlta()">
+                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 5v14m-7-7h14"/></svg>
+                    Dar de alta nueva empresa
+                </button>
+                <button class="action-top-btn baja" onclick="mostrarFormBaja()">
+                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                    Comunicar cierre de empresa
+                </button>
+            </div>
+
+            <!-- ========== FORMULARIO ALTA NUEVA EMPRESA ========== -->
+            <div id="pasoAlta" class="hidden space-y-6">
+                <button class="btn-back" onclick="volverInicio()">
+                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+                    Volver
+                </button>
+
+                <div class="glass-card rounded-2xl p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-500/20 flex items-center justify-center">
+                            <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#10b981" stroke-width="2"><path d="M12 5v14m-7-7h14"/></svg>
+                        </div>
+                        <div>
+                            <div class="form-section-title">Solicitud de alta de nueva empresa</div>
+                            <div class="form-section-desc">Rellena los datos para incluir una empresa en el directorio</div>
+                        </div>
+                    </div>
+                    <div class="aviso-box mb-6">
+                        Las solicitudes de alta seran revisadas y validadas por la <strong>Concejalía de Empleo, Emprendimiento y Desarrollo Empresarial del Ayuntamiento de Santander</strong> antes de su publicacion en el directorio.
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-medium text-white/50 mb-1.5">Nombre de la empresa *</label>
+                            <input type="text" id="altaNombre" required placeholder="Nombre comercial" class="input-auth">
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-white/50 mb-1.5">Poligono / Area industrial *</label>
+                                <select id="altaArea" required class="input-auth">
+                                    <option value="">Selecciona...</option>
+                                    <option value="candina">Candina</option>
+                                    <option value="campon">El Campon - Peñacastillo</option>
+                                    <option value="parayas-sur">Parayas Sur</option>
+                                    <option value="parayas-norte">Parayas Norte</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-white/50 mb-1.5">Sector / Actividad *</label>
+                                <input type="text" id="altaSector" required placeholder="Ej: Taller, Concesionario..." class="input-auth">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-white/50 mb-1.5">Descripcion de la actividad *</label>
+                            <textarea id="altaDescripcion" rows="2" required placeholder="Describe brevemente la actividad de la empresa..." class="input-auth resize-none"></textarea>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-white/50 mb-1.5">Direccion *</label>
+                                <input type="text" id="altaDireccion" required placeholder="Calle, numero..." class="input-auth">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-white/50 mb-1.5">Nave / Local</label>
+                                <input type="text" id="altaNave" placeholder="Nave, local, planta..." class="input-auth">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-white/50 mb-1.5">Telefono *</label>
+                                <input type="tel" id="altaTelefono" required placeholder="942 XXX XXX" class="input-auth">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-white/50 mb-1.5">Email</label>
+                                <input type="email" id="altaEmail" placeholder="info@empresa.com" class="input-auth">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-white/50 mb-1.5">Pagina web</label>
+                            <input type="url" id="altaWeb" placeholder="https://www.empresa.com" class="input-auth">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-white/50 mb-1.5">CIF de la empresa</label>
+                            <input type="text" id="altaCif" placeholder="B39XXXXXX" class="input-auth">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-white/50 mb-1.5">Observaciones</label>
+                            <textarea id="altaObs" rows="2" placeholder="Cualquier informacion adicional..." class="input-auth resize-none"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Datos del solicitante alta -->
+                <div class="glass-card rounded-2xl p-6">
+                    <div class="form-section-title">Datos del solicitante</div>
+                    <div class="form-section-desc">Para verificar la solicitud de alta</div>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-medium text-white/50 mb-1.5">Nombre y apellidos *</label>
+                            <input type="text" id="altaAuthNombre" required placeholder="Tu nombre completo" class="input-auth">
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-white/50 mb-1.5">Cargo *</label>
+                                <input type="text" id="altaAuthCargo" required placeholder="Ej: Gerente, Propietario..." class="input-auth">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-white/50 mb-1.5">Telefono *</label>
+                                <input type="tel" id="altaAuthTel" required placeholder="6XX XXX XXX" class="input-auth">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-white/50 mb-1.5">Email de contacto</label>
+                            <input type="email" id="altaAuthEmail" placeholder="tu@email.com" class="input-auth">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col items-center gap-3">
+                    <button type="button" onclick="enviarAlta()" class="btn-primary w-full sm:w-auto px-10 py-3.5 rounded-xl text-sm font-semibold text-white tracking-wide">
+                        Enviar solicitud de alta
+                    </button>
+                    <p class="text-white/30 text-xs text-center">Pendiente de validacion por el Ayuntamiento de Santander</p>
+                </div>
+            </div>
+
+            <!-- ========== FORMULARIO BAJA / CIERRE ========== -->
+            <div id="pasoBaja" class="hidden space-y-6">
+                <button class="btn-back" onclick="volverInicio()">
+                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+                    Volver
+                </button>
+
+                <div class="glass-card rounded-2xl p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-xl bg-red-500/20 flex items-center justify-center">
+                            <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#ef4444" stroke-width="2"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                        </div>
+                        <div>
+                            <div class="form-section-title">Comunicar cierre de empresa</div>
+                            <div class="form-section-desc">Solicita la baja de una empresa que ha cesado su actividad</div>
+                        </div>
+                    </div>
+                    <div class="aviso-box mb-6">
+                        La baja sera verificada por la <strong>Concejalía de Empleo, Emprendimiento y Desarrollo Empresarial del Ayuntamiento de Santander</strong> antes de eliminar la empresa del directorio.
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-medium text-white/50 mb-1.5">Empresa que ha cesado actividad *</label>
+                            <select id="bajaEmpresa" required class="input-auth">
+                                <option value="">Selecciona la empresa...</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-white/50 mb-1.5">Motivo del cierre *</label>
+                            <select id="bajaMotivo" required class="input-auth">
+                                <option value="">Selecciona...</option>
+                                <option value="cierre_definitivo">Cierre definitivo / Cese de actividad</option>
+                                <option value="traslado">Traslado fuera del poligono</option>
+                                <option value="cambio_nombre">Cambio de razon social / nombre</option>
+                                <option value="duplicada">Empresa duplicada en el directorio</option>
+                                <option value="otro">Otro motivo</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-white/50 mb-1.5">Fecha aproximada del cierre</label>
+                            <input type="month" id="bajaFecha" class="input-auth">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-white/50 mb-1.5">Detalles adicionales</label>
+                            <textarea id="bajaDetalles" rows="3" placeholder="Cualquier informacion relevante sobre el cierre..." class="input-auth resize-none"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Datos del solicitante baja -->
+                <div class="glass-card rounded-2xl p-6">
+                    <div class="form-section-title">Datos del solicitante</div>
+                    <div class="form-section-desc">Para verificar la comunicacion de baja</div>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-medium text-white/50 mb-1.5">Nombre y apellidos *</label>
+                            <input type="text" id="bajaAuthNombre" required placeholder="Tu nombre completo" class="input-auth">
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-white/50 mb-1.5">Cargo / Relacion con la empresa *</label>
+                                <input type="text" id="bajaAuthCargo" required placeholder="Ej: Propietario, Vecino..." class="input-auth">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-white/50 mb-1.5">Telefono *</label>
+                                <input type="tel" id="bajaAuthTel" required placeholder="6XX XXX XXX" class="input-auth">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-white/50 mb-1.5">Email de contacto</label>
+                            <input type="email" id="bajaAuthEmail" placeholder="tu@email.com" class="input-auth">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col items-center gap-3">
+                    <button type="button" onclick="enviarBaja()" class="btn-primary w-full sm:w-auto px-10 py-3.5 rounded-xl text-sm font-semibold text-white tracking-wide" style="background:linear-gradient(135deg,#b91c1c,#ef4444)">
+                        Enviar comunicacion de cierre
+                    </button>
+                    <p class="text-white/30 text-xs text-center">Pendiente de validacion por el Ayuntamiento de Santander</p>
+                </div>
+            </div>
 
             <!-- ========== PASO 1: DIRECTORIO ========== -->
             <div id="pasoDirectorio">
@@ -350,6 +571,17 @@
 
         renderDirectorio();
 
+        // Poblar select de baja con empresas
+        const selectBaja = document.getElementById('bajaEmpresa');
+        if (selectBaja) {
+            todasEmpresas.forEach(e => {
+                const opt = document.createElement('option');
+                opt.value = e.id;
+                opt.textContent = `${e.nombre} — ${AREA_LABELS[e.areaId] || e.area}`;
+                selectBaja.appendChild(opt);
+            });
+        }
+
         // Si viene con ID o nombre por URL, cargar directamente
         const params = new URLSearchParams(window.location.search);
         const idParam = params.get('id');
@@ -449,6 +681,7 @@
 
         // Mostrar ficha, ocultar directorio
         document.getElementById('pasoDirectorio').classList.add('hidden');
+        document.getElementById('botonesAccion').classList.add('hidden');
         document.getElementById('pasoFicha').classList.remove('hidden');
         document.getElementById('pageTitle').textContent = empresaActual.nombre;
         document.getElementById('pageSubtitle').textContent = 'Revisa los datos y modifica lo que necesites';
@@ -459,6 +692,7 @@
     function volverDirectorio() {
         document.getElementById('pasoFicha').classList.add('hidden');
         document.getElementById('pasoDirectorio').classList.remove('hidden');
+        document.getElementById('botonesAccion').classList.remove('hidden');
         document.getElementById('pageTitle').textContent = 'Verificar y actualizar datos';
         document.getElementById('pageSubtitle').textContent = 'Busca tu empresa, revisa los datos y corrige lo que necesites.';
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -603,6 +837,149 @@
         setTimeout(() => {
             document.getElementById('pasoFicha').classList.add('hidden');
             document.getElementById('msgExito').classList.remove('hidden');
+            document.getElementById('pageTitle').textContent = 'Solicitud enviada';
+            document.getElementById('pageSubtitle').textContent = '';
+        }, 500);
+    }
+
+    // ---- Navegacion entre secciones ----
+    function ocultarTodo() {
+        ['pasoDirectorio','pasoFicha','pasoAlta','pasoBaja','msgExito'].forEach(id => document.getElementById(id).classList.add('hidden'));
+    }
+
+    function mostrarFormAlta() {
+        ocultarTodo();
+        document.getElementById('botonesAccion').classList.add('hidden');
+        document.getElementById('pasoAlta').classList.remove('hidden');
+        document.getElementById('pageTitle').textContent = 'Alta de nueva empresa';
+        document.getElementById('pageSubtitle').textContent = 'Rellena los datos para solicitar la inclusion en el directorio.';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function mostrarFormBaja() {
+        ocultarTodo();
+        document.getElementById('botonesAccion').classList.add('hidden');
+        document.getElementById('pasoBaja').classList.remove('hidden');
+        document.getElementById('pageTitle').textContent = 'Comunicar cierre de empresa';
+        document.getElementById('pageSubtitle').textContent = 'Indica que empresa ha cesado su actividad.';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function volverInicio() {
+        ocultarTodo();
+        document.getElementById('botonesAccion').classList.remove('hidden');
+        document.getElementById('pasoDirectorio').classList.remove('hidden');
+        document.getElementById('pageTitle').textContent = 'Verificar y actualizar datos';
+        document.getElementById('pageSubtitle').textContent = 'Busca tu empresa, revisa los datos y corrige lo que necesites.';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ---- Enviar alta ----
+    function enviarAlta() {
+        const nombre = document.getElementById('altaNombre').value.trim();
+        const area = document.getElementById('altaArea').value;
+        const sector = document.getElementById('altaSector').value.trim();
+        const desc = document.getElementById('altaDescripcion').value.trim();
+        const dir = document.getElementById('altaDireccion').value.trim();
+        const tel = document.getElementById('altaTelefono').value.trim();
+        const authNombre = document.getElementById('altaAuthNombre').value.trim();
+        const authCargo = document.getElementById('altaAuthCargo').value.trim();
+        const authTel = document.getElementById('altaAuthTel').value.trim();
+
+        if (!nombre || !area || !sector || !desc || !dir || !tel) { alert('Por favor, rellena todos los campos obligatorios de la empresa'); return; }
+        if (!authNombre || !authCargo || !authTel) { alert('Por favor, rellena los datos del solicitante'); return; }
+
+        const asunto = encodeURIComponent(`[ALTA] Nueva empresa: ${nombre}`);
+        let cuerpo = `SOLICITUD DE ALTA — DIRECTORIO EMPRESARIAL DE SANTANDER\n${'='.repeat(60)}\n\n`;
+        cuerpo += `EMPRESA NUEVA\n${'-'.repeat(40)}\n`;
+        cuerpo += `Nombre: ${nombre}\n`;
+        cuerpo += `Area: ${document.getElementById('altaArea').selectedOptions[0].text}\n`;
+        cuerpo += `Sector: ${sector}\n`;
+        cuerpo += `Descripcion: ${desc}\n`;
+        cuerpo += `Direccion: ${dir}\n`;
+        const nave = document.getElementById('altaNave').value.trim();
+        if (nave) cuerpo += `Nave/Local: ${nave}\n`;
+        cuerpo += `Telefono: ${tel}\n`;
+        const email = document.getElementById('altaEmail').value.trim();
+        if (email) cuerpo += `Email: ${email}\n`;
+        const web = document.getElementById('altaWeb').value.trim();
+        if (web) cuerpo += `Web: ${web}\n`;
+        const cif = document.getElementById('altaCif').value.trim();
+        if (cif) cuerpo += `CIF: ${cif}\n`;
+        const obs = document.getElementById('altaObs').value.trim();
+        if (obs) cuerpo += `Observaciones: ${obs}\n`;
+        cuerpo += `\nSOLICITANTE\n${'-'.repeat(40)}\n`;
+        cuerpo += `Nombre: ${authNombre}\nCargo: ${authCargo}\nTelefono: ${authTel}\n`;
+        const authEmail = document.getElementById('altaAuthEmail').value.trim();
+        if (authEmail) cuerpo += `Email: ${authEmail}\n`;
+        cuerpo += `\nPENDIENTE DE VALIDACION POR AYUNTAMIENTO DE SANTANDER\n`;
+        cuerpo += `Fecha: ${new Date().toLocaleString('es-ES')}\n`;
+
+        // Backup localStorage
+        const registro = { tipo: 'alta', empresa: nombre, area, sector, fecha: new Date().toISOString(),
+                           solicitante: { nombre: authNombre, cargo: authCargo, telefono: authTel } };
+        const historial = JSON.parse(localStorage.getItem('solicitudes_cambios') || '[]');
+        historial.push(registro);
+        localStorage.setItem('solicitudes_cambios', JSON.stringify(historial));
+
+        window.location.href = `mailto:info@clotitec.com?subject=${asunto}&body=${encodeURIComponent(cuerpo)}`;
+
+        setTimeout(() => {
+            document.getElementById('pasoAlta').classList.add('hidden');
+            document.getElementById('msgExito').classList.remove('hidden');
+            document.getElementById('msgExito').querySelector('h3').textContent = 'Solicitud de alta enviada';
+            document.getElementById('msgExito').querySelector('p').innerHTML = 'La solicitud sera revisada por el Ayuntamiento de Santander.<br>Te contactaremos para confirmar la inclusion en el directorio.';
+            document.getElementById('pageTitle').textContent = 'Solicitud enviada';
+            document.getElementById('pageSubtitle').textContent = '';
+        }, 500);
+    }
+
+    // ---- Enviar baja ----
+    function enviarBaja() {
+        const empresaId = document.getElementById('bajaEmpresa').value;
+        const motivo = document.getElementById('bajaMotivo').value;
+        const authNombre = document.getElementById('bajaAuthNombre').value.trim();
+        const authCargo = document.getElementById('bajaAuthCargo').value.trim();
+        const authTel = document.getElementById('bajaAuthTel').value.trim();
+
+        if (!empresaId || !motivo) { alert('Por favor, selecciona la empresa y el motivo del cierre'); return; }
+        if (!authNombre || !authCargo || !authTel) { alert('Por favor, rellena los datos del solicitante'); return; }
+
+        const emp = todasEmpresas.find(e => e.id === parseInt(empresaId));
+        const empresaNombre = emp ? emp.nombre : 'Desconocida';
+        const motivoTexto = document.getElementById('bajaMotivo').selectedOptions[0].text;
+
+        const asunto = encodeURIComponent(`[BAJA] Cierre: ${empresaNombre}`);
+        let cuerpo = `COMUNICACION DE CIERRE — DIRECTORIO EMPRESARIAL DE SANTANDER\n${'='.repeat(60)}\n\n`;
+        cuerpo += `EMPRESA\n${'-'.repeat(40)}\n`;
+        cuerpo += `Nombre: ${empresaNombre}\n`;
+        if (emp) cuerpo += `Area: ${emp.area}\nID: ${emp.id}\n`;
+        cuerpo += `\nMOTIVO: ${motivoTexto}\n`;
+        const fecha = document.getElementById('bajaFecha').value;
+        if (fecha) cuerpo += `Fecha aprox. cierre: ${fecha}\n`;
+        const detalles = document.getElementById('bajaDetalles').value.trim();
+        if (detalles) cuerpo += `Detalles: ${detalles}\n`;
+        cuerpo += `\nSOLICITANTE\n${'-'.repeat(40)}\n`;
+        cuerpo += `Nombre: ${authNombre}\nCargo/Relacion: ${authCargo}\nTelefono: ${authTel}\n`;
+        const authEmail = document.getElementById('bajaAuthEmail').value.trim();
+        if (authEmail) cuerpo += `Email: ${authEmail}\n`;
+        cuerpo += `\nPENDIENTE DE VALIDACION POR AYUNTAMIENTO DE SANTANDER\n`;
+        cuerpo += `Fecha solicitud: ${new Date().toLocaleString('es-ES')}\n`;
+
+        // Backup localStorage
+        const registro = { tipo: 'baja', empresaId: parseInt(empresaId), empresa: empresaNombre, motivo,
+                           solicitante: { nombre: authNombre, cargo: authCargo, telefono: authTel }, fecha: new Date().toISOString() };
+        const historial = JSON.parse(localStorage.getItem('solicitudes_cambios') || '[]');
+        historial.push(registro);
+        localStorage.setItem('solicitudes_cambios', JSON.stringify(historial));
+
+        window.location.href = `mailto:info@clotitec.com?subject=${asunto}&body=${encodeURIComponent(cuerpo)}`;
+
+        setTimeout(() => {
+            document.getElementById('pasoBaja').classList.add('hidden');
+            document.getElementById('msgExito').classList.remove('hidden');
+            document.getElementById('msgExito').querySelector('h3').textContent = 'Comunicacion de cierre enviada';
+            document.getElementById('msgExito').querySelector('p').innerHTML = 'La baja sera verificada por el Ayuntamiento de Santander.<br>Te contactaremos para confirmar la eliminacion del directorio.';
             document.getElementById('pageTitle').textContent = 'Solicitud enviada';
             document.getElementById('pageSubtitle').textContent = '';
         }, 500);
