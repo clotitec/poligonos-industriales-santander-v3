@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0a1628">
+    <title>Preguntas frecuentes | Directorio Empresarial de Santander</title>
+    <meta name="description" content="Preguntas frecuentes sobre el Directorio de Áreas Empresariales e Industriales de Santander: qué es, por qué se hace, cómo usarlo, cómo aparecer como empresa, datos y privacidad.">
+    <meta property="og:title" content="Preguntas frecuentes — Directorio Empresarial de Santander">
+    <meta property="og:description" content="Resuelve dudas sobre el directorio interactivo de los polígonos industriales de Santander.">
+    <meta property="og:type" content="website">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+                    colors: {
+                        santander: { DEFAULT: '#00696c', light: '#14c8cc', dark: '#004f51', accent: '#3c4949', glow: '#14c8cc', pale: '#e0f7fa' }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background: linear-gradient(135deg, #0a1628 0%, #0f2035 50%, #0a1628 100%); min-height: 100vh; }
+        .glass-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(20px); }
+        .legal-h2 { font-size: 17px; font-weight: 700; color: #14c8cc; margin-top: 2rem; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 8px; }
+        .legal-h2::before { content: ''; display: inline-block; width: 3px; height: 18px; background: #14c8cc; border-radius: 2px; flex-shrink: 0; }
+        .legal-p { font-size: 14px; color: rgba(255,255,255,0.72); line-height: 1.75; margin-bottom: 0.75rem; }
+        .legal-ul { list-style: none; padding: 0; margin-bottom: 0.75rem; }
+        .legal-ul li { font-size: 14px; color: rgba(255,255,255,0.72); line-height: 1.75; padding-left: 1.25rem; position: relative; }
+        .legal-ul li::before { content: '–'; position: absolute; left: 0; color: #14c8cc; }
+        .divider { border: none; border-top: 1px solid rgba(255,255,255,0.06); margin: 1.5rem 0; }
+        .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: rgba(255,255,255,0.4); cursor: pointer; padding: 6px 12px; border-radius: 8px; transition: all 0.2s; text-decoration: none; }
+        .back-link:hover { color: #14c8cc; background: rgba(20,200,204,0.08); }
+
+        /* Acordeones FAQ */
+        details.faq-item {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 14px;
+            margin-bottom: 10px;
+            transition: all 0.2s ease;
+            overflow: hidden;
+        }
+        details.faq-item[open] {
+            background: rgba(20,200,204,0.04);
+            border-color: rgba(20,200,204,0.2);
+        }
+        details.faq-item > summary {
+            cursor: pointer;
+            list-style: none;
+            padding: 14px 18px;
+            font-size: 14px;
+            font-weight: 600;
+            color: rgba(255,255,255,0.92);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            transition: color 0.15s ease;
+        }
+        details.faq-item > summary:hover { color: #14c8cc; }
+        details.faq-item > summary::-webkit-details-marker { display: none; }
+        details.faq-item > summary::after {
+            content: '+';
+            font-size: 22px;
+            font-weight: 300;
+            color: #14c8cc;
+            transition: transform 0.25s ease;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+        details.faq-item[open] > summary::after { transform: rotate(45deg); }
+        .faq-answer {
+            padding: 0 18px 16px;
+            font-size: 13.5px;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.75;
+        }
+        .faq-answer p { margin-bottom: 0.65rem; }
+        .faq-answer p:last-child { margin-bottom: 0; }
+        .faq-answer strong { color: #14c8cc; font-weight: 600; }
+        .faq-answer a { color: #14c8cc; text-decoration: underline; }
+        .faq-answer ul { padding-left: 1.1rem; margin: 0.5rem 0; list-style: disc; }
+        .faq-answer ul li { margin-bottom: 0.3rem; }
+
+        /* Toggle de idioma propio */
+        .lang-toggle {
+            display: inline-flex;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 999px;
+            padding: 3px;
+            gap: 2px;
+        }
+        .lang-toggle button {
+            background: transparent;
+            border: none;
+            color: rgba(255,255,255,0.55);
+            font-size: 12px;
+            font-weight: 600;
+            padding: 5px 14px;
+            border-radius: 999px;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.18s ease;
+        }
+        .lang-toggle button.active {
+            background: linear-gradient(135deg, #00696c, #14c8cc);
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(20,200,204,0.25);
+        }
+        .lang-toggle button:hover:not(.active) { color: rgba(255,255,255,0.85); }
+
+        /* Idioma activo: mostrar/ocultar según data-lang del body */
+        body[data-lang="es"] [data-lang-en] { display: none; }
+        body[data-lang="en"] [data-lang-es] { display: none; }
+
+        /* Tarjetas de contacto/CTA */
+        .contact-box { background: rgba(20,200,204,0.06); border: 1px solid rgba(20,200,204,0.15); border-radius: 14px; padding: 18px 20px; }
+        .cta-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #fff;
+            text-decoration: none;
+            background: linear-gradient(135deg, #00696c, #14c8cc);
+            box-shadow: 0 4px 14px rgba(20,200,204,0.22);
+            transition: all 0.18s ease;
+        }
+        .cta-link:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(20,200,204,0.32); }
+    </style>
+
+    <!-- Schema.org FAQPage JSON-LD (en español, idioma del país) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "¿Qué es el Directorio de Áreas Empresariales e Industriales de Santander?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Es una herramienta web pública e interactiva que reúne en un único mapa a las 158 empresas instaladas en los 4 polígonos industriales del municipio de Santander (Candina, El Campón, Parayas Norte y Parayas Sur), con sus fichas, ubicación, datos de contacto, sector de actividad, fotografías, spots de audio y vista panorámica 360°." } },
+        { "@type": "Question", "name": "¿Por qué se hace este proyecto?",
+          "acceptedAnswer": { "@type": "Answer", "text": "El tejido industrial de Santander es invisible para gran parte de los vecinos, profesionales e inversores. No existía una guía moderna y unificada de qué empresas están dónde, qué hacen y cómo contactarlas. Este directorio nace para dar visibilidad a ese tejido, facilitar negocio entre empresas, ayudar a los vecinos a localizar servicios cercanos y atraer nueva inversión." } },
+        { "@type": "Question", "name": "¿Qué intención tiene la solución?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Convertir un dato disperso (qué hay en cada polígono) en una herramienta útil del día a día: para una pyme buscando proveedor cercano, para un vecino que quiere saber qué fábrica tiene al lado, para una persona que busca empleo en su zona, para un inversor que evalúa parcelas libres, y para el propio Ayuntamiento como instrumento de promoción económica." } },
+        { "@type": "Question", "name": "¿Qué se puede esperar de la app?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Un mapa interactivo con buscador y filtros, fichas de empresa con teléfono y web, audios narrados de presentación, fotografías recientes y panoramas 360°, capas de transporte público y puntos de carga eléctrica, listado de parcelas industriales libres, modo offline parcial vía PWA, y disponibilidad bilingüe español/inglés. Es gratuita y sin publicidad." } },
+        { "@type": "Question", "name": "¿Cómo aparezco como empresa en el directorio?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Si tu empresa está dentro de uno de los 4 polígonos cubiertos y aún no aparece, rellena el formulario público de empresas. Es gratuito y la inclusión la revisamos manualmente. Normalmente publicamos en pocas horas." } },
+        { "@type": "Question", "name": "¿Cómo actualizo mis datos si ya aparezco?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Usa el mismo formulario indicando tu empresa y los datos a corregir. También puedes escribir directamente a info@clotitec.com adjuntando capturas o documentos." } },
+        { "@type": "Question", "name": "¿La aplicación recoge datos personales?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No utilizamos cookies de seguimiento ni publicitarias. Se guardan en tu navegador (localStorage) las empresas que has visitado y unas estadísticas anónimas para el dashboard del Ayuntamiento. Puedes consultar el detalle en la política de privacidad." } },
+        { "@type": "Question", "name": "¿Cómo se protege la privacidad en las fotografías de las empresas?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Todas las imágenes publicadas pasan por el sistema de verificación y difuminado automático de Clotitec, una tecnología propia entrenada para detectar y aplicar blurring sobre caras de personas y matrículas de vehículos antes de la publicación. Esto garantiza el cumplimiento del RGPD y de la LOPDGDD sin necesidad de pedir consentimiento individual." } },
+        { "@type": "Question", "name": "¿Quién está detrás del directorio?",
+          "acceptedAnswer": { "@type": "Answer", "text": "El proyecto pertenece al Ayuntamiento de Santander, a través de la Concejalía de Empleo, Emprendimiento y Desarrollo Empresarial. El desarrollo técnico, el contenido y la operación son de Clotitec (info@clotitec.com)." } }
+      ]
+    }
+    </script>
+</head>
+<body class="font-sans text-white antialiased" data-lang="es">
+
+    <!-- Header -->
+    <header class="pt-8 pb-4 px-4">
+        <div class="max-w-3xl mx-auto">
+            <div class="flex items-start justify-between gap-3 mb-4">
+                <a href="index.html" class="back-link">
+                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+                    <span data-lang-es>Volver al directorio</span>
+                    <span data-lang-en>Back to directory</span>
+                </a>
+                <div class="lang-toggle" role="group" aria-label="Idioma">
+                    <button id="btnLangEs" class="active" type="button" onclick="setFaqLang('es')">ES</button>
+                    <button id="btnLangEn" type="button" onclick="setFaqLang('en')">EN</button>
+                </div>
+            </div>
+            <div class="text-center">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-santander/20 text-santander-light text-xs font-medium tracking-wide mb-4">
+                    <span data-lang-es>DIRECTORIO EMPRESARIAL DE SANTANDER</span>
+                    <span data-lang-en>SANTANDER BUSINESS DIRECTORY</span>
+                </div>
+                <h1 class="text-2xl sm:text-3xl font-bold text-white mb-2">
+                    <span data-lang-es>Preguntas frecuentes</span>
+                    <span data-lang-en>Frequently Asked Questions</span>
+                </h1>
+                <p class="text-white/40 text-sm">
+                    <span data-lang-es>Todo lo que necesitas saber sobre el directorio interactivo de los polígonos industriales</span>
+                    <span data-lang-en>Everything you need to know about the interactive directory of the industrial estates</span>
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <main class="px-4 pb-12">
+        <div class="max-w-3xl mx-auto">
+
+            <div class="glass-card rounded-2xl p-6 sm:p-8">
+
+                <!-- ============ SOBRE EL PROYECTO ============ -->
+                <div class="legal-h2">
+                    <span data-lang-es>Sobre el proyecto</span>
+                    <span data-lang-en>About the project</span>
+                </div>
+
+                <details class="faq-item" open>
+                    <summary>
+                        <span data-lang-es>¿Qué es este directorio?</span>
+                        <span data-lang-en>What is this directory?</span>
+                    </summary>
+                    <div class="faq-answer">
+                        <p data-lang-es>Es una herramienta web pública e interactiva que reúne en un único mapa a las <strong>158 empresas</strong> instaladas en los <strong>4 polígonos industriales</strong> del municipio de Santander: <strong>Candina, El Campón, Parayas Norte y Parayas Sur</strong>. Cada empresa tiene su ficha con ubicación exacta, datos de contacto, sector de actividad, fotografías, spots de audio y, en el polígono de Candina, vista panorámica 360°.</p>
+                        <p data-lang-en>It's a public, interactive web tool that brings together in a single map the <strong>158 companies</strong> located in the <strong>4 industrial estates</strong> of the municipality of Santander: <strong>Candina, El Campón, Parayas North and Parayas South</strong>. Each company has its profile with exact location, contact details, business sector, photos, audio spots and, in the Candina estate, a 360° panoramic view.</p>
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary>
+                        <span data-lang-es>¿Por qué se hace este proyecto?</span>
+                        <span data-lang-en>Why does this project exist?</span>
+                    </summary>
+                    <div class="faq-answer">
+                        <p data-lang-es>El tejido industrial y empresarial de Santander es <strong>invisible</strong> para una gran parte de los vecinos, profesionales e inversores. No existía una guía moderna y unificada de qué empresas están dónde, qué hacen y cómo contactarlas. La información estaba dispersa en censos antiguos, mapas estáticos, directorios desactualizados o, simplemente, no estaba publicada.</p>
+                        <p data-lang-es>Este directorio nace para <strong>dar visibilidad</strong> a ese tejido, <strong>facilitar negocio entre empresas</strong>, ayudar a los vecinos a localizar servicios cercanos, abrir oportunidades a quien busca empleo en su zona y atraer nueva inversión al municipio.</p>
+                        <p data-lang-en>Santander's industrial and business fabric is <strong>invisible</strong> to many residents, professionals and investors. There was no modern, unified guide to which companies are where, what they do and how to contact them. Information was scattered across old census records, static maps, outdated directories or simply unpublished.</p>
+                        <p data-lang-en>This directory was born to <strong>give visibility</strong> to that fabric, <strong>facilitate business between companies</strong>, help residents locate nearby services, open opportunities for jobseekers in the area and attract new investment to the municipality.</p>
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary>
+                        <span data-lang-es>¿Qué intención tiene la solución?</span>
+                        <span data-lang-en>What's the intention behind the solution?</span>
+                    </summary>
+                    <div class="faq-answer">
+                        <p data-lang-es>Convertir un dato disperso (qué hay en cada polígono) en una <strong>herramienta útil del día a día</strong>:</p>
+                        <ul data-lang-es>
+                            <li>Para una <strong>pyme</strong> buscando un proveedor cercano sin tener que cruzar la ciudad.</li>
+                            <li>Para un <strong>vecino</strong> que quiere saber qué fábrica, taller o tienda tiene al lado.</li>
+                            <li>Para una <strong>persona que busca empleo</strong> y quiere identificar empresas de su sector cerca.</li>
+                            <li>Para un <strong>inversor</strong> que evalúa parcelas libres antes de instalarse.</li>
+                            <li>Para el propio <strong>Ayuntamiento</strong> como instrumento de promoción económica.</li>
+                        </ul>
+                        <p data-lang-en>Turn scattered data (what's in each estate) into a <strong>useful day-to-day tool</strong>:</p>
+                        <ul data-lang-en>
+                            <li>For a <strong>SME</strong> looking for a nearby supplier without crossing the city.</li>
+                            <li>For a <strong>resident</strong> who wants to know what factory, workshop or shop is next door.</li>
+                            <li>For a <strong>jobseeker</strong> identifying companies in their sector nearby.</li>
+                            <li>For an <strong>investor</strong> assessing free plots before settling in.</li>
+                            <li>For the <strong>City Council</strong> itself as an economic promotion tool.</li>
+                        </ul>
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary>
+                        <span data-lang-es>¿Qué se puede esperar de la app?</span>
+                        <span data-lang-en>What can you expect from the app?</span>
+                    </summary>
+                    <div class="faq-answer">
+                        <p data-lang-es>Esto es lo que ofrece hoy:</p>
+                        <ul data-lang-es>
+                            <li><strong>Mapa interactivo</strong> con marcadores agrupados por sector y polígono.</li>
+                            <li><strong>Buscador y filtros</strong> combinables (zona + sector + texto libre).</li>
+                            <li><strong>Fichas de empresa</strong> con dirección, teléfono, email, web y CNAE.</li>
+                            <li><strong>Spots de audio</strong> de ~30 segundos con narración profesional.</li>
+                            <li><strong>Galería de fotos</strong>, tour virtual interior y video corporativo en empresas premium.</li>
+                            <li><strong>Vista panorámica 360°</strong> propia (Candina) y Google Street View como respaldo.</li>
+                            <li>Capas de <strong>transporte público</strong>, <strong>puntos de carga eléctrica</strong>, <strong>parcelas libres</strong>, <strong>accesos por carretera</strong> y <strong>puntos clave</strong> (puerto, aeropuerto, hospital).</li>
+                            <li><strong>Tiempo meteorológico</strong> en tiempo real.</li>
+                            <li>Disponible en <strong>español e inglés</strong>.</li>
+                            <li><strong>Modo offline parcial</strong> como PWA instalable.</li>
+                            <li><strong>Asistente de ayuda</strong> integrado para resolver dudas mientras navegas.</li>
+                            <li><strong>Verificación y difuminado automático</strong> de caras y matrículas en todas las fotografías mediante tecnología propia de Clotitec, garantizando RGPD.</li>
+                        </ul>
+                        <p data-lang-es>Lo que <strong>no</strong> debes esperar (todavía): comparador de precios, sistema de reservas, ranking comercial, ni clasificación cualitativa de empresas. El directorio es <strong>neutral, gratuito y sin publicidad</strong>.</p>
+                        <p data-lang-en>What it offers today:</p>
+                        <ul data-lang-en>
+                            <li><strong>Interactive map</strong> with markers clustered by sector and estate.</li>
+                            <li><strong>Search and filters</strong> that can be combined (zone + sector + free text).</li>
+                            <li><strong>Company profiles</strong> with address, phone, email, website and CNAE code.</li>
+                            <li><strong>Audio spots</strong> ~30 seconds with professional narration.</li>
+                            <li><strong>Photo gallery</strong>, indoor virtual tour and corporate video in premium companies.</li>
+                            <li><strong>Own 360° panoramic view</strong> (Candina) and Google Street View as fallback.</li>
+                            <li><strong>Public transport</strong>, <strong>EV charging points</strong>, <strong>free plots</strong>, <strong>road accesses</strong> and <strong>key points</strong> (port, airport, hospital) layers.</li>
+                            <li>Real-time <strong>weather</strong>.</li>
+                            <li>Available in <strong>Spanish and English</strong>.</li>
+                            <li>Partial <strong>offline mode</strong> as installable PWA.</li>
+                            <li>Built-in <strong>help assistant</strong> to solve questions while you browse.</li>
+                            <li><strong>Automatic verification and blurring</strong> of faces and license plates in all photos using Clotitec's own technology, ensuring GDPR compliance.</li>
+                        </ul>
+                        <p data-lang-en>What you should <strong>not</strong> expect (yet): price comparator, booking system, commercial ranking or qualitative company rating. The directory is <strong>neutral, free and ad-free</strong>.</p>
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary>
+                        <span data-lang-es>¿Quién está detrás del directorio?</span>
+                        <span data-lang-en>Who is behind the directory?</span>
+                    </summary>
+                    <div class="faq-answer">
+                        <p data-lang-es>El proyecto pertenece al <strong>Ayuntamiento de Santander</strong>, a través de la <strong>Concejalía de Empleo, Emprendimiento y Desarrollo Empresarial</strong>. El desarrollo técnico, el diseño, la curación de contenido y la operación son de <strong>Clotitec</strong> (<a href="mailto:info@clotitec.com">info@clotitec.com</a>).</p>
+                        <p data-lang-en>The project belongs to <strong>Santander City Council</strong>, through the <strong>Department of Employment, Entrepreneurship and Business Development</strong>. Technical development, design, content curation and operation are by <strong>Clotitec</strong> (<a href="mailto:info@clotitec.com">info@clotitec.com</a>).</p>
+                    </div>
+                </details>
+
+                <hr class="divider">
+
+                <!-- ============ CÓMO USAR LA APP ============ -->
+                <div class="legal-h2">
+                    <span data-lang-es>Cómo usar la app</span>
+                    <span data-lang-en>How to use the app</span>
+                </div>
+
+                <details class="faq-item">
+                    <summary>
+                        <span data-lang-es>¿Cómo busco una empresa concreta?</span>
+                        <span data-lang-en>How do I search for a specific company?</span>
+                    </summary>
+                    <div class="faq-answer">
+                        <p data-lang-es>El buscador está arriba del panel lateral (escritorio) o del panel inferior (móvil). Escribe nombre, sector o palabra clave: la lista y el mapa se actualizan al instante. También puedes preguntar al <strong>asistente</strong> (icono 💬 abajo a la izquierda) escribiendo el nombre directamente.</p>
+                        <p data-lang-en>The search bar is at the top of the side panel (desktop) or bottom sheet (mobile). Type a name, sector or keyword: the list and map update instantly. You can also ask the <strong>assistant</strong> (💬 icon bottom-left) by typing the name directly.</p>
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary>
+                        <span data-lang-es>¿Cómo aplico filtros por polígono o sector?</span>
+                        <span data-lang-en>How do I filter by estate or sector?</span>
+                    </summary>
+                    <div class="faq-answer">
+                        <p data-lang-es>Bajo el buscador hay dos filas de filtros: primero por <strong>polígono</strong> (Candina, El Campón, Parayas Norte/Sur) y luego por <strong>sector</strong>. Puedes combinarlos. La URL guarda el estado, así que el enlace que copies al compartir mantendrá el filtro.</p>
+                        <p data-lang-en>Below the search box there are two filter rows: first by <strong>estate</strong> (Candina, El Campón, Parayas N/S) then by <strong>sector</strong>. You can combine them. The URL stores the state, so the link you copy keeps the filter.</p>
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary>
+                        <span data-lang-es>¿Qué capas del mapa puedo activar?</span>
+                        <span data-lang-en>What map layers can I enable?</span>
+                    </summary>
+                    <div class="faq-answer">
+                        <p data-lang-es>Desde los botones flotantes de la derecha:</p>
+                        <ul data-lang-es>
+                            <li><strong>Vista satélite</strong> — fotografía aérea real.</li>
+                            <li><strong>Puntos clave</strong> — puerto, aeropuerto, hospital, accesos viarios.</li>
+                            <li><strong>Transporte</strong> — paradas de bus en tiempo real.</li>
+                            <li><strong>Parcelas libres</strong> — suelo industrial disponible.</li>
+                            <li><strong>Accesos</strong> — entradas/salidas del polígono.</li>
+                            <li><strong>Puntos de carga EV</strong> — cargadores eléctricos.</li>
+                            <li><strong>Street View 360°</strong> — panoramas propios del Ayuntamiento (Candina).</li>
+                        </ul>
+                        <p data-lang-en>From the floating buttons on the right:</p>
+                        <ul data-lang-en>
+                            <li><strong>Satellite view</strong> — real aerial photography.</li>
+                            <li><strong>Key points</strong> — port, airport, hospital, road accesses.</li>
+                            <li><strong>Transport</strong> — real-time bus stops.</li>
+                            <li><strong>Free plots</strong> — available industrial land.</li>
+                            <li><strong>Access points</strong> — estate entries/exits.</li>
+                            <li><strong>EV charging</strong> — electric chargers.</li>
+                            <li><strong>360° Street View</strong> — own Council panoramas (Candina).</li>
+                        </ul>
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary>
+                        <span data-lang-es>¿Cómo cambio el idioma?</span>
+                        <span data-lang-en>How do I change the language?</span>
+                    </summary>
+                    <div class="faq-answer">
+                        <p data-lang-es>Pulsa el botón con la <strong>bandera</strong> en la cabecera del panel lateral (a la derecha del título). El idioma se guarda en tu navegador. La app no envía esa preferencia a ningún servidor.</p>
+                        <p data-lang-en>Tap the <strong>flag</strong> button in the side panel header (to the right of the title). The language is stored in your browser. The app doesn't send this preference to any server.</p>
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary>
+                        <span data-lang-es>¿Puedo usarla sin conexión a internet?</span>
+                        <span data-lang-en>Can I use it offline?</span>
+                    </summary>
+                    <div class="faq-answer">
+                        <p data-lang-es>Parcialmente. Esta app es una <strong>PWA</strong>: tras la primera visita, los archivos principales (mapa, datos, estilos) quedan cacheados y funcionan sin red. Las capas que dependen de APIs externas (transporte, puntos de carga EV, tiempo meteorológico) <strong>requieren conexión</strong>.</p>
+                        <p data-lang-en>Partially. This app is a <strong>PWA</strong>: after the first visit, the main files (map, data, styles) are cached and work offline. Layers depending on external APIs (transport, EV charging, weather) <strong>require connection</strong>.</p>
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary>
+                        <span data-lang-es>¿Cómo la instalo en mi móvil o escritorio?</span>
+                        <span data-lang-en>How do I install it on my phone or desktop?</span>
+                    </summary>
+                    <div class="faq-answer">
+                        <p data-lang-es>En el navegador, abre el menú y selecciona <strong>"Añadir a pantalla de inicio"</strong> (móvil) o <strong>"Instalar app"</strong> (escritorio). El icono aparecerá como una app más, sin pasar por la tienda de aplicaciones.</p>
+                        <p data-lang-en>In your browser, open the menu and select <strong>"Add to home screen"</strong> (mobile) or <strong>"Install app"</strong> (desktop). The icon will appear like any other app, without going through the app store.</p>
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary>
+                        <span data-lang-es>¿Para qué sirve el asistente flotante?</span>
+                        <span data-lang-en>What is the floating assistant for?</span>
+                    </summary>
+                    <div class="faq-answer">
+                        <p data-lang-es>El icono 💬 de la esquina inferior izquierda abre un <strong>asistente local</strong> que responde dudas sobre la app, te lleva a empresas o sectores concretos, y activa capas del mapa por ti. Funciona <strong>100 % en tu dispositivo</strong> (sin IA generativa, sin enviar tus consultas a ningún servidor) con respuestas predefinidas y búsqueda directa en los datos del directorio.</p>
+                        <p data-lang-en>The 💬 icon in the bottom-left corner opens a <strong>local assistant</strong> that answers questions about the app, takes you to specific companies or sectors, and toggles map layers for you. It runs <strong>100% on your device</strong> (no generative AI, no queries sent to any server) using scripted answers and direct search in the directory data.</p>
+                    </div>
+                </details>
+
+                <hr class="divider">
+
+                <!-- ============ EMPRESAS ============ -->
+                <div class="legal-h2">
+                    <span data-lang-es>Si eres una empresa</span>
+                    <span data-lang-en>If you are a company</span>
+                </div>
+
+                <details class="faq-item">
+                    <summary>
+                        <span data-lang-es>¿Cómo aparezco en el directorio?</span>
+                        <span data-lang-en>How do I appear in the directory?</span>
+                    </summary>
+                    <div class="faq-answer">
+                        <p data-lang-es>Si tu empresa está dentro de uno de los <strong>4 polígonos cubiertos</strong> (Candina, El Campón, Parayas Norte o Parayas Sur) y aún no aparece, rellena el <a href="formulario-empresas.html" target="_blank">formulario público de empresas</a>. Lo revisamos manualmente y la publicación suele tardar pocas horas.</p>
+                        <p data-lang-en>If your company is in one of the <strong>4 covered estates</strong> (Candina, El Campón, Parayas North or South) and isn't yet listed, fill in the <a href="formulario-empresas.html" target="_blank">public company form</a>. We review it manually and publication usually takes a few hours.</p>
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary>
+                        <span data-lang-es>¿Cómo actualizo mis datos si ya aparezco?</span>
+                        <span data-lang-en>How do I update my data if I already appear?</span>
+                    </summary>
+                    <div class="faq-answer">
+                        <p data-lang-es>Usa el mismo <a href="formulario-empresas.html" target="_blank">formulario</a> indicando tu empresa y los datos a corregir. También puedes escribir directamente a <a href="mailto:info@clotitec.com">info@clotitec.com</a> adjuntando capturas o documentos justificativos.</p>
+                        <p data-lang-en>Use the same <a href="formulario-empresas.html" target="_blank">form</a>, indicating your company and the data to correct. You can also write directly to <a href="mailto:info@clotitec.com">info@clotitec.com</a> attaching screenshots or supporting documents.</p>
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary>
+                        <span data-lang-es>¿Tiene algún coste aparecer?</span>
+                        <span data-lang-en>Is there any cost to appear?</span>
+                    </summary>
+                    <div class="faq-answer">
+                        <p data-lang-es>No. Aparecer en el directorio es <strong>completamente gratuito</strong>. Forma parte de la promoción económica del Ayuntamiento de Santander. El directorio no incluye publicidad ni cobra por posicionamiento ni por orden de aparición.</p>
+                        <p data-lang-en>No. Appearing in the directory is <strong>completely free</strong>. It's part of Santander City Council's economic promotion. The directory contains no ads and charges nothing for positioning or order of appearance.</p>
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary>
+                        <span data-lang-es>¿Qué son los servicios premium?</span>
+                        <span data-lang-en>What are the premium services?</span>
+                    </summary>
+                    <div class="faq-answer">
+                        <p data-lang-es>Servicios opcionales de pago para empresas que quieren <strong>destacar más su ficha</strong>: spot de audio profesional con narración personalizada, galería ampliada de fotografías, tour virtual interior 360°, video corporativo embebido, etc. Son extras de marketing — la ficha base con datos de contacto, ubicación y sector seguirá siendo gratuita siempre. Más información en <a href="servicios-premium.html">servicios premium</a>.</p>
+                        <p data-lang-en>Optional paid services for companies that want to <strong>highlight their profile</strong>: professional audio spot with custom narration, expanded photo gallery, indoor 360° virtual tour, embedded corporate video, etc. They are marketing extras — the base profile with contact info, location and sector will always remain free. More info at <a href="servicios-premium.html">premium services</a>.</p>
+                    </div>
+                </details>
+
+                <hr class="divider">
+
+                <!-- ============ DATOS Y PRIVACIDAD ============ -->
+                <div class="legal-h2">
+                    <span data-lang-es>Datos y privacidad</span>
+                    <span data-lang-en>Data and privacy</span>
+                </div>
+
+                <details class="faq-item">
+                    <summary>
+                        <span data-lang-es>¿De dónde salen los datos de las empresas?</span>
+                        <span data-lang-en>Where does the company data come from?</span>
+                    </summary>
+                    <div class="faq-answer">
+                        <p data-lang-es>Combinamos: censos del Ayuntamiento de Santander, fuentes públicas (Google Maps, registros mercantiles), trabajo de campo y, sobre todo, las <strong>actualizaciones que las propias empresas envían</strong> a través del formulario. Por eso es importante que cada empresa revise su ficha periódicamente.</p>
+                        <p data-lang-en>We combine: Santander City Council census, public sources (Google Maps, business registries), field work and, above all, the <strong>updates companies submit themselves</strong> through the form. That's why it's important for each company to review its profile periodically.</p>
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary>
+                        <span data-lang-es>¿Con qué frecuencia se actualiza?</span>
+                        <span data-lang-en>How often is it updated?</span>
+                    </summary>
+                    <div class="faq-answer">
+                        <p data-lang-es>El censo de empresas se revisa <strong>de forma continua</strong> a partir de las solicitudes recibidas. Las correcciones puntuales se publican en <strong>menos de 72 horas hábiles</strong>. Hacemos auditorías generales <strong>dos veces al año</strong>.</p>
+                        <p data-lang-en>The company census is reviewed <strong>continuously</strong> from incoming requests. Specific corrections are published in <strong>less than 72 working hours</strong>. We carry out general audits <strong>twice a year</strong>.</p>
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary>
+                        <span data-lang-es>¿Qué datos guarda la app sobre mí cuando navego?</span>
+                        <span data-lang-en>What data does the app store about me when I browse?</span>
+                    </summary>
+                    <div class="faq-answer">
+                        <p data-lang-es>No usamos cookies de seguimiento ni publicitarias. Solo guardamos en <strong>tu navegador</strong> (localStorage) las empresas que has visitado y unas <strong>estadísticas anónimas</strong> de uso (qué filtros se usan más, qué empresas se consultan más) para alimentar el dashboard interno del Ayuntamiento. Puedes rechazarlo desde el banner inicial. Detalle completo en <a href="politica-privacidad.html">política de privacidad</a> y <a href="politica-cookies.html">política de cookies</a>.</p>
+                        <p data-lang-en>We don't use tracking or advertising cookies. We only store in <strong>your browser</strong> (localStorage) the companies you've visited and some <strong>anonymous usage statistics</strong> (which filters are most used, which companies are most viewed) to feed the City Council's internal dashboard. You can refuse this from the initial banner. Full detail in <a href="politica-privacidad.html">privacy policy</a> and <a href="politica-cookies.html">cookie policy</a>.</p>
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary>
+                        <span data-lang-es>¿Cómo se protege la privacidad en las fotografías de las empresas?</span>
+                        <span data-lang-en>How is privacy protected in the company photos?</span>
+                    </summary>
+                    <div class="faq-answer">
+                        <p data-lang-es>Todas las imágenes publicadas pasan por el <strong>sistema de verificación y difuminado automático de Clotitec</strong>, una tecnología propia entrenada para detectar y aplicar <em>blurring</em> sobre <strong>caras de personas</strong> y <strong>matrículas de vehículos</strong> antes de la publicación. Esto garantiza el cumplimiento del <strong>RGPD</strong> y de la <strong>LOPDGDD</strong> sin necesidad de pedir consentimiento individual a cada persona o conductor que aparezca casualmente en las fotos.</p>
+                        <p data-lang-es>El software se ejecuta en una pasada de validación previa a la subida y un técnico revisa los casos en los que el modelo no tiene suficiente confianza. Si detectas alguna imagen con un dato personal sin difuminar, escríbenos a <a href="mailto:info@clotitec.com">info@clotitec.com</a> y la corregimos en menos de 24 horas hábiles.</p>
+                        <p data-lang-en>All published images go through <strong>Clotitec's own automatic verification and blurring system</strong>, a proprietary technology trained to detect and apply <em>blurring</em> on <strong>people's faces</strong> and <strong>vehicle license plates</strong> before publication. This ensures compliance with <strong>GDPR</strong> and Spanish <strong>LOPDGDD</strong> without requiring individual consent from every person or driver who happens to appear in the photos.</p>
+                        <p data-lang-en>The software runs in a validation pass prior to upload and a technician reviews cases where the model is not sufficiently confident. If you spot any image with un-blurred personal data, write to <a href="mailto:info@clotitec.com">info@clotitec.com</a> and we'll fix it within 24 working hours.</p>
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary>
+                        <span data-lang-es>¿Mis consultas al asistente se envían a algún servidor?</span>
+                        <span data-lang-en>Are my assistant queries sent to any server?</span>
+                    </summary>
+                    <div class="faq-answer">
+                        <p data-lang-es>No. El asistente funciona <strong>100 % en tu navegador</strong> con respuestas predefinidas y búsqueda local en los datos del directorio. Solo se registran de forma anónima la <strong>categoría</strong> de la pregunta (ej. "búsqueda", "ayuda con filtros") para mejorar el contenido del propio asistente. <strong>El texto literal de tu pregunta nunca sale de tu dispositivo.</strong></p>
+                        <p data-lang-en>No. The assistant runs <strong>100% in your browser</strong> with scripted answers and local search in the directory data. Only the <strong>category</strong> of the question (e.g. "search", "filter help") is anonymously logged to improve the assistant content. <strong>The literal text of your question never leaves your device.</strong></p>
+                    </div>
+                </details>
+
+                <hr class="divider">
+
+                <!-- ============ SOPORTE ============ -->
+                <div class="legal-h2">
+                    <span data-lang-es>Soporte y contacto</span>
+                    <span data-lang-en>Support and contact</span>
+                </div>
+
+                <details class="faq-item">
+                    <summary>
+                        <span data-lang-es>¿Cómo reporto un error o sugerencia?</span>
+                        <span data-lang-en>How do I report a bug or suggestion?</span>
+                    </summary>
+                    <div class="faq-answer">
+                        <p data-lang-es>Escríbenos a <a href="mailto:info@clotitec.com">info@clotitec.com</a> describiendo el problema, el navegador que usas y, si puedes, una captura. Solemos responder en <strong>menos de 72 horas hábiles</strong>.</p>
+                        <p data-lang-en>Write to <a href="mailto:info@clotitec.com">info@clotitec.com</a> describing the problem, the browser you use and, if possible, a screenshot. We usually reply in <strong>less than 72 working hours</strong>.</p>
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary>
+                        <span data-lang-es>¿Hay barreras de accesibilidad?</span>
+                        <span data-lang-en>Are there accessibility barriers?</span>
+                    </summary>
+                    <div class="faq-answer">
+                        <p data-lang-es>Trabajamos para cumplir <strong>WCAG 2.1 nivel AA</strong>. Las limitaciones conocidas (mapa interactivo sin alternativa textual completa, spots sin transcripción, etc.) están detalladas en la <a href="accesibilidad.html">declaración de accesibilidad</a> con un plan de mejora.</p>
+                        <p data-lang-en>We work to comply with <strong>WCAG 2.1 level AA</strong>. Known limitations (interactive map without full text alternative, audio spots without transcription, etc.) are detailed in the <a href="accesibilidad.html">accessibility statement</a> with an improvement plan.</p>
+                    </div>
+                </details>
+
+                <hr class="divider">
+
+                <div class="contact-box">
+                    <p class="legal-p" style="margin:0 0 12px;">
+                        <strong style="color:#fff;">
+                            <span data-lang-es>¿No encuentras lo que buscas?</span>
+                            <span data-lang-en>Can't find what you're looking for?</span>
+                        </strong>
+                    </p>
+                    <p class="legal-p" style="margin:0 0 16px;">
+                        <span data-lang-es>Pulsa el icono 💬 abajo a la izquierda para abrir el asistente, o escríbenos directamente.</span>
+                        <span data-lang-en>Tap the 💬 icon at the bottom-left to open the assistant, or write to us directly.</span>
+                    </p>
+                    <a href="mailto:info@clotitec.com?subject=Consulta%20Directorio%20Empresarial%20Santander" class="cta-link">
+                        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                        <span data-lang-es>Contactar por email</span>
+                        <span data-lang-en>Contact by email</span>
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- Navegación entre páginas -->
+            <div class="glass-card rounded-2xl p-4 mt-4 flex flex-wrap gap-3 justify-center">
+                <a href="aviso-legal.html" class="text-xs text-white/40 hover:text-santander-light transition-colors">Aviso Legal</a>
+                <span class="text-white/15 text-xs">·</span>
+                <a href="politica-privacidad.html" class="text-xs text-white/40 hover:text-santander-light transition-colors">
+                    <span data-lang-es>Política de Privacidad</span>
+                    <span data-lang-en>Privacy Policy</span>
+                </a>
+                <span class="text-white/15 text-xs">·</span>
+                <a href="politica-cookies.html" class="text-xs text-white/40 hover:text-santander-light transition-colors">
+                    <span data-lang-es>Política de Cookies</span>
+                    <span data-lang-en>Cookie Policy</span>
+                </a>
+                <span class="text-white/15 text-xs">·</span>
+                <a href="accesibilidad.html" class="text-xs text-white/40 hover:text-santander-light transition-colors">
+                    <span data-lang-es>Accesibilidad</span>
+                    <span data-lang-en>Accessibility</span>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="pb-8 px-4 text-center">
+        <p class="text-white/20 text-xs">
+            <span data-lang-es>Concejalía de Empleo, Emprendimiento y Desarrollo Empresarial &mdash; Ayuntamiento de Santander</span>
+            <span data-lang-en>Department of Employment, Entrepreneurship and Business Development &mdash; Santander City Council</span>
+        </p>
+        <p class="text-white/15 text-xs mt-1">
+            <span data-lang-es>Desarrollado por</span>
+            <span data-lang-en>Developed by</span>
+            <a href="https://clotitec.com" target="_blank" style="color:rgba(255,255,255,.3);text-decoration:none;font-weight:600">Clotitec</a>
+        </p>
+    </footer>
+
+    <script>
+        // Idioma persistente propio (separado del de la app principal)
+        function setFaqLang(lang) {
+            document.body.setAttribute('data-lang', lang);
+            document.documentElement.lang = lang;
+            document.getElementById('btnLangEs').classList.toggle('active', lang === 'es');
+            document.getElementById('btnLangEn').classList.toggle('active', lang === 'en');
+            try { localStorage.setItem('faq_lang', lang); } catch(e) {}
+        }
+        (function() {
+            try {
+                var saved = localStorage.getItem('faq_lang');
+                if (saved === 'en') setFaqLang('en');
+            } catch(e) {}
+        })();
+    </script>
+</body>
+</html>

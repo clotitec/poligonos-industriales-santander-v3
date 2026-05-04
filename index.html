@@ -174,6 +174,8 @@
             <p class="landing-footer-text">© 2026 Ayuntamiento de Santander · Concejalía de Empleo, Emprendimiento y Desarrollo Empresarial</p>
             <p class="landing-footer-text" style="margin-top:6px">Desarrollado por <a href="https://clotitec.com" target="_blank" style="color:rgba(255,255,255,.7);text-decoration:none;font-weight:600">Clotitec</a></p>
             <p class="landing-footer-text" style="margin-top:10px;font-size:11px;">
+                <a href="preguntas-frecuentes.html" style="color:rgba(255,255,255,.35);text-decoration:none;">Preguntas frecuentes</a>
+                <span style="color:rgba(255,255,255,.15);margin:0 6px;">·</span>
                 <a href="aviso-legal.html" style="color:rgba(255,255,255,.35);text-decoration:none;">Aviso Legal</a>
                 <span style="color:rgba(255,255,255,.15);margin:0 6px;">·</span>
                 <a href="politica-privacidad.html" style="color:rgba(255,255,255,.35);text-decoration:none;">Privacidad</a>
@@ -229,6 +231,10 @@
                 <a href="formulario-empresas.html" target="_blank" class="update-data-link" style="display:flex;align-items:center;gap:6px;margin-top:8px;padding:6px 12px;border-radius:8px;background:rgba(20,200,204,0.08);border:1px solid rgba(20,200,204,0.15);color:#14c8cc;font-size:11px;font-weight:500;text-decoration:none;transition:all 0.2s;cursor:pointer;" onmouseover="this.style.background='rgba(20,200,204,0.15)'" onmouseout="this.style.background='rgba(20,200,204,0.08)'">
                     <span style="font-size:13px">✏️</span>
                     <span data-i18n="updateYourData">¿Eres una empresa? Actualiza tus datos</span>
+                </a>
+                <a href="preguntas-frecuentes.html" target="_blank" style="display:flex;align-items:center;gap:6px;margin-top:6px;padding:6px 12px;border-radius:8px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.78);font-size:11px;font-weight:500;text-decoration:none;transition:all 0.2s;cursor:pointer;" onmouseover="this.style.background='rgba(255,255,255,0.12)';this.style.color='#fff'" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.color='rgba(255,255,255,0.78)'">
+                    <span style="font-size:13px">❓</span>
+                    <span data-i18n="faq">Preguntas frecuentes</span>
                 </a>
             </div>
 
@@ -325,6 +331,12 @@
                 <button class="floating-pill" id="btnAccessFloat" onclick="toggleAccessPoints()">
                     <span class="floating-pill-icon">🛣️</span>
                     <span class="floating-pill-label" data-i18n="accesses">Accesos</span>
+                </button>
+
+                <!-- Puntos de carga eléctrica -->
+                <button class="floating-pill" id="btnEVChargingFloat" onclick="toggleEVCharging()">
+                    <span class="floating-pill-icon">⚡</span>
+                    <span class="floating-pill-label" data-i18n="evCharging">Puntos de carga EV</span>
                 </button>
 
                 <!-- Street View personalizado -->
@@ -585,6 +597,43 @@
 
     <!-- App JS -->
     <script src="app.js"></script>
+
+    <!-- ========== CHATBOT ASISTENTE ========== -->
+    <div id="chatbotLauncher" role="region" aria-label="Asistente de ayuda">
+        <button class="floating-pill" id="chatbotLauncherBtn" type="button"
+                aria-controls="chatbotOverlay" aria-expanded="false" title="Asistente de ayuda">
+            <span class="floating-pill-icon">💬</span>
+            <span class="floating-pill-label" id="chatbotLauncherLabel" data-i18n="chatbotOpenLabel">Ayuda</span>
+            <span class="chatbot-unread-dot" hidden></span>
+        </button>
+    </div>
+
+    <div id="chatbotOverlay" class="chatbot-overlay" role="dialog" aria-modal="true" aria-labelledby="chatbotTitle">
+        <div class="chatbot-card">
+            <header class="chatbot-header">
+                <div class="chatbot-header-icon" aria-hidden="true">💬</div>
+                <div class="chatbot-header-text">
+                    <h2 id="chatbotTitle" data-i18n="chatbotTitle">Asistente del directorio</h2>
+                    <p id="chatbotSub" class="chatbot-header-sub" data-i18n="chatbotDisclaimer">Asistente local · respuestas predefinidas, sin IA generativa</p>
+                </div>
+                <button class="chatbot-close" type="button" onclick="window.Chatbot && window.Chatbot.close()" aria-label="Cerrar asistente">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+                </button>
+            </header>
+            <div id="chatbotMessages" class="chatbot-messages" role="log" aria-live="polite" aria-atomic="false"></div>
+            <div id="chatbotQuickReplies" class="chatbot-quick-replies" role="group" aria-label="Sugerencias"></div>
+            <form id="chatbotForm" class="chatbot-input-row">
+                <input id="chatbotInput" type="text" autocomplete="off"
+                       placeholder="Escribe tu pregunta…"
+                       data-i18n-placeholder="chatbotPlaceholder"
+                       aria-label="Mensaje al asistente">
+                <button type="submit" class="chatbot-send" aria-label="Enviar">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+                </button>
+            </form>
+        </div>
+    </div>
+    <script src="chatbot.js" defer></script>
 
     <!-- Service Worker -->
     <script>

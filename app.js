@@ -121,7 +121,64 @@ const TRANSLATIONS = {
         streetViewCustom: 'Street View personalizado · Ayuntamiento de Santander 2026',
         panorama360: 'Vista panorámica 360°',
         panoramaDistance: 'Panorama más cercano a {dist} de la empresa',
-        panoramaLayer: 'Panoramas 360°'
+        panoramaLayer: 'Panoramas 360°',
+        evCharging: 'Puntos de carga EV',
+        evChargingStation: 'Punto de carga eléctrica',
+        evConnectors: 'Conectores',
+        evPower: 'Potencia',
+        evOperator: 'Operador',
+        evAccess: 'Acceso',
+        evFee: 'De pago',
+        evFree: 'Gratuito',
+        evYes: 'Sí',
+        evNo: 'No',
+        evUnknown: 'Desconocido',
+        evCapacity: 'Plazas',
+        evOpeningHours: 'Horario',
+        // ==== CHATBOT + FAQ ====
+        faq: 'Preguntas frecuentes',
+        chatbotOpenLabel: 'Ayuda',
+        chatbotTitle: 'Asistente del directorio',
+        chatbotDisclaimer: 'Asistente local · respuestas predefinidas, sin IA generativa',
+        chatbotPlaceholder: 'Escribe tu pregunta…',
+        chatbotWelcome: '¡Hola! Soy el asistente del directorio. Puedo ayudarte a buscar empresas, activar capas del mapa, explicarte cómo funciona la app o llevarte al formulario para añadir tu negocio. Pulsa una sugerencia o escribe tu pregunta.',
+        chatbotFallback: 'No estoy seguro de qué me preguntas. Estos son temas que sí conozco. Si necesitas más detalle, abre las [preguntas frecuentes](preguntas-frecuentes.html) o escríbenos a info@clotitec.com.',
+        chatbotMatchedCompanies: 'Encontré {n} empresa(s) que podrían encajar:',
+        chatbotMatchedSector: '{emoji} El sector "{sector}" agrupa {n} empresa(s) en el directorio.',
+        chatbotMatchedArea: 'El polígono "{area}" tiene {n} empresa(s) registradas.',
+        chatbotApplyFilter: 'Aplicar filtro',
+        chatbotApplyAction: 'Hacerlo ahora',
+        chatbotOpenForm: 'Abrir formulario',
+        chip_what_is: '¿Qué es esta app?',
+        chip_how_search: 'Cómo busco una empresa',
+        chip_how_filter: 'Cómo aplico filtros',
+        chip_list_areas: 'Lista de polígonos',
+        chip_satellite: 'Activar vista satélite',
+        chip_register: 'Añadir mi empresa',
+        chip_faq: 'Ver FAQ completa',
+        chip_privacy: 'Política de privacidad',
+        answer_greeting: '¡Hola! ¿En qué te ayudo? Puedes preguntarme por empresas, sectores, polígonos o cómo usar la app.',
+        answer_what_is: 'Es el directorio interactivo oficial de las **Áreas Empresariales e Industriales de Santander**: 158 empresas en 4 polígonos (Candina, El Campón, Parayas Norte y Parayas Sur) sobre un mapa interactivo, con fichas, audios, fotos, Street View 360° y filtros por sector. Lo desarrolla Clotitec para el Ayuntamiento de Santander.',
+        answer_how_search: 'Tienes el buscador en la parte superior del panel lateral (escritorio) o del panel inferior (móvil). Escribe nombre de empresa, sector o palabra clave y los resultados se actualizan en el mapa y la lista al instante. También puedes preguntarme aquí directamente: escribe el nombre de una empresa y te la enseño.',
+        answer_how_filter: 'Bajo el buscador hay dos filas de filtros: primero por **polígono** (Candina, El Campón, Parayas Norte/Sur) y luego por **sector** (Taller, Concesionario, Almacén, Tienda, Fábrica…). Puedes combinarlos. La URL guarda el estado del filtro, así que puedes compartir el enlace.',
+        answer_areas: 'Estos son los 4 polígonos cubiertos. Pulsa cualquiera para filtrar el mapa:',
+        answer_satellite: 'Puedes activar la vista satélite desde el botón "Vista satélite" en los controles superiores del mapa, o pulsando el botón de aquí abajo.',
+        answer_panoramas: 'Los panoramas 360° muestran fotografías esféricas tomadas en el polígono de Candina (cobertura propia del Ayuntamiento). Otras zonas usan Google Street View como respaldo. Activa la capa con el botón "Street View personalizado".',
+        answer_transport: 'La capa de transporte público muestra paradas de bus en tiempo real obtenidas de OpenStreetMap (Overpass API). Pulsa el botón "Transporte" en los controles flotantes de la derecha.',
+        answer_ev: 'Los puntos de carga eléctrica también vienen de OpenStreetMap. Activa la capa "Puntos de carga EV" para verlos sobre el mapa con el operador, número de conectores y potencia.',
+        answer_parcels: 'La capa "Parcelas libres" señala el suelo industrial disponible en los polígonos. Útil si buscas dónde montar una nave o ampliar.',
+        answer_access: 'Los accesos por carretera marcan las entradas y salidas principales del polígono, con distinción para vehículos pesados y ligeros.',
+        answer_pois: 'Los puntos clave incluyen Puerto, Aeropuerto Seve Ballesteros, accesos A-67/A-8, estación FEVE, hospital Valdecilla y estación de autobuses, todos con distancia en línea recta a cada empresa.',
+        answer_register: 'Si eres una empresa de los polígonos y quieres aparecer o actualizar tus datos, rellena el formulario público. Lo revisamos manualmente y se publica en pocas horas. Es **gratuito**.',
+        answer_lang: 'Puedes cambiar entre español e inglés desde el botón de la bandera en la cabecera, o pulsando aquí. Tu preferencia se guarda en el navegador.',
+        answer_install: 'Esta app es una **PWA**: puedes instalarla en tu móvil o escritorio desde el menú del navegador ("Añadir a pantalla de inicio" o "Instalar app"). Funciona parcialmente sin conexión: el mapa cacheado y las fichas siguen disponibles, pero las capas que dependen de APIs externas (transporte, EV, tiempo) requieren conexión.',
+        answer_audio: 'Cada empresa con audio tiene un botón naranja "Escuchar spot" en su ficha. Son spots de ~30 segundos generados con narración profesional. Hay un reproductor flotante inferior que continúa mientras navegas.',
+        answer_contact: 'Para soporte, sugerencias o reportar errores, escríbenos a info@clotitec.com. Solemos responder en menos de 72 horas hábiles.',
+        answer_who: 'El proyecto es del **Ayuntamiento de Santander** (Concejalía de Empleo, Emprendimiento y Desarrollo Empresarial). El desarrollo técnico es de **Clotitec** (info@clotitec.com).',
+        answer_privacy: 'No usamos cookies de seguimiento ni publicitarias. Solo guardamos en tu navegador (localStorage) tus empresas visitadas y unas estadísticas anónimas para el dashboard interno. Más detalle en la política de privacidad.',
+        answer_blurring: 'Todas las fotografías del directorio pasan por el **sistema propio de Clotitec de verificación y difuminado automático** de caras de personas y matrículas de vehículos antes de publicarse. Es tecnología entrenada por nosotros para garantizar el cumplimiento del RGPD y la LOPDGDD sin pedir consentimiento individual a cada persona o conductor que aparezca casualmente. Si ves alguna imagen sin difuminar, escríbenos a info@clotitec.com.',
+        answer_faq: 'Aquí tienes la guía completa de preguntas frecuentes con todo el detalle del proyecto:',
+        answer_thanks: '¡A ti! Si necesitas algo más, sigo aquí.'
     },
     en: {
         title: 'Business & Industrial Areas',
@@ -195,7 +252,64 @@ const TRANSLATIONS = {
         streetViewCustom: 'Custom Street View · Santander City Council 2026',
         panorama360: '360° Panoramic View',
         panoramaDistance: 'Nearest panorama {dist} from company',
-        panoramaLayer: '360° Panoramas'
+        panoramaLayer: '360° Panoramas',
+        evCharging: 'EV Charging',
+        evChargingStation: 'EV Charging Station',
+        evConnectors: 'Connectors',
+        evPower: 'Power',
+        evOperator: 'Operator',
+        evAccess: 'Access',
+        evFee: 'Paid',
+        evFree: 'Free',
+        evYes: 'Yes',
+        evNo: 'No',
+        evUnknown: 'Unknown',
+        evCapacity: 'Spots',
+        evOpeningHours: 'Hours',
+        // ==== CHATBOT + FAQ ====
+        faq: 'FAQ',
+        chatbotOpenLabel: 'Help',
+        chatbotTitle: 'Directory assistant',
+        chatbotDisclaimer: 'Local assistant · scripted answers, no generative AI',
+        chatbotPlaceholder: 'Type your question…',
+        chatbotWelcome: 'Hi! I\'m the directory assistant. I can help you find companies, toggle map layers, explain how the app works or take you to the form to add your business. Tap a suggestion or type your question.',
+        chatbotFallback: 'I\'m not sure what you\'re asking. These are topics I do know. For more detail open the [FAQ](preguntas-frecuentes.html) or write to info@clotitec.com.',
+        chatbotMatchedCompanies: 'I found {n} matching company/companies:',
+        chatbotMatchedSector: '{emoji} The "{sector}" sector groups {n} company/companies in the directory.',
+        chatbotMatchedArea: 'The "{area}" estate has {n} registered company/companies.',
+        chatbotApplyFilter: 'Apply filter',
+        chatbotApplyAction: 'Do it now',
+        chatbotOpenForm: 'Open form',
+        chip_what_is: 'What is this app?',
+        chip_how_search: 'How to search',
+        chip_how_filter: 'How to filter',
+        chip_list_areas: 'List of estates',
+        chip_satellite: 'Satellite view',
+        chip_register: 'Add my company',
+        chip_faq: 'Open full FAQ',
+        chip_privacy: 'Privacy policy',
+        answer_greeting: 'Hi! How can I help? You can ask me about companies, sectors, estates or how to use the app.',
+        answer_what_is: 'This is the official interactive directory of **Santander\'s Business and Industrial Areas**: 158 companies across 4 estates (Candina, El Campón, Parayas North and Parayas South) on an interactive map, with profiles, audios, photos, 360° Street View and sector filters. Built by Clotitec for Santander City Council.',
+        answer_how_search: 'The search box is at the top of the side panel (desktop) or bottom sheet (mobile). Type a company name, sector or keyword and the map and list update instantly. You can also ask me here directly: type a company name and I\'ll show it to you.',
+        answer_how_filter: 'Below the search box there are two filter rows: first by **estate** (Candina, El Campón, Parayas N/S) then by **sector** (Workshop, Dealership, Warehouse, Shop, Factory…). You can combine them. The URL stores the filter state, so you can share the link.',
+        answer_areas: 'These are the 4 covered estates. Tap any to filter the map:',
+        answer_satellite: 'You can toggle satellite view from the "Satellite view" button in the upper map controls, or by tapping the button below.',
+        answer_panoramas: '360° panoramas show spherical photos taken in the Candina estate (City Council\'s own coverage). Other zones use Google Street View as fallback. Toggle the layer with the "Custom Street View" button.',
+        answer_transport: 'The public transport layer shows real-time bus stops from OpenStreetMap (Overpass API). Tap the "Transport" button in the floating right controls.',
+        answer_ev: 'EV charging points also come from OpenStreetMap. Toggle the "EV charging" layer to see them on the map with operator, number of connectors and power.',
+        answer_parcels: 'The "Free plots" layer marks available industrial land in the estates. Useful if you\'re looking for where to set up a warehouse or expand.',
+        answer_access: 'Road accesses mark the main entrances and exits of the estate, distinguishing heavy and light vehicles.',
+        answer_pois: 'Key points include the Port, Seve Ballesteros Airport, A-67/A-8 access points, FEVE station, Valdecilla hospital and bus station, all with straight-line distance to each company.',
+        answer_register: 'If you\'re a company in the estates and want to appear or update your data, fill in the public form. We review it manually and publish within hours. It\'s **free**.',
+        answer_lang: 'You can switch between Spanish and English from the flag button in the header, or by tapping here. Your preference is stored in the browser.',
+        answer_install: 'This app is a **PWA**: you can install it on your phone or desktop from the browser menu ("Add to home screen" or "Install app"). It works partially offline: cached map and profiles remain available, but layers depending on external APIs (transport, EV, weather) require connection.',
+        answer_audio: 'Each company with audio has an orange "Listen to spot" button on its profile. They are ~30-second spots with professional narration. There\'s a floating bottom player that keeps playing while you browse.',
+        answer_contact: 'For support, suggestions or to report bugs, write to info@clotitec.com. We usually reply within 72 working hours.',
+        answer_who: 'The project belongs to **Santander City Council** (Department of Employment, Entrepreneurship and Business Development). Technical development by **Clotitec** (info@clotitec.com).',
+        answer_privacy: 'We don\'t use tracking or advertising cookies. We only store in your browser (localStorage) the companies you\'ve visited and anonymous statistics for the internal dashboard. More detail in the privacy policy.',
+        answer_blurring: 'All directory photos go through **Clotitec\'s own automatic verification and blurring system** for people\'s faces and vehicle license plates before publication. It\'s technology we trained in-house to ensure GDPR (and Spanish LOPDGDD) compliance without needing individual consent from every person or driver who happens to appear. If you spot any un-blurred image, write to info@clotitec.com.',
+        answer_faq: 'Here\'s the full FAQ guide with every detail of the project:',
+        answer_thanks: 'Thanks to you! If you need anything else, I\'m still here.'
     }
 };
 
@@ -312,6 +426,11 @@ function applyTranslations() {
             ['concat', ['get', 'nombre'], '\n', ['to-string', ['get', 'superficie']], ' m²']
         );
     }
+
+    // Re-translate chatbot UI if loaded
+    if (window.Chatbot && typeof window.Chatbot.applyTranslations === 'function') {
+        window.Chatbot.applyTranslations();
+    }
 }
 
 // ---- NUEVAS FEATURES: Estado global ----
@@ -329,6 +448,8 @@ let accessPointsVisible = false;
 let accessMarkers = [];
 let transportMarkersCustom = [];
 let weatherOverlayExpanded = false;
+let evChargingData = null;
+let evChargingVisible = false;
 
 const SNAP = {
     COLLAPSED: 140,
@@ -437,10 +558,11 @@ window.addEventListener('load', async () => {
     fetchBusStops();
     startWeatherRefresh();
 
-    // Features V3: Parcelas, Transporte custom, Accesos
+    // Features V3: Parcelas, Transporte custom, Accesos, Carga EV
     addParcelasLayer();
     addCustomTransportStops();
     addAccessPointMarkers();
+    fetchEVCharging();
 
     // Analytics, deep linking & recent companies
     // Only initialise local analytics if user has not rejected consent
@@ -2553,4 +2675,167 @@ function toggleTransport() {
     }
 
     document.getElementById('btnTransportFloat')?.classList.toggle('active', busStopsVisible);
+}
+
+// ============================================================
+// FEATURE: PUNTOS DE CARGA ELÉCTRICA (OVERPASS API)
+// ============================================================
+
+async function fetchEVCharging() {
+    // Check sessionStorage cache
+    try {
+        const cached = sessionStorage.getItem('evCharging_santander');
+        if (cached) {
+            const parsed = JSON.parse(cached);
+            if (Date.now() - parsed.timestamp < 3600000) {
+                evChargingData = parsed.data;
+                addEVChargingLayer();
+                return;
+            }
+        }
+    } catch (e) {}
+
+    const query = `[out:json][timeout:15];(node["amenity"="charging_station"](43.40,-3.92,43.50,-3.75);way["amenity"="charging_station"](43.40,-3.92,43.50,-3.75););out center body;`;
+
+    try {
+        const resp = await fetch('https://overpass-api.de/api/interpreter', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: 'data=' + encodeURIComponent(query)
+        });
+        if (!resp.ok) throw new Error('Overpass API error');
+        const json = await resp.json();
+
+        evChargingData = {
+            type: 'FeatureCollection',
+            features: json.elements.filter(el => (el.lat && el.lon) || (el.center)).map(el => {
+                const lat = el.lat || el.center.lat;
+                const lon = el.lon || el.center.lon;
+                const tags = el.tags || {};
+
+                // Parse connector types
+                const connectors = [];
+                if (tags['socket:type2'] || tags['socket:type2:output']) connectors.push('Type 2');
+                if (tags['socket:type2_combo'] || tags['socket:ccs']) connectors.push('CCS');
+                if (tags['socket:chademo']) connectors.push('CHAdeMO');
+                if (tags['socket:type1']) connectors.push('Type 1');
+                if (tags['socket:schuko']) connectors.push('Schuko');
+                if (connectors.length === 0 && tags.socket) connectors.push(tags.socket);
+
+                // Parse max power
+                let maxPower = '';
+                const powerKeys = ['socket:type2_combo:output', 'socket:ccs:output', 'socket:type2:output', 'socket:chademo:output', 'charging_station:output'];
+                for (const k of powerKeys) {
+                    if (tags[k]) { maxPower = tags[k]; break; }
+                }
+
+                return {
+                    type: 'Feature',
+                    geometry: { type: 'Point', coordinates: [lon, lat] },
+                    properties: {
+                        name: tags.name || tags.brand || tags.operator || t('evChargingStation'),
+                        operator: tags.operator || tags.brand || '',
+                        network: tags.network || '',
+                        connectors: connectors.join(', ') || '',
+                        maxPower: maxPower,
+                        capacity: tags.capacity || '',
+                        fee: tags.fee || '',
+                        access: tags.access || '',
+                        openingHours: tags.opening_hours || '',
+                        website: tags.website || tags['contact:website'] || ''
+                    }
+                };
+            })
+        };
+
+        try {
+            sessionStorage.setItem('evCharging_santander', JSON.stringify({ data: evChargingData, timestamp: Date.now() }));
+        } catch (e) {}
+
+        addEVChargingLayer();
+    } catch (err) {
+        console.warn('Error fetching EV charging stations:', err);
+    }
+}
+
+function addEVChargingLayer() {
+    if (!evChargingData || map.getSource('ev-charging')) return;
+
+    map.addSource('ev-charging', { type: 'geojson', data: evChargingData });
+
+    const beforeLayer = map.getLayer('clusters') ? 'clusters' : undefined;
+
+    map.addLayer({
+        id: 'ev-charging-points', type: 'circle', source: 'ev-charging',
+        paint: {
+            'circle-color': '#22c55e',
+            'circle-radius': 7,
+            'circle-stroke-width': 2.5,
+            'circle-stroke-color': '#ffffff',
+            'circle-opacity': 0.95
+        },
+        layout: { 'visibility': 'none' }
+    }, beforeLayer);
+
+    map.addLayer({
+        id: 'ev-charging-labels', type: 'symbol', source: 'ev-charging',
+        layout: {
+            'text-field': ['get', 'name'],
+            'text-size': 10,
+            'text-offset': [0, 1.6],
+            'text-font': ['Open Sans Regular', 'Arial Unicode MS Regular'],
+            'visibility': 'none'
+        },
+        minzoom: 15,
+        paint: { 'text-color': '#15803d', 'text-halo-color': '#ffffff', 'text-halo-width': 1.5 }
+    }, beforeLayer);
+
+    // Click popup with detailed info
+    map.on('click', 'ev-charging-points', (e) => {
+        const props = e.features[0].properties;
+        const coords = e.features[0].geometry.coordinates.slice();
+
+        let html = `<div style="min-width:200px;max-width:280px;font-family:Inter,system-ui,sans-serif">`;
+        html += `<div style="font-size:13px;font-weight:700;color:#15803d;margin-bottom:6px">⚡ ${escapeHTML(props.name)}</div>`;
+
+        if (props.operator) html += `<div style="font-size:11px;color:#334155;margin-bottom:3px"><strong>${t('evOperator')}:</strong> ${escapeHTML(props.operator)}</div>`;
+        if (props.connectors) html += `<div style="font-size:11px;color:#334155;margin-bottom:3px"><strong>${t('evConnectors')}:</strong> ${escapeHTML(props.connectors)}</div>`;
+        if (props.maxPower) html += `<div style="font-size:11px;color:#334155;margin-bottom:3px"><strong>${t('evPower')}:</strong> ${escapeHTML(props.maxPower)}</div>`;
+        if (props.capacity) html += `<div style="font-size:11px;color:#334155;margin-bottom:3px"><strong>${t('evCapacity')}:</strong> ${escapeHTML(props.capacity)}</div>`;
+
+        if (props.fee) {
+            const feeLabel = props.fee === 'yes' ? t('evFee') : props.fee === 'no' ? t('evFree') : escapeHTML(props.fee);
+            html += `<div style="font-size:11px;color:#334155;margin-bottom:3px"><strong>${t('evAccess')}:</strong> ${feeLabel}</div>`;
+        }
+        if (props.openingHours) html += `<div style="font-size:11px;color:#334155;margin-bottom:3px"><strong>${t('evOpeningHours')}:</strong> ${escapeHTML(props.openingHours)}</div>`;
+
+        if (props.website) {
+            html += `<div style="margin-top:4px"><a href="${escapeHTML(props.website)}" target="_blank" rel="noopener" style="font-size:11px;color:#2563eb;text-decoration:underline">Web</a></div>`;
+        }
+
+        const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${coords[1]},${coords[0]}&travelmode=driving`;
+        html += `<a href="${directionsUrl}" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:6px;margin-top:8px;padding:7px 0;background:#15803d;color:#fff;border-radius:6px;font-size:12px;font-weight:600;text-decoration:none;text-align:center">
+            <span style="font-size:14px">🧭</span> ${t('directions')}
+        </a>`;
+        html += `</div>`;
+
+        new maplibregl.Popup({ maxWidth: '300px', offset: 12 })
+            .setLngLat(coords)
+            .setHTML(html)
+            .addTo(map);
+    });
+
+    // Hover cursor
+    map.on('mouseenter', 'ev-charging-points', () => { map.getCanvas().style.cursor = 'pointer'; });
+    map.on('mouseleave', 'ev-charging-points', () => { map.getCanvas().style.cursor = ''; });
+}
+
+function toggleEVCharging() {
+    evChargingVisible = !evChargingVisible;
+
+    const vis = evChargingVisible ? 'visible' : 'none';
+    if (map.getLayer('ev-charging-points')) map.setLayoutProperty('ev-charging-points', 'visibility', vis);
+    if (map.getLayer('ev-charging-labels')) map.setLayoutProperty('ev-charging-labels', 'visibility', vis);
+
+    document.getElementById('btnEVChargingFloat')?.classList.toggle('active', evChargingVisible);
 }
