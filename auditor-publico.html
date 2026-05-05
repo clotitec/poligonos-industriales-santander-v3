@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Auditoría pública de spots — Directorio Empresarial Santander</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after { box-sizing: border-box; }
+  body {
+    font-family: Inter, system-ui, sans-serif;
+    margin: 0;
+    background: linear-gradient(135deg, #0a1628 0%, #0f2035 50%, #0a1628 100%);
+    color: #e2e8f0;
+    min-height: 100vh;
+    padding: 24px 16px 100px;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; }
+  h1 { font-size: 26px; margin: 0 0 6px; color: #fff; }
+  .sub { font-size: 13px; color: #94a3b8; margin: 0 0 18px; }
+  .stats {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px;
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px); padding: 14px 16px; border-radius: 14px;
+  }
+  .stat {
+    background: rgba(20,200,204,0.06); border: 1px solid rgba(20,200,204,0.16);
+    color: #a7e9eb; padding: 6px 12px; border-radius: 999px;
+    font-size: 12px; font-weight: 600;
+  }
+  .stat strong { color: #fff; margin-right: 4px; }
+  .stat.warn  { background: rgba(245,158,11,0.08); border-color: rgba(245,158,11,0.25); color: #fbbf24; }
+  .stat.bad   { background: rgba(239,68,68,0.08);  border-color: rgba(239,68,68,0.25);  color: #fca5a5; }
+  .stat.ok    { background: rgba(34,197,94,0.08);  border-color: rgba(34,197,94,0.25);  color: #86efac; }
+
+  .filters {
+    display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; align-items: center;
+  }
+  .search {
+    flex: 1 1 280px; min-width: 220px;
+    padding: 10px 14px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.04); color: #fff; font-family: inherit; font-size: 14px;
+  }
+  .search:focus { outline: none; border-color: #14c8cc; background: rgba(255,255,255,0.07); }
+  .filter-btn {
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+    color: #cbd5e1; padding: 8px 14px; border-radius: 10px; font-size: 12px;
+    font-weight: 600; cursor: pointer; font-family: inherit; transition: all 0.15s;
+  }
+  .filter-btn:hover { background: rgba(255,255,255,0.08); color: #fff; }
+  .filter-btn.active { background: linear-gradient(135deg,#00696c,#14c8cc); color: #fff; border-color: transparent; }
+  .filter-btn .count {
+    display: inline-block; margin-left: 5px; padding: 1px 7px; border-radius: 999px;
+    background: rgba(255,255,255,0.15); font-size: 11px; font-weight: 700;
+  }
+
+  .section-title {
+    font-size: 14px; font-weight: 700; color: #14c8cc;
+    text-transform: uppercase; letter-spacing: 0.05em;
+    margin: 28px 0 10px; padding-bottom: 6px;
+    border-bottom: 1px solid rgba(20,200,204,0.18);
+  }
+
+  .row {
+    display: flex; flex-direction: column;
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 12px; padding: 10px 14px; margin-bottom: 6px;
+    transition: all 0.18s ease;
+  }
+  .row:hover { background: rgba(255,255,255,0.05); border-color: rgba(20,200,204,0.2); }
+  .row.flag-bad      { border-left: 4px solid #ef4444; }
+  .row.flag-warn     { border-left: 4px solid #f59e0b; }
+  .row.flag-orphan   { border-left: 4px solid #a855f7; }
+  .row.flag-dup      { border-left: 4px solid #ec4899; }
+  .row.flag-ok       { border-left: 4px solid #22c55e; }
+  .row.has-notes     { background: rgba(20,200,204,0.07); border-color: rgba(20,200,204,0.3); }
+  .row-main {
+    display: grid;
+    grid-template-columns: 56px 1fr 360px 56px 56px;
+    gap: 12px; align-items: center;
+  }
+
+  .row-id {
+    font-family: 'Courier New', monospace;
+    font-size: 11px; font-weight: 700; color: #64748b;
+    text-align: center;
+  }
+  .row-info { min-width: 0; overflow: hidden; }
+  .row-name {
+    font-size: 14px; font-weight: 600; color: #fff;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .row-meta {
+    font-size: 11px; color: #94a3b8;
+    display: flex; gap: 10px; flex-wrap: wrap; margin-top: 3px;
+  }
+  .row-meta span { white-space: nowrap; }
+  .row-file {
+    font-family: 'Courier New', monospace; font-size: 11px; color: #14c8cc;
+    word-break: break-all; line-height: 1.4; margin-top: 4px;
+  }
+  .badge {
+    display: inline-block; padding: 2px 8px; border-radius: 999px;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.03em;
+    text-transform: uppercase; margin-left: 6px;
+  }
+  .badge.ok   { background: rgba(34,197,94,0.15); color: #86efac; }
+  .badge.bad  { background: rgba(239,68,68,0.15); color: #fca5a5; }
+  .badge.warn { background: rgba(245,158,11,0.15); color: #fbbf24; }
+  .badge.orph { background: rgba(168,85,247,0.15); color: #d8b4fe; }
+  .badge.dup  { background: rgba(236,72,153,0.15); color: #f9a8d4; }
+
+  .row audio { width: 100%; height: 36px; }
+
+  .row-actions { text-align: center; }
+  .verdict-btn {
+    width: 36px; height: 36px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.04); color: #94a3b8;
+    cursor: pointer; font-size: 16px; font-family: inherit; transition: all 0.15s;
+  }
+  .verdict-btn:hover { background: rgba(255,255,255,0.08); color: #fff; }
+  .verdict-btn.verdict-ok  { background: rgba(34,197,94,0.2); color: #86efac; border-color: rgba(34,197,94,0.4); }
+  .verdict-btn.verdict-bad { background: rgba(239,68,68,0.2); color: #fca5a5; border-color: rgba(239,68,68,0.4); }
+  .notes-btn {
+    width: 36px; height: 36px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.04); color: #94a3b8;
+    cursor: pointer; font-size: 14px; font-family: inherit; transition: all 0.15s;
+  }
+  .notes-btn:hover { background: rgba(255,255,255,0.08); color: #fff; }
+  .notes-btn.has-content {
+    background: rgba(20,200,204,0.2); color: #14c8cc; border-color: rgba(20,200,204,0.5);
+  }
+  .row-notes {
+    margin-top: 10px; padding-top: 10px;
+    border-top: 1px dashed rgba(20,200,204,0.18);
+    display: none;
+  }
+  .row-notes.expanded { display: block; }
+  .notes-tags {
+    display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px;
+  }
+  .tag-chip {
+    padding: 4px 11px; border-radius: 999px; font-size: 11px; font-weight: 600;
+    border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.04);
+    color: #94a3b8; cursor: pointer; font-family: inherit; transition: all 0.15s;
+    user-select: none;
+  }
+  .tag-chip:hover { color: #fff; background: rgba(255,255,255,0.08); }
+  .tag-chip.active {
+    background: linear-gradient(135deg,#00696c,#14c8cc);
+    color: #fff; border-color: transparent;
+  }
+  .tag-chip.tag-acentos.active   { background: linear-gradient(135deg,#a855f7,#c084fc); }
+  .tag-chip.tag-ubicacion.active { background: linear-gradient(135deg,#ef4444,#f87171); }
+  .tag-chip.tag-rehacer.active   { background: linear-gradient(135deg,#f59e0b,#fbbf24); }
+  .tag-chip.tag-generar.active   { background: linear-gradient(135deg,#06b6d4,#22d3ee); }
+  .tag-chip.tag-ortografia.active{ background: linear-gradient(135deg,#ec4899,#f472b6); }
+  .tag-chip.tag-entonacion.active{ background: linear-gradient(135deg,#8b5cf6,#a78bfa); }
+  .tag-chip.tag-cortado.active   { background: linear-gradient(135deg,#dc2626,#ef4444); }
+  .tag-chip.tag-volumen.active   { background: linear-gradient(135deg,#0891b2,#06b6d4); }
+  .notes-textarea {
+    width: 100%; min-height: 60px; padding: 8px 12px;
+    background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px; color: #e2e8f0; font-family: inherit; font-size: 13px;
+    line-height: 1.5; resize: vertical; outline: none;
+  }
+  .notes-textarea:focus { border-color: #14c8cc; background: rgba(0,0,0,0.35); }
+  .notes-meta {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-top: 6px; font-size: 11px; color: #64748b;
+  }
+  .notes-clear-btn {
+    background: transparent; border: 1px solid rgba(239,68,68,0.3);
+    color: #fca5a5; padding: 4px 10px; border-radius: 6px; font-size: 11px;
+    cursor: pointer; font-family: inherit; transition: all 0.15s;
+  }
+  .notes-clear-btn:hover { background: rgba(239,68,68,0.15); color: #fff; }
+
+  .legend {
+    display: flex; flex-wrap: wrap; gap: 14px; padding: 12px 16px;
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 12px; font-size: 12px; color: #94a3b8; margin-bottom: 18px;
+  }
+  .legend-item { display: flex; align-items: center; gap: 6px; }
+  .legend-bar { width: 4px; height: 14px; border-radius: 2px; }
+
+  .empty { text-align: center; padding: 40px; color: #64748b; font-size: 14px; }
+  .loading { text-align: center; padding: 40px; color: #94a3b8; font-size: 14px; }
+  .error-box {
+    background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3);
+    border-radius: 12px; padding: 16px 20px; color: #fca5a5;
+    font-family: 'Courier New', monospace; font-size: 12px; line-height: 1.6;
+    white-space: pre-wrap; margin: 16px 0;
+  }
+  .error-box strong { color: #fff; display: block; margin-bottom: 6px; font-family: inherit; }
+
+  .export-bar {
+    position: fixed; bottom: 14px; left: 50%; transform: translateX(-50%);
+    background: rgba(0,0,0,0.85); backdrop-filter: blur(20px);
+    border: 1px solid rgba(20,200,204,0.3); padding: 10px 16px; border-radius: 12px;
+    display: flex; gap: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.4); z-index: 100;
+  }
+  .export-btn {
+    background: linear-gradient(135deg,#00696c,#14c8cc); color: #fff;
+    border: none; padding: 9px 18px; border-radius: 10px; font-size: 12px;
+    font-weight: 700; cursor: pointer; font-family: inherit;
+  }
+  .export-btn.ghost { background: transparent; border: 1px solid rgba(255,255,255,0.15); color: #cbd5e1; }
+
+  @media (max-width: 768px) {
+    .row-main { grid-template-columns: 40px 1fr 44px 44px; }
+    .row-main audio { grid-column: 1 / -1; margin-top: 6px; }
+    .export-bar { bottom: 8px; padding: 8px 10px; }
+    .export-btn { padding: 7px 12px; font-size: 11px; }
+    .verdict-btn, .notes-btn { width: 36px; height: 36px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🔊 Auditoría pública de spots · ayúdanos a mejorar</h1>
+  <p class="sub">Escucha los spots de cada empresa, marca si están bien (✓) o mal (✕), y añade comentarios cuando detectes problemas. Cuando termines, pulsa <strong>Enviar mi auditoría a Clotitec</strong> y nos llegará automáticamente por email. ¡Gracias por tu tiempo!</p>
+  <div id="revisorChip" style="display:none; margin-bottom:14px; padding:8px 14px; background:rgba(20,200,204,0.08); border:1px solid rgba(20,200,204,0.2); border-radius:10px; font-size:12px; color:#a7e9eb;">
+    Revisando como <strong id="revisorChipNombre">—</strong> · <span id="revisorChipEmail" style="color:#94a3b8;">—</span>
+    <button onclick="cambiarRevisor()" style="margin-left:8px; background:transparent; border:1px solid rgba(255,255,255,0.15); color:#cbd5e1; padding:3px 9px; border-radius:6px; font-size:11px; cursor:pointer;">cambiar</button>
+  </div>
+
+  <div id="bootError" style="display:none"></div>
+  <div id="stats"><div class="loading">Cargando datos del directorio…</div></div>
+
+  <div class="legend" id="legend" style="display:none">
+    <div class="legend-item"><span class="legend-bar" style="background:#22c55e"></span>OK · empresa coincide con nombre del fichero</div>
+    <div class="legend-item"><span class="legend-bar" style="background:#ef4444"></span>Mismatch sospechoso · fichero no coincide con empresa</div>
+    <div class="legend-item"><span class="legend-bar" style="background:#f59e0b"></span>Por revisar</div>
+    <div class="legend-item"><span class="legend-bar" style="background:#a855f7"></span>Huérfano</div>
+    <div class="legend-item"><span class="legend-bar" style="background:#ec4899"></span>Posible duplicado</div>
+  </div>
+
+  <div class="filters" id="filters" style="display:none">
+    <input type="text" id="search" class="search" placeholder="Filtrar por empresa, sector, polígono o fichero…">
+    <button class="filter-btn active" data-filter="all">Todos</button>
+    <button class="filter-btn" data-filter="bad">Mismatches</button>
+    <button class="filter-btn" data-filter="warn">Por revisar</button>
+    <button class="filter-btn" data-filter="orphan">Huérfanos</button>
+    <button class="filter-btn" data-filter="dup">Duplicados</button>
+    <button class="filter-btn" data-filter="ok">OK</button>
+    <button class="filter-btn" data-filter="notes">Con notas</button>
+  </div>
+
+  <div id="empresasSection" style="display:none">
+    <div class="section-title">Empresas con audio asociado</div>
+    <div id="empresasList"></div>
+  </div>
+
+  <div id="orphanSection" style="display:none">
+    <div class="section-title">Audios huérfanos · existen pero ninguna empresa los referencia</div>
+    <div id="orphanList"></div>
+  </div>
+</div>
+
+<div class="export-bar" id="exportBar" style="display:none">
+  <button class="export-btn" onclick="enviarAuditoria()" id="enviarBtn">📧 Enviar mi auditoría a Clotitec</button>
+  <button class="export-btn ghost" onclick="exportVerdicts()" title="Descargar copia local del JSON">⬇️ JSON</button>
+</div>
+
+<!-- Modal de identificación del revisor -->
+<div id="modalRevisor" style="position:fixed; inset:0; background:rgba(0,0,0,0.85); backdrop-filter:blur(8px); z-index:1000; display:flex; align-items:center; justify-content:center; padding:20px;">
+  <div style="background:linear-gradient(135deg,#0f2035,#0a1628); border:1px solid rgba(20,200,204,0.3); border-radius:16px; padding:28px; max-width:480px; width:100%; box-shadow:0 30px 80px rgba(0,0,0,0.5);">
+    <h2 style="margin:0 0 8px; color:#fff; font-size:22px;">Antes de empezar</h2>
+    <p style="font-size:13px; color:#94a3b8; margin:0 0 22px; line-height:1.5;">
+      Cuéntanos quién eres para que podamos darte las gracias y, si hace falta, contactarte sobre tu revisión.
+    </p>
+    <label style="display:block; font-size:12px; color:#cbd5e1; margin-bottom:6px; font-weight:600;">Tu nombre</label>
+    <input id="revisorNombre" type="text" placeholder="Ej. Ana García" style="width:100%; padding:11px 14px; border-radius:10px; border:1px solid rgba(255,255,255,0.1); background:rgba(255,255,255,0.04); color:#fff; font-family:inherit; font-size:14px; margin-bottom:14px;">
+    <label style="display:block; font-size:12px; color:#cbd5e1; margin-bottom:6px; font-weight:600;">Tu email</label>
+    <input id="revisorEmail" type="email" placeholder="email@dominio.com" style="width:100%; padding:11px 14px; border-radius:10px; border:1px solid rgba(255,255,255,0.1); background:rgba(255,255,255,0.04); color:#fff; font-family:inherit; font-size:14px; margin-bottom:6px;">
+    <p id="modalRevisorError" style="display:none; font-size:12px; color:#fca5a5; margin:6px 0 14px;"></p>
+    <button onclick="empezarAuditoria()" style="width:100%; background:linear-gradient(135deg,#00696c,#14c8cc); color:#fff; border:none; padding:12px 18px; border-radius:10px; font-size:14px; font-weight:700; cursor:pointer; font-family:inherit; margin-top:8px;">
+      Empezar auditoría →
+    </button>
+    <p style="font-size:11px; color:#64748b; margin:14px 0 0; text-align:center;">
+      Tus datos solo se usan para identificar tu revisión. No te suscribimos a nada.
+    </p>
+  </div>
+</div>
+
+<!-- Modal de envío en curso / éxito / error -->
+<div id="modalEnvio" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); backdrop-filter:blur(8px); z-index:1001; align-items:center; justify-content:center; padding:20px;">
+  <div id="modalEnvioInner" style="background:linear-gradient(135deg,#0f2035,#0a1628); border:1px solid rgba(20,200,204,0.3); border-radius:16px; padding:32px; max-width:480px; width:100%; text-align:center; box-shadow:0 30px 80px rgba(0,0,0,0.5);"></div>
+</div>
+
+<footer style="position:fixed; bottom:0; left:0; right:0; padding:6px 12px; font-size:10px; color:#475569; text-align:center; background:rgba(10,22,40,0.6); backdrop-filter:blur(6px); pointer-events:none; z-index:50;">
+  Envío gestionado por <a href="https://web3forms.com" target="_blank" rel="noopener" style="color:#475569; pointer-events:auto;">Web3Forms</a> · Auditoría pública para Clotitec
+</footer>
+
+<!-- =========================================================
+     IMPORTANTE: cargamos data.js dinámicamente con manejo de errores
+     porque si falla, queremos verlo en pantalla.
+     ========================================================= -->
+<script>
+(function() {
+  'use strict';
+
+  // ---- Mostrar error en pantalla ----
+  function showError(title, detail) {
+    var box = document.getElementById('bootError');
+    box.style.display = 'block';
+    box.className = 'error-box';
+    box.innerHTML = '<strong>' + title + '</strong>' + detail;
+    var loadEl = document.querySelector('#stats .loading');
+    if (loadEl) loadEl.textContent = 'Error de carga (ver detalle arriba)';
+  }
+
+  // ---- Capturar errores globales ----
+  window.addEventListener('error', function(e) {
+    showError('Error de JavaScript: ' + (e.message || ''),
+      'Archivo: ' + (e.filename||'?') + ':' + (e.lineno||'?') + '\n' +
+      'Stack: ' + (e.error && e.error.stack || ''));
+  });
+
+  // ---- Cargar data.js con tag <script> y esperar ----
+  function loadDataJs(callback) {
+    var s = document.createElement('script');
+    s.src = 'data.js?v=' + Date.now();  // bust cache del SW
+    s.onload = function() { callback(null); };
+    s.onerror = function() { callback(new Error('No se pudo cargar data.js (HTTP error)')); };
+    document.head.appendChild(s);
+  }
+
+  loadDataJs(function(err) {
+    if (err) {
+      showError('No se pudo cargar data.js', err.message + '\nComprueba que el servidor está corriendo en http://localhost:8000');
+      return;
+    }
+    if (typeof empresas === 'undefined') {
+      showError('data.js cargó pero no expone "empresas"',
+        'Variables visibles en window: ' + Object.keys(window).filter(function(k){return /^[a-z]/.test(k);}).slice(0,40).join(', '));
+      return;
+    }
+    if (!Array.isArray(empresas) || empresas.length === 0) {
+      showError('"empresas" cargó pero está vacío',
+        'typeof: ' + typeof empresas + '\nlength: ' + (empresas && empresas.length));
+      return;
+    }
+    try {
+      boot();
+    } catch (e) {
+      showError('Error inicializando el auditor', e.message + '\n\nStack:\n' + (e.stack||''));
+    }
+  });
+
+  // ============================================================
+  //                        AUDITOR
+  // ============================================================
+  var STORAGE_KEY = 'audio_audit_publico_verdicts';
+  var NOTES_KEY = 'audio_audit_publico_notes';
+  var REVISOR_KEY = 'audio_audit_publico_revisor';
+  // Web3Forms access key — pegar el access_key de https://web3forms.com aqui
+  var WEB3FORMS_ACCESS_KEY = 'WEB3FORMS_ACCESS_KEY_AQUI';
+  var allRows = [];
+  var verdicts = {};
+  var notes = {};   // notes[key] = { tags: ['acentos',...], text: '...', updated: ISO }
+
+  // Tags predefinidos: id, etiqueta visible, breve descripción
+  var TAG_DEFS = [
+    { id: 'acentos',    label: 'Acentos/tildes mal',  desc: 'Pronuncia mal las tildes o acentos' },
+    { id: 'ubicacion',  label: 'Mal ubicado',         desc: 'Audio asignado a empresa equivocada' },
+    { id: 'rehacer',    label: 'Rehacer',             desc: 'Hay que regenerar este audio' },
+    { id: 'generar',    label: 'Generar nuevo',       desc: 'Esta empresa necesita un audio nuevo desde cero' },
+    { id: 'ortografia', label: 'Ortografía',          desc: 'Lee mal una palabra concreta' },
+    { id: 'entonacion', label: 'Entonación',          desc: 'Tono, ritmo o pausa incorrectos' },
+    { id: 'cortado',    label: 'Cortado',             desc: 'El audio se corta o falta texto' },
+    { id: 'volumen',    label: 'Volumen',             desc: 'Volumen muy alto o muy bajo' }
+  ];
+
+  // Lista de huérfanos detectados por la auditoría previa.
+  // Estos archivos existen físicamente pero ninguna empresa los referencia.
+  var KNOWN_ORPHANS = [
+    'SPOT_05_GARAJE_SANCHO_SAAB_ESTILO_F.mp3',
+    'SPOT_11_MRW_ESTILO_E.mp3',
+    'SPOT_22_ISQUION_MARKETING_MEDICO_ESTILO_E.mp3',
+    'SPOT_23_CHIWAWAP_ESTILO_E.mp3',
+    'SPOT_24_MADERAS_CANDINA_ESTILO_D.mp3',
+    'SPOT_25_NOLDEMANN_ESTILO_C.mp3',
+    'SPOT_29_TALLER_DOMINGO_PARDO_ESTILO_D.mp3',
+    'SPOT_30_CERCHA_OBRAS_ESPECIALES_ESTILO_F.mp3',
+    'SPOT_31_TEXEIRA_ESTILO_F.mp3',
+    'SPOT_34_SUPERPEKES_ESTILO_B.mp3',
+    'SPOT_35_DIMINUTOS_CANDINA_ESTILO_B.mp3',
+    'SPOT_36_CONFORT_MUEBLES_ESTILO_B.mp3',
+    'SPOT_37_HERRERO_TRANSFORMACIONES_ESTILO_A.mp3',
+    'SPOT_39_SANTANDER_BERRIES_ESTILO_F.mp3',
+    'SPOT_44_TURBOTENCASA_ESTILO_E.mp3',
+    'SPOT_50_DEODE_ESTILO_C.mp3',
+    'SPOT_52_TOP_CASH.mp3',
+    'SPOT_53_BLENDIO_AUTOGOMAS_ESTILO_A.mp3',
+    'SPOT_54_MEGAMOTOR_TOYOTA_ESTILO_C.mp3',
+    'SPOT_56_SAT_ELECTRODOMESTICOS_ESTILO_D.mp3',
+    'SPOT_57_HIDRODISELEC_ESTILO_F.mp3'
+  ];
+
+  function loadVerdicts() {
+    try { verdicts = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); }
+    catch(e) { verdicts = {}; }
+  }
+  function saveVerdicts() {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(verdicts)); } catch(e){}
+  }
+  function loadNotes() {
+    try { notes = JSON.parse(localStorage.getItem(NOTES_KEY) || '{}'); }
+    catch(e) { notes = {}; }
+  }
+  function saveNotes() {
+    try { localStorage.setItem(NOTES_KEY, JSON.stringify(notes)); } catch(e){}
+  }
+  function getNote(key) {
+    return notes[key] || { tags: [], text: '' };
+  }
+  function setNote(key, partial) {
+    var current = getNote(key);
+    var merged = {
+      tags: partial.tags !== undefined ? partial.tags : current.tags,
+      text: partial.text !== undefined ? partial.text : current.text,
+      updated: new Date().toISOString()
+    };
+    if ((!merged.tags || !merged.tags.length) && !merged.text) {
+      delete notes[key];
+    } else {
+      notes[key] = merged;
+    }
+    saveNotes();
+  }
+  function noteHasContent(key) {
+    var n = notes[key];
+    return n && ((n.tags && n.tags.length) || (n.text && n.text.trim()));
+  }
+
+  // Normaliza usando rango Unicode escapado (portable, sin chars literales)
+  function norm(s) {
+    return String(s||'')
+      .normalize('NFD')
+      .replace(/[̀-ͯ]/g, '')
+      .toLowerCase()
+      .replace(/[^a-z0-9]/g, '');
+  }
+
+  function extractAudioName(filename) {
+    if (!filename) return null;
+    var m = filename.match(/^SPOT_(\d+)_(.+?)(?:_ESTILO_[A-F])?\.mp3$/i);
+    if (!m) return null;
+    return { num: parseInt(m[1],10), label: m[2].replace(/_/g,' ') };
+  }
+
+  function classifyMatch(empresa, audioFilename) {
+    if (!audioFilename) return { flag: 'warn', reason: 'sin audio' };
+    var info = extractAudioName(audioFilename);
+    if (!info) return { flag: 'warn', reason: 'patrón no reconocido' };
+    var empN = norm(empresa.nombre);
+    var audN = norm(info.label);
+    if (empN.length < 4 || audN.length < 4) return { flag: 'warn', reason: 'nombre muy corto' };
+    if (empN.indexOf(audN) >= 0 || audN.indexOf(empN) >= 0) return { flag: 'ok', reason: 'coincide' };
+    for (var i = 0; i + 5 <= audN.length; i++) {
+      var slice = audN.substring(i, i+5);
+      if (empN.indexOf(slice) >= 0) return { flag: 'ok', reason: 'coincide parcial' };
+    }
+    return { flag: 'bad', reason: 'audio "' + info.label + '"', suggestion: info.label };
+  }
+
+  function build() {
+    var rows = [];
+    var usedFiles = {};
+    for (var i = 0; i < empresas.length; i++) {
+      var e = empresas[i];
+      var file = (e.audioUrl || '').replace(/^.*\//, '');
+      if (file) {
+        if (!usedFiles[file]) usedFiles[file] = [];
+        usedFiles[file].push(e.id);
+      }
+    }
+    for (var j = 0; j < empresas.length; j++) {
+      var emp = empresas[j];
+      var path = emp.audioUrl || '';
+      var fileN = path.replace(/^.*\//, '');
+      var cls = classifyMatch(emp, fileN);
+      var dup = fileN && usedFiles[fileN] && usedFiles[fileN].length > 1;
+      rows.push({
+        type: 'empresa',
+        id: emp.id,
+        empresaNombre: emp.nombre || '(sin nombre)',
+        sector: emp.sector || '—',
+        area: emp.area || '—',
+        audioPath: path,
+        file: fileN,
+        flag: dup ? 'dup' : cls.flag,
+        reason: dup ? ('duplicado: ' + usedFiles[fileN].length + ' empresas usan este audio') : cls.reason
+      });
+    }
+    return { rows: rows, usedFiles: usedFiles };
+  }
+
+  function escapeHtml(s) {
+    return String(s||'').replace(/[&<>"']/g, function(c){
+      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];
+    });
+  }
+
+  function badgeFor(flag) {
+    var map = {
+      ok:   '<span class="badge ok">OK</span>',
+      bad:  '<span class="badge bad">Mismatch</span>',
+      warn: '<span class="badge warn">Revisar</span>',
+      dup:  '<span class="badge dup">Duplicado</span>',
+      orphan:'<span class="badge orph">Huérfano</span>'
+    };
+    return map[flag] || '';
+  }
+
+  function notesBlockHtml(key) {
+    var note = getNote(key);
+    var tags = note.tags || [];
+    var text = note.text || '';
+    var chips = '';
+    for (var i = 0; i < TAG_DEFS.length; i++) {
+      var t = TAG_DEFS[i];
+      var active = tags.indexOf(t.id) >= 0 ? ' active' : '';
+      chips += '<button class="tag-chip tag-' + t.id + active + '" data-key="' + key + '" data-tag="' + t.id + '" title="' + escapeHtml(t.desc) + '">' + escapeHtml(t.label) + '</button>';
+    }
+    var updated = note.updated ? ('Última edición: ' + new Date(note.updated).toLocaleString('es-ES')) : '';
+    return '' +
+      '<div class="row-notes" data-notes-key="' + key + '">' +
+        '<div class="notes-tags">' + chips + '</div>' +
+        '<textarea class="notes-textarea" data-key="' + key + '" placeholder="Comentario libre — qué falla, qué hay que rehacer, dónde mover el audio…">' + escapeHtml(text) + '</textarea>' +
+        '<div class="notes-meta">' +
+          '<span>' + updated + '</span>' +
+          '<button class="notes-clear-btn" data-clear-key="' + key + '">Borrar nota</button>' +
+        '</div>' +
+      '</div>';
+  }
+
+  function rowHtml(r) {
+    var verdictKey = r.type === 'empresa' ? ('emp_' + r.id) : ('orphan_' + r.file);
+    var verdict = verdicts[verdictKey] || null;
+    var verdictClass = verdict === 'ok' ? 'verdict-ok' : verdict === 'bad' ? 'verdict-bad' : '';
+    var verdictIcon;
+    if (r.type === 'orphan') {
+      verdictIcon = verdict === 'ok' ? '↪' : verdict === 'bad' ? '🗑' : '?';
+    } else {
+      verdictIcon = verdict === 'ok' ? '✓' : verdict === 'bad' ? '✗' : '?';
+    }
+    var verdictTitle = r.type === 'orphan' ? 'Click: marcar para reasignar / borrar' : 'Click: marcar OK / Mismatch';
+    var hasNotes = noteHasContent(verdictKey);
+    var notesBtnClass = hasNotes ? 'notes-btn has-content' : 'notes-btn';
+    var notesIcon = hasNotes ? '📝' : '✏️';
+    var rowClass = hasNotes ? 'row flag-' + r.flag + ' has-notes' : 'row flag-' + r.flag;
+
+    if (r.type === 'empresa') {
+      var audioTag = r.audioPath
+        ? '<audio controls preload="none" src="' + escapeHtml(encodeURI(r.audioPath)) + '"></audio>'
+        : '<div style="font-size:11px;color:#64748b;text-align:center">sin audio</div>';
+      return '' +
+        '<div class="' + rowClass + '" data-flag="' + r.flag + '" data-search="' + escapeHtml((r.empresaNombre+' '+r.sector+' '+r.area+' '+r.file).toLowerCase()) + '">' +
+          '<div class="row-main">' +
+            '<div class="row-id">' + r.id + '</div>' +
+            '<div class="row-info">' +
+              '<div class="row-name">' + escapeHtml(r.empresaNombre) + badgeFor(r.flag) + '</div>' +
+              '<div class="row-meta">' +
+                '<span>📂 ' + escapeHtml(r.sector) + '</span>' +
+                '<span>📍 ' + escapeHtml(r.area) + '</span>' +
+                '<span style="color:#fbbf24">' + escapeHtml(r.reason) + '</span>' +
+              '</div>' +
+              '<div class="row-file">' + escapeHtml(r.file || '(sin audioUrl)') + '</div>' +
+            '</div>' +
+            '<div>' + audioTag + '</div>' +
+            '<div class="row-actions">' +
+              '<button class="verdict-btn ' + verdictClass + '" data-key="' + verdictKey + '" title="' + verdictTitle + '">' + verdictIcon + '</button>' +
+            '</div>' +
+            '<div class="row-actions">' +
+              '<button class="' + notesBtnClass + '" data-toggle-notes="' + verdictKey + '" title="Anotar comentarios">' + notesIcon + '</button>' +
+            '</div>' +
+          '</div>' +
+          notesBlockHtml(verdictKey) +
+        '</div>';
+    } else {
+      var info = extractAudioName(r.file);
+      var label = info ? info.label : r.file;
+      return '' +
+        '<div class="' + rowClass + '" data-flag="orphan" data-search="' + escapeHtml(r.file.toLowerCase()) + '">' +
+          '<div class="row-main">' +
+            '<div class="row-id">—</div>' +
+            '<div class="row-info">' +
+              '<div class="row-name">' + escapeHtml(label) + badgeFor('orphan') + '</div>' +
+              '<div class="row-meta">' +
+                '<span style="color:#d8b4fe">Existe en /audio pero ninguna empresa lo usa</span>' +
+              '</div>' +
+              '<div class="row-file">' + escapeHtml(r.file) + '</div>' +
+            '</div>' +
+            '<div><audio controls preload="none" src="./audio/' + escapeHtml(encodeURI(r.file)) + '"></audio></div>' +
+            '<div class="row-actions">' +
+              '<button class="verdict-btn ' + verdictClass + '" data-key="' + verdictKey + '" title="' + verdictTitle + '">' + verdictIcon + '</button>' +
+            '</div>' +
+            '<div class="row-actions">' +
+              '<button class="' + notesBtnClass + '" data-toggle-notes="' + verdictKey + '" title="Anotar comentarios">' + notesIcon + '</button>' +
+            '</div>' +
+          '</div>' +
+          notesBlockHtml(verdictKey) +
+        '</div>';
+    }
+  }
+
+  function renderRows(rows, container) {
+    if (!rows.length) {
+      container.innerHTML = '<div class="empty">Sin filas</div>';
+      return;
+    }
+    var html = '';
+    for (var i = 0; i < rows.length; i++) html += rowHtml(rows[i]);
+    container.innerHTML = html;
+  }
+
+  function cycleVerdict(key, btn) {
+    var cur = verdicts[key] || null;
+    var next = cur === null ? 'ok' : cur === 'ok' ? 'bad' : null;
+    if (next === null) delete verdicts[key]; else verdicts[key] = next;
+    saveVerdicts();
+    btn.className = 'verdict-btn ' + (next === 'ok' ? 'verdict-ok' : next === 'bad' ? 'verdict-bad' : '');
+    var isOrphan = key.indexOf('orphan_') === 0;
+    btn.textContent = isOrphan
+      ? (next === 'ok' ? '↪' : next === 'bad' ? '🗑' : '?')
+      : (next === 'ok' ? '✓' : next === 'bad' ? '✗' : '?');
+    updateStats();
+  }
+
+  function applyFilter() {
+    var search = (document.getElementById('search').value || '').toLowerCase().trim();
+    var activeBtn = document.querySelector('.filter-btn.active');
+    var filter = activeBtn ? activeBtn.getAttribute('data-filter') : 'all';
+    var rows = document.querySelectorAll('.row');
+    for (var i = 0; i < rows.length; i++) {
+      var row = rows[i];
+      var matchSearch = !search || row.getAttribute('data-search').indexOf(search) >= 0;
+      var matchFilter;
+      if (filter === 'all') matchFilter = true;
+      else if (filter === 'notes') matchFilter = row.classList.contains('has-notes');
+      else matchFilter = row.getAttribute('data-flag') === filter;
+      row.style.display = (matchSearch && matchFilter) ? '' : 'none';
+    }
+  }
+
+  function updateStats() {
+    var counts = { ok:0, bad:0, warn:0, orphan:0, dup:0 };
+    for (var i = 0; i < allRows.length; i++) counts[allRows[i].flag] = (counts[allRows[i].flag]||0) + 1;
+    var verCount = Object.keys(verdicts).length;
+    var notesCount = 0;
+    for (var nk in notes) { if (noteHasContent(nk)) notesCount++; }
+    document.getElementById('stats').innerHTML =
+      '<span class="stat"><strong>' + empresas.length + '</strong>empresas</span>' +
+      '<span class="stat ok"><strong>' + (counts.ok||0) + '</strong>OK</span>' +
+      '<span class="stat bad"><strong>' + (counts.bad||0) + '</strong>mismatches</span>' +
+      '<span class="stat warn"><strong>' + (counts.warn||0) + '</strong>por revisar</span>' +
+      '<span class="stat" style="background:rgba(168,85,247,0.08);border-color:rgba(168,85,247,0.25);color:#d8b4fe"><strong>' + (counts.orphan||0) + '</strong>huérfanos</span>' +
+      '<span class="stat" style="background:rgba(236,72,153,0.08);border-color:rgba(236,72,153,0.25);color:#f9a8d4"><strong>' + (counts.dup||0) + '</strong>duplicados</span>' +
+      '<span class="stat"><strong>' + verCount + '</strong>veredictos</span>' +
+      '<span class="stat" style="background:rgba(20,200,204,0.08);border-color:rgba(20,200,204,0.3);color:#14c8cc"><strong>' + notesCount + '</strong>notas</span>';
+
+    var btns = document.querySelectorAll('.filter-btn');
+    for (var j = 0; j < btns.length; j++) {
+      var btn = btns[j];
+      var f = btn.getAttribute('data-filter');
+      if (f === 'all') continue;
+      var c;
+      if (f === 'notes') c = notesCount;
+      else c = counts[f] || 0;
+      var existing = btn.querySelector('.count');
+      if (!existing) {
+        existing = document.createElement('span');
+        existing.className = 'count';
+        btn.appendChild(existing);
+      }
+      existing.textContent = c;
+    }
+  }
+
+  // ---- Build full report (verdicts + notes joined to companies) ----
+  function buildReport() {
+    var rows = [];
+    for (var i = 0; i < allRows.length; i++) {
+      var r = allRows[i];
+      var key = r.type === 'empresa' ? 'emp_' + r.id : 'orphan_' + r.file;
+      var v = verdicts[key] || null;
+      var n = notes[key] || null;
+      var hasAnything = v || (n && noteHasContent(key));
+      if (!hasAnything) continue;
+      rows.push({
+        type: r.type,
+        id: r.id,
+        empresa: r.empresaNombre,
+        sector: r.sector,
+        area: r.area,
+        archivo: r.file,
+        flag_auto: r.flag,
+        razon_auto: r.reason,
+        veredicto: v,
+        tags: n ? (n.tags || []) : [],
+        comentario: n ? (n.text || '') : '',
+        actualizado: n ? n.updated : null
+      });
+    }
+    return rows;
+  }
+
+  // ---- Exports ----
+  window.exportVerdicts = function() {
+    var report = buildReport();
+    var data = JSON.stringify({
+      timestamp: new Date().toISOString(),
+      summary: {
+        total_filas_anotadas: report.length,
+        veredictos_ok: Object.keys(verdicts).filter(function(k){return verdicts[k]==='ok';}).length,
+        veredictos_bad: Object.keys(verdicts).filter(function(k){return verdicts[k]==='bad';}).length,
+        notas_con_contenido: Object.keys(notes).filter(function(k){return noteHasContent(k);}).length
+      },
+      filas: report,
+      raw: { verdicts: verdicts, notes: notes }
+    }, null, 2);
+    var blob = new Blob([data], {type:'application/json'});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'auditoria-audios-v2-' + new Date().toISOString().slice(0,10) + '.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
+  window.resetVerdicts = function() {
+    if (!confirm('¿Borrar TODOS los veredictos y notas guardados? Esta acción no se puede deshacer.')) return;
+    verdicts = {};
+    notes = {};
+    saveVerdicts();
+    saveNotes();
+    location.reload();
+  };
+
+  window.copyMismatches = function() {
+    var report = buildReport();
+    if (!report.length) { alert('No hay nada anotado todavía.'); return; }
+    var lines = [];
+    lines.push('AUDITORÍA AUDIOS — ' + new Date().toLocaleString('es-ES'));
+    lines.push('=================================');
+    lines.push('');
+    for (var i = 0; i < report.length; i++) {
+      var r = report[i];
+      var head = '[' + (r.veredicto || '?').toUpperCase() + '] ' + r.id + ' · ' + r.empresa;
+      lines.push(head);
+      lines.push('  Archivo: ' + r.archivo);
+      lines.push('  Sector: ' + r.sector + ' | Área: ' + r.area);
+      lines.push('  Detección automática: ' + r.flag_auto + ' (' + r.razon_auto + ')');
+      if (r.tags && r.tags.length) {
+        var tagLabels = [];
+        for (var j = 0; j < r.tags.length; j++) {
+          for (var k = 0; k < TAG_DEFS.length; k++) {
+            if (TAG_DEFS[k].id === r.tags[j]) { tagLabels.push(TAG_DEFS[k].label); break; }
+          }
+        }
+        lines.push('  Tags: ' + tagLabels.join(', '));
+      }
+      if (r.comentario) lines.push('  Comentario: ' + r.comentario);
+      lines.push('');
+    }
+    var text = lines.join('\n');
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text).then(function(){
+        alert('Copiadas ' + report.length + ' filas anotadas al portapapeles.');
+      }, function(err){
+        alert('No se pudo copiar: ' + err);
+      });
+    } else {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); alert('Copiadas ' + report.length); } catch(e) { alert('Falló copia'); }
+      document.body.removeChild(ta);
+    }
+  };
+
+  // ---- Identificacion del revisor ----
+  function loadRevisor() {
+    try { return JSON.parse(localStorage.getItem(REVISOR_KEY) || 'null'); }
+    catch(e){ return null; }
+  }
+  function saveRevisor(r) {
+    try { localStorage.setItem(REVISOR_KEY, JSON.stringify(r)); } catch(e){}
+  }
+
+  window.empezarAuditoria = function() {
+    var nombre = document.getElementById('revisorNombre').value.trim();
+    var email = document.getElementById('revisorEmail').value.trim();
+    var err = document.getElementById('modalRevisorError');
+    if (nombre.length < 2) {
+      err.textContent = 'Por favor escribe tu nombre.';
+      err.style.display = 'block';
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+      err.textContent = 'Email no válido. Formato esperado: usuario@dominio.com';
+      err.style.display = 'block';
+      return;
+    }
+    var revisor = { nombre: nombre, email: email, inicio: new Date().toISOString() };
+    saveRevisor(revisor);
+    aplicarRevisor(revisor);
+  };
+
+  window.cambiarRevisor = function() {
+    document.getElementById('modalRevisor').style.display = 'flex';
+    var r = loadRevisor();
+    if (r) {
+      document.getElementById('revisorNombre').value = r.nombre || '';
+      document.getElementById('revisorEmail').value = r.email || '';
+    }
+  };
+
+  function aplicarRevisor(r) {
+    document.getElementById('modalRevisor').style.display = 'none';
+    document.getElementById('modalRevisorError').style.display = 'none';
+    var chip = document.getElementById('revisorChip');
+    if (chip) {
+      chip.style.display = 'block';
+      document.getElementById('revisorChipNombre').textContent = r.nombre;
+      document.getElementById('revisorChipEmail').textContent = r.email;
+    }
+  }
+
+  // ---- Envio a Web3Forms ----
+  function showEnvio(html) {
+    var m = document.getElementById('modalEnvio');
+    m.style.display = 'flex';
+    document.getElementById('modalEnvioInner').innerHTML = html;
+  }
+  function hideEnvio() {
+    document.getElementById('modalEnvio').style.display = 'none';
+  }
+
+  window.enviarAuditoria = async function() {
+    var revisor = loadRevisor();
+    if (!revisor || !revisor.email) {
+      cambiarRevisor();
+      return;
+    }
+    if (!WEB3FORMS_ACCESS_KEY || WEB3FORMS_ACCESS_KEY === 'WEB3FORMS_ACCESS_KEY_AQUI') {
+      showEnvio(
+        '<h2 style="color:#fbbf24; margin:0 0 10px;">⚠️ Envío no configurado</h2>' +
+        '<p style="font-size:13px; color:#cbd5e1; line-height:1.5;">' +
+        'El destino de email aún no está configurado en este formulario. ' +
+        'Por favor, descarga el JSON con el botón <strong>JSON</strong> y envíalo manualmente a ' +
+        '<a href="mailto:info@clotitec.com" style="color:#14c8cc;">info@clotitec.com</a>.</p>' +
+        '<button onclick="hideEnvio()" style="margin-top:18px; background:linear-gradient(135deg,#00696c,#14c8cc); color:#fff; border:none; padding:10px 18px; border-radius:10px; font-weight:700; cursor:pointer;">Entendido</button>'
+      );
+      window.hideEnvio = hideEnvio;
+      return;
+    }
+
+    var report = buildReport();
+    if (!report.length) {
+      alert('No has anotado nada todavía. Marca al menos un veredicto antes de enviar.');
+      return;
+    }
+    var summary = {
+      total_filas_anotadas: report.length,
+      veredictos_ok: Object.keys(verdicts).filter(function(k){return verdicts[k]==='ok';}).length,
+      veredictos_bad: Object.keys(verdicts).filter(function(k){return verdicts[k]==='bad';}).length,
+      notas_con_contenido: Object.keys(notes).filter(function(k){return noteHasContent(k);}).length
+    };
+    var payload = {
+      timestamp: new Date().toISOString(),
+      revisor: revisor,
+      summary: summary,
+      filas: report,
+      raw: { verdicts: verdicts, notes: notes }
+    };
+    var jsonStr = JSON.stringify(payload, null, 2);
+    var blob = new Blob([jsonStr], { type: 'application/json' });
+    var fname = 'auditoria-' + revisor.nombre.replace(/\s+/g,'_').replace(/[^\w\-]/g,'') + '-' + Date.now() + '.json';
+
+    showEnvio(
+      '<div style="margin:0 auto 16px; width:48px; height:48px; border:4px solid rgba(20,200,204,0.2); border-top-color:#14c8cc; border-radius:50%; animation:spin 0.9s linear infinite;"></div>' +
+      '<style>@keyframes spin{to{transform:rotate(360deg)}}</style>' +
+      '<h2 style="margin:0 0 6px; color:#fff;">Enviando auditoría…</h2>' +
+      '<p style="font-size:13px; color:#94a3b8;">No cierres la ventana.</p>'
+    );
+
+    var fd = new FormData();
+    fd.append('access_key', WEB3FORMS_ACCESS_KEY);
+    fd.append('subject', 'Auditoría audios v2 — ' + revisor.nombre);
+    fd.append('from_name', revisor.nombre);
+    fd.append('replyto', revisor.email);
+    fd.append('email', revisor.email);
+    fd.append('message',
+      'Auditoría pública recibida.\n\n' +
+      'Revisor: ' + revisor.nombre + ' <' + revisor.email + '>\n' +
+      'Inicio: ' + (revisor.inicio || '?') + '\n' +
+      'Total filas anotadas: ' + summary.total_filas_anotadas + '\n' +
+      'Veredictos OK: ' + summary.veredictos_ok + '\n' +
+      'Veredictos BAD: ' + summary.veredictos_bad + '\n' +
+      'Notas con contenido: ' + summary.notas_con_contenido + '\n\n' +
+      'Ver JSON adjunto para detalles completos.'
+    );
+    fd.append('attachment', blob, fname);
+    fd.append('botcheck', '');
+
+    try {
+      var res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: fd });
+      var data = await res.json();
+      if (data.success) {
+        showEnvio(
+          '<div style="font-size:46px; margin-bottom:6px;">✅</div>' +
+          '<h2 style="margin:0 0 6px; color:#86efac;">¡Auditoría enviada!</h2>' +
+          '<p style="font-size:14px; color:#cbd5e1; line-height:1.5;">Gracias <strong>' + revisor.nombre + '</strong>. Hemos recibido tu revisión correctamente.</p>' +
+          '<p style="font-size:12px; color:#64748b; margin-top:14px;">' + summary.veredictos_ok + ' OK · ' + summary.veredictos_bad + ' BAD · ' + summary.notas_con_contenido + ' notas</p>' +
+          '<button onclick="hideEnvio()" style="margin-top:20px; background:linear-gradient(135deg,#00696c,#14c8cc); color:#fff; border:none; padding:10px 22px; border-radius:10px; font-weight:700; cursor:pointer;">Cerrar</button>'
+        );
+        window.hideEnvio = hideEnvio;
+      } else {
+        throw new Error(data.message || 'Respuesta sin success');
+      }
+    } catch (e) {
+      showEnvio(
+        '<div style="font-size:46px; margin-bottom:6px;">⚠️</div>' +
+        '<h2 style="margin:0 0 6px; color:#fca5a5;">No se pudo enviar</h2>' +
+        '<p style="font-size:13px; color:#cbd5e1; line-height:1.5; margin-bottom:8px;">' + (e.message || 'Error de red') + '</p>' +
+        '<p style="font-size:12px; color:#94a3b8;">Puedes descargar el JSON y enviarlo manualmente a <a href="mailto:info@clotitec.com" style="color:#14c8cc;">info@clotitec.com</a>.</p>' +
+        '<div style="margin-top:18px; display:flex; gap:8px; justify-content:center;">' +
+        '<button onclick="exportVerdicts(); hideEnvio();" style="background:transparent; color:#cbd5e1; border:1px solid rgba(255,255,255,0.2); padding:9px 16px; border-radius:10px; font-weight:600; cursor:pointer;">Descargar JSON</button>' +
+        '<button onclick="enviarAuditoria()" style="background:linear-gradient(135deg,#00696c,#14c8cc); color:#fff; border:none; padding:9px 16px; border-radius:10px; font-weight:700; cursor:pointer;">Reintentar</button>' +
+        '</div>'
+      );
+      window.hideEnvio = hideEnvio;
+    }
+  };
+
+  // ============================================================
+  //                          BOOT
+  // ============================================================
+  function boot() {
+    // Mostrar/ocultar modal de identificacion
+    var revisor = loadRevisor();
+    if (revisor && revisor.nombre && revisor.email) {
+      aplicarRevisor(revisor);
+    } else {
+      document.getElementById('modalRevisor').style.display = 'flex';
+    }
+
+    loadVerdicts();
+    loadNotes();
+    var built = build();
+    allRows = built.rows.slice();
+
+    // Añadir huérfanos al final
+    var referenced = {};
+    for (var i = 0; i < allRows.length; i++) referenced[allRows[i].file] = true;
+    for (var j = 0; j < KNOWN_ORPHANS.length; j++) {
+      var f = KNOWN_ORPHANS[j];
+      if (!referenced[f]) {
+        allRows.push({ type:'orphan', id:f, file:f, flag:'orphan', reason:'no usado', empresaNombre:f, sector:'-', area:'-', audioPath:'./audio/'+f });
+      }
+    }
+
+    var empresasOnly = [];
+    var orphansOnly = [];
+    for (var k = 0; k < allRows.length; k++) {
+      if (allRows[k].type === 'empresa') empresasOnly.push(allRows[k]);
+      else orphansOnly.push(allRows[k]);
+    }
+
+    renderRows(empresasOnly, document.getElementById('empresasList'));
+    renderRows(orphansOnly, document.getElementById('orphanList'));
+
+    // Mostrar UI
+    document.getElementById('legend').style.display = 'flex';
+    document.getElementById('filters').style.display = 'flex';
+    document.getElementById('empresasSection').style.display = 'block';
+    document.getElementById('orphanSection').style.display = 'block';
+    document.getElementById('exportBar').style.display = 'flex';
+
+    updateStats();
+
+    // Eventos
+    document.getElementById('search').addEventListener('input', applyFilter);
+
+    var btns = document.querySelectorAll('.filter-btn');
+    for (var b = 0; b < btns.length; b++) {
+      btns[b].addEventListener('click', function() {
+        for (var x = 0; x < btns.length; x++) btns[x].classList.remove('active');
+        this.classList.add('active');
+        applyFilter();
+      });
+    }
+
+    // Delegación para clicks: veredictos, toggle notas, chips, clear
+    document.body.addEventListener('click', function(e) {
+      var t = e.target;
+      if (!t || !t.classList) return;
+
+      // Veredicto
+      if (t.classList.contains('verdict-btn')) {
+        var vKey = t.getAttribute('data-key');
+        if (vKey) cycleVerdict(vKey, t);
+        return;
+      }
+
+      // Toggle panel de notas
+      if (t.hasAttribute('data-toggle-notes')) {
+        var nKey = t.getAttribute('data-toggle-notes');
+        var panel = document.querySelector('[data-notes-key="' + nKey + '"]');
+        if (panel) panel.classList.toggle('expanded');
+        return;
+      }
+
+      // Click en chip de tag
+      if (t.classList.contains('tag-chip')) {
+        var tagKey = t.getAttribute('data-key');
+        var tagId = t.getAttribute('data-tag');
+        toggleTag(tagKey, tagId, t);
+        return;
+      }
+
+      // Borrar nota
+      if (t.classList.contains('notes-clear-btn')) {
+        var clrKey = t.getAttribute('data-clear-key');
+        if (clrKey && confirm('¿Borrar tags y comentario de esta fila?')) {
+          delete notes[clrKey];
+          saveNotes();
+          rerenderNotesArea(clrKey);
+        }
+        return;
+      }
+    });
+
+    // Delegación para input en textareas (autoguardado)
+    document.body.addEventListener('input', function(e) {
+      var t = e.target;
+      if (!t || !t.classList) return;
+      if (t.classList.contains('notes-textarea')) {
+        var key = t.getAttribute('data-key');
+        if (key) {
+          setNote(key, { text: t.value });
+          updateNotesUI(key);
+        }
+      }
+    });
+  }
+
+  function toggleTag(key, tagId, btnEl) {
+    var note = getNote(key);
+    var tags = (note.tags || []).slice();
+    var idx = tags.indexOf(tagId);
+    if (idx >= 0) {
+      tags.splice(idx, 1);
+      btnEl.classList.remove('active');
+    } else {
+      tags.push(tagId);
+      btnEl.classList.add('active');
+    }
+    setNote(key, { tags: tags });
+    updateNotesUI(key);
+  }
+
+  function updateNotesUI(key) {
+    // Actualiza icono del botón notas y clase de la fila
+    var btn = document.querySelector('[data-toggle-notes="' + key + '"]');
+    if (!btn) return;
+    var has = noteHasContent(key);
+    btn.className = has ? 'notes-btn has-content' : 'notes-btn';
+    btn.textContent = has ? '📝' : '✏️';
+    var row = btn.closest('.row');
+    if (row) {
+      if (has) row.classList.add('has-notes');
+      else row.classList.remove('has-notes');
+    }
+    // Actualiza meta (timestamp)
+    var meta = document.querySelector('[data-notes-key="' + key + '"] .notes-meta span');
+    var note = notes[key];
+    if (meta && note && note.updated) {
+      meta.textContent = 'Última edición: ' + new Date(note.updated).toLocaleString('es-ES');
+    } else if (meta) {
+      meta.textContent = '';
+    }
+    updateStats();
+  }
+
+  function rerenderNotesArea(key) {
+    var panel = document.querySelector('[data-notes-key="' + key + '"]');
+    if (!panel) return;
+    var wasExpanded = panel.classList.contains('expanded');
+    var newHtml = notesBlockHtml(key);
+    var temp = document.createElement('div');
+    temp.innerHTML = newHtml;
+    var newPanel = temp.firstChild;
+    if (wasExpanded) newPanel.classList.add('expanded');
+    panel.parentNode.replaceChild(newPanel, panel);
+    updateNotesUI(key);
+  }
+})();
+</script>
+</body>
+</html>
