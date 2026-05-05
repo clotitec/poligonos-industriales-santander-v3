@@ -1,5 +1,5 @@
 // Service Worker - Áreas Empresariales e Industriales de Santander
-const CACHE_NAME = 'pi-santander-v9';
+const CACHE_NAME = 'pi-santander-v11';
 const TILE_CACHE = 'pi-santander-tiles-v2';
 
 const PRECACHE_URLS = [

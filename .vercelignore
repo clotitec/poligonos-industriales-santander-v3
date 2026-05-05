@@ -1,0 +1,14 @@
+temp_campon
+temp_kmz
+temp_ubicaciones.zip
+merge_data.py
+*.csv
+*.kml
+*.kmz
+panoramas georreferenciados
+.claude
+audio_voice_only
+audio_backup_pre_v2
+*.backup_pre_v2
+CLAUDE.md
+CLAUDE_ES.md
