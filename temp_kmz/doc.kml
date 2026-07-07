@@ -1,0 +1,1240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Polígonos industriales de Santander - Campón y Peñacastillo</name>
+    <description/>
+    <Style id="icon-1899-0288D1-normal">
+      <IconStyle>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-1.png</href>
+        </Icon>
+        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+    </Style>
+    <Style id="icon-1899-0288D1-highlight">
+      <IconStyle>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-1.png</href>
+        </Icon>
+        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+    </Style>
+    <StyleMap id="icon-1899-0288D1">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-1899-0288D1-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-1899-0288D1-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-1899-0288D1-nodesc-normal">
+      <IconStyle>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-1.png</href>
+        </Icon>
+        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-1899-0288D1-nodesc-highlight">
+      <IconStyle>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-1.png</href>
+        </Icon>
+        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-1899-0288D1-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-1899-0288D1-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-1899-0288D1-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Folder>
+      <name>Candina</name>
+      <Placemark>
+        <name>Cenfarte</name>
+        <description>https://maps.app.goo.gl/JFPLp8ki17y2JmaB6</description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8350802,43.4478168,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>ArcelorMittal Distribución - Santander</name>
+        <description>https://maps.app.goo.gl/9Gf8hyFmv7JBhEiVA</description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8348002,43.448311,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Panusa Candina-Panamar Bakery Group</name>
+        <description>https://maps.app.goo.gl/TFhT42WQpvjxhdrt7</description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8348053,43.4487762,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Distribuciones Corla</name>
+        <description>https://maps.app.goo.gl/g1GUqMaRjE15QsFV6</description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <Point>
+          <coordinates>
+            -3.836024,43.4492313,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Automoción Garage Sancho</name>
+        <description>https://maps.app.goo.gl/rmXLCELUg8nM3MS48</description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8293542,43.453254,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Vidrios Cobo</name>
+        <description>https://maps.app.goo.gl/HApXgRjCn68auVCm9</description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8366904,43.4487228,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>HidroCantabria</name>
+        <description>https://maps.app.goo.gl/N2wQaxh7bmBUEoeCA</description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <Point>
+          <coordinates>
+            -3.837126,43.449899,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Saltoki Materiales de Construcción</name>
+        <description>https://maps.app.goo.gl/t25StKe3VSko4qGt5</description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <Point>
+          <coordinates>
+            -3.837939,43.450318,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name><![CDATA[ORAN Auto (Talleres ORAN & ORAN Automotive) - recepción y visitas]]></name>
+        <description>https://maps.app.goo.gl/JZZe5iJfMAfFQ5kv5</description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8342088,43.4502568,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Ad Cantabria</name>
+        <description>https://maps.app.goo.gl/RFa3WPmDDwQmwiFp8</description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8362469,43.4511847,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Punto de Venta DHL Express</name>
+        <description>https://maps.app.goo.gl/vHf2LHFVZnoY8ksa6</description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8360017,43.448167,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Hertz Alquiler De Coches - Santander - C Gerardo De Alvear Sn (Cargo Van Location)</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8343849,43.452003,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Pro Box Santander</name>
+        <description>https://maps.app.goo.gl/7YKLK6mCr6GYjfE66</description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8316236,43.4522258,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Saltoki</name>
+        <description>https://maps.app.goo.gl/YfpnF87eycZxPiV96</description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8324324,43.4524607,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>NACEX</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8316675,43.452418,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Petroprix</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8308658,43.452428,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Cafetería Avenida Candina</name>
+        <description>https://maps.app.goo.gl/tTCYs7DSVTF91VDN6</description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8296584,43.4530231,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Lostal Gruposiete</name>
+        <description>https://maps.app.goo.gl/9PVU1QYdPod6o7nw9</description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8293011,43.453106,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Ambuiberica Santander</name>
+        <description>https://maps.app.goo.gl/dneaGHRAgjv434q5A</description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <Point>
+          <coordinates>
+            -3.831452,43.4512178,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Amichi Serigrafía</name>
+        <description>https://maps.app.goo.gl/NfpGXPNavxBoqdnZ9</description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8320087,43.4523562,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Herveluz SL</name>
+        <description>https://maps.app.goo.gl/LHoJaosyrANjHa8i6</description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8367562,43.4510573,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Isquion Marketing Médico</name>
+        <description>https://maps.app.goo.gl/BqbEXiDCaCd56dYi6</description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8358294,43.4513538,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Maderas Candina Carpinteria Interior - Exterior</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.835554,43.4515436,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>NOLDEMANN</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8356284,43.4513599,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Talleres Manolo</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.835554,43.4515436,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Tienda Würth Santander</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.835554,43.4515436,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Davasa</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8350535,43.4515054,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Taller DOMINGO PARDO</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.83371,43.45184,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Cercha Obras Tecnicas SL</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8357425,43.4512987,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>TEIXEIRA COMPRAVENTA COCHES IBERICOS S.L.</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8323903,43.4525605,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>TALLER GALINDO</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8318537,43.4526914,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Altamira</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8312251,43.4525762,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Superpekes</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8309836,43.4526359,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>DIMINUTOS DIMICANT SL</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.850269,43.449345,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Confort Muebles</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8291075,43.4529212,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Herrero Transformaciones,S.L</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8311406,43.4523606,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Elecnor Alumbrado Público de Santander</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8305343,43.4518955,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Santander Berries</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8318926,43.4521579,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Taller ALSA</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8331202,43.4517188,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>RECAMBIOS RAF SANTANDER</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8318568,43.4514973,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>TALLER CGA - TALLER RALY</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8315,43.45168,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Recambios Arrosam Santander</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.832,43.45118,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Turobotencasa</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8330264,43.4512775,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>El Trastero Americano</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8328028,43.4510983,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Altor Alquileres Santander</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8378827,43.4506266,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>El Saco Util S.L.</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8325412,43.450319,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Viesgo Candina Norte</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8340673,43.4514999,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Alufasa Fabricados del Aluminio</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.836671,43.4490199,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>DEODE</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8356926,43.4493002,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Amica Centro Entorno (SAEMA)</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8331475,43.4500445,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Top Cash</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.833395,43.4492767,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name><![CDATA[ORAN Auto (Talleres ORAN & ORAN Automotive) - recepción y visitas]]></name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8342088,43.4502568,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>HOTEL BED4U SANTANDER</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8282533,43.4524584,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>muebleX Santander</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8283212,43.4519474,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Power Wash</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8287263,43.451689,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Renault Santander - Vidal de la Peña</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.830295,43.4505271,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Gasolinera EasyGas Santander</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8304387,43.450132,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Comillas Motor-Taller Oficial Subaru y SsangYong</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8329294,43.4482861,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Concesionario Oficial TOYOTA Santander - Megamotor</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.835171,43.4436603,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Kia Numar Motor</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8314958,43.4485469,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Opel Auto Palas</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.834505,43.44455,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Adarsa Norte Mercedes-Benz | Ventas</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8326835,43.4472401,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Tienda Online de Skates y Skatepark - Life Skate Farm</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8375182,43.4429593,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Concesionario Hyundai Hercos Motor Santander</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8321753,43.4466202,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Ecrimesa Group</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8337866,43.4454022,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Concesionario Oficial MG | Blendio Birmauto Santander</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8306185,43.4497415,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>PORCELANOSA Santander</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8356379,43.4430054,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Subaru Comillas Motor</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8307919,43.4500724,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Nissan Blendio | Santander</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8313718,43.4487255,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Volvo Selective Motor</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8313155,43.4494552,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Mitsubishi Blendio Devauto</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.83115,43.44896,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>GLS Parayas</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8318099,43.4480928,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Alvemaco Rent</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8321277,43.4476631,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Taller Oficial Carrera Motor Carrocería</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8336464,43.4471323,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>DUQUE SOLAETA, S.L.</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8338348,43.4470653,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Honda Tecnocas - Santander</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8333919,43.4467315,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Sonepar Santander</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8346685,43.4462858,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Electro Crisol Metal</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8351146,43.4452862,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Automóviles Jessicar</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8359143,43.4443888,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>El Diario Montañés</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8349767,43.4440599,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Lexus Santander</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8352148,43.4435984,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Concesionario Oficial TOYOTA Santander - Megamotor</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.835171,43.4436603,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Hispanofil</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.837053,43.4436597,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>INV SEGURIDAD</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8367145,43.4430355,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>HidroCantabria</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.837126,43.449899,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name><![CDATA[Calvo & Salcines, S.A. Cereales Y Piensos]]></name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.832232,43.447546,0
+          </coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>Campon Peñacastillo</name>
+      <Placemark>
+        <name>Diprimar</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8543133,43.4526743,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Autos Raúl</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8552819,43.4524223,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Finca Tablanca</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8556754,43.4525182,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Das Welt Auto Parte Automóviles</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8561529,43.4528074,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Marmolería El Campón</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8566612,43.4525362,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Parte Automóviles Santander - Concesionario Oficial Volkswagen</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8565833,43.4520778,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Castrol Service Talleres Motorinsa</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.85707,43.452198,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>A. Menocal</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8572058,43.4522661,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Empresa Comercial de Recreativos</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.857533,43.4518095,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Lavanderia Los Cantabrucos</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8575263,43.452562,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Hiper Campon</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8577047,43.4517929,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Taller Citroën Blendio Autogomas | Santander</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8581447,43.4515557,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Canalsa</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8583443,43.4522106,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Allende Salcedo S.l.</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8592059,43.4519076,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Ballenoil Santander V</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8597794,43.4512616,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Puertas Cantovi</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8599846,43.4510628,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>ACORDE TECHNOLOGIES, S.A.</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8600376,43.450979,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Librería Gil-Almacén</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8601445,43.4516216,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Citroën Autogomas</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8584307,43.4514612,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Carlos Uriarte Muebles</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.859889,43.4516805,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Escayolas y Yesos Burgos Cedrun</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8602777,43.4515218,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Oscar Alquiler de Coches Santander</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8606907,43.4510048,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Concesionario Oficial Audi Hercos Parayas Santander</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8607565,43.450909,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Toldos Santander Stores</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8613937,43.4511138,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Telymca Servicios de Limpieza</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8613632,43.4507711,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Carlos Uriarte Diseño</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8609062,43.4506592,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Avenida Diseño</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.861174,43.4504279,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>La Taberna del Herrero</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8615883,43.4503071,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>RG Montemar-Grupo RG Iberia</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8619735,43.4508117,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Herceba S.L</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8621414,43.4508232,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Eurorepar Talleres EMA</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8624165,43.4508607,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name><![CDATA[UBUD Fitness &Fight]]></name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8622489,43.4505583,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Varona Producción Técnica</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8621068,43.4504223,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Lopsa - Almacén Peñacastillo</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8628731,43.4497454,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Taller Fimacan</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8644876,43.4495086,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Ventanas De la Parte. PVC y Aluminio</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8641165,43.4498457,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Ascensores IMEM</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.865782,43.449273,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Luminsa</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8649331,43.4501167,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Confiterías Gómez</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8650725,43.4493357,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Sealco Consultoría Alimentaria</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -3.8612457,43.4506452,0
+          </coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>

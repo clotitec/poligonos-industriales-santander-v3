@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document id="1st-IrWDSSKonUwevdIJXc330EzAGqZbM">
+	<name>Poligonos industriales en Santander - Clotitec 2025.</name>
+	<gx:CascadingStyle kml:id="__managed_style_5C39EB107A3D6DC56954">
+		<Style>
+			<IconStyle>
+				<scale>1.2</scale>
+				<Icon>
+					<href>https://earth.google.com/earth/document/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2f2fd3</color>
+				<width>12</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<gx:CascadingStyle kml:id="__managed_style_451F90D2A43D6DC56954">
+		<Style>
+			<IconStyle>
+				<Icon>
+					<href>https://earth.google.com/earth/document/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2f2fd3</color>
+				<width>8</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<StyleMap id="__managed_style_32B35673B73D6DC56954">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#__managed_style_451F90D2A43D6DC56954</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#__managed_style_5C39EB107A3D6DC56954</styleUrl>
+		</Pair>
+	</StyleMap>
+	<gx:CascadingStyle kml:id="__managed_style_097618C19F3D6DC56953">
+		<Style>
+			<IconStyle>
+				<scale>1.2</scale>
+				<Icon>
+					<href>https://earth.google.com/earth/document/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff007cf5</color>
+				<width>12</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<StyleMap id="__managed_style_0F42D466F93D6DC56951">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#__managed_style_1810DB470D3D6DC56951</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#__managed_style_097618C19F3D6DC56953</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="__managed_style_0F8A89C7DC3D6DC56954">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#__managed_style_170ED0BAD13D6DC56954</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#__managed_style_2FA2B91F703D6DC56954</styleUrl>
+		</Pair>
+	</StyleMap>
+	<gx:CascadingStyle kml:id="__managed_style_1954A8B6183D6DC56956">
+		<Style>
+			<IconStyle>
+				<Icon>
+					<href>https://earth.google.com/earth/document/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>fff5a542</color>
+				<width>8</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<gx:CascadingStyle kml:id="__managed_style_170ED0BAD13D6DC56954">
+		<Style>
+			<IconStyle>
+				<Icon>
+					<href>https://earth.google.com/earth/document/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ffbc47ab</color>
+				<width>8</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<gx:CascadingStyle kml:id="__managed_style_2C84F671433D6DC56956">
+		<Style>
+			<IconStyle>
+				<scale>1.2</scale>
+				<Icon>
+					<href>https://earth.google.com/earth/document/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>fff5a542</color>
+				<width>12</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<StyleMap id="__managed_style_0295829B023D6DC56956">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#__managed_style_1954A8B6183D6DC56956</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#__managed_style_2C84F671433D6DC56956</styleUrl>
+		</Pair>
+	</StyleMap>
+	<gx:CascadingStyle kml:id="__managed_style_1810DB470D3D6DC56951">
+		<Style>
+			<IconStyle>
+				<Icon>
+					<href>https://earth.google.com/earth/document/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff007cf5</color>
+				<width>8</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<gx:CascadingStyle kml:id="__managed_style_249B8F75C23D6DC56943">
+		<Style>
+			<IconStyle>
+				<scale>1.2</scale>
+				<Icon>
+					<href>https://earth.google.com/earth/document/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2dc0fb</color>
+				<width>4</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<gx:CascadingStyle kml:id="__managed_style_2FA2B91F703D6DC56954">
+		<Style>
+			<IconStyle>
+				<scale>1.2</scale>
+				<Icon>
+					<href>https://earth.google.com/earth/document/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ffbc47ab</color>
+				<width>12</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<gx:CascadingStyle kml:id="__managed_style_1F4FFA45CE3D6DC56943">
+		<Style>
+			<IconStyle>
+				<Icon>
+					<href>https://earth.google.com/earth/document/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2dc0fb</color>
+				<width>2.66667</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<StyleMap id="__managed_style_02BFEFD7AB3D6DC56943">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#__managed_style_1F4FFA45CE3D6DC56943</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#__managed_style_249B8F75C23D6DC56943</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Folder id="06398E3C2F3B5A238097">
+		<name>Capa de áreas -Poligonos Industriales Santander</name>
+		<open>1</open>
+		<styleUrl>#__managed_style_02BFEFD7AB3D6DC56943</styleUrl>
+		<Placemark id="0817B67C4D3B5A062379">
+			<name>Parayas sur</name>
+			<LookAt>
+				<longitude>-3.833044795835282</longitude>
+				<latitude>43.44743394690606</latitude>
+				<altitude>12.24266381816374</altitude>
+				<heading>-16.32506977139888</heading>
+				<tilt>33.94731090381798</tilt>
+				<gx:fovy>35</gx:fovy>
+				<range>1346.729497148335</range>
+				<altitudeMode>absolute</altitudeMode>
+			</LookAt>
+			<styleUrl>#__managed_style_0295829B023D6DC56956</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							-3.834158498184295,43.44413926566831,0 -3.833421351597324,43.44410618839046,0 -3.829137127855385,43.44612065446508,0 -3.828885617168019,43.4467492891287,0 -3.830207667487647,43.44954596960855,0 -3.834158498184295,43.44413926566831,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark id="0A01B32E503B4CB43BFB">
+			<name>Candina </name>
+			<LookAt>
+				<longitude>-3.832732890403819</longitude>
+				<latitude>43.44890167608634</latitude>
+				<altitude>2.876944199072684</altitude>
+				<heading>156.8558846351532</heading>
+				<tilt>14.07328321186421</tilt>
+				<gx:fovy>35</gx:fovy>
+				<range>2186.584550902771</range>
+				<altitudeMode>absolute</altitudeMode>
+			</LookAt>
+			<styleUrl>#__managed_style_0F8A89C7DC3D6DC56954</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							-3.828268325438027,43.45306356146579,0 -3.829191524965561,43.45365991680239,0 -3.837754350259135,43.45117882719661,0 -3.839435707957604,43.450258829941,0 -3.83684628928596,43.44757898903052,0 -3.834693241003,43.44751867115586,0 -3.831228682293749,43.45049639379084,0 -3.828268325438027,43.45306356146579,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark id="08A1966D8B3B4CA8E3C7">
+			<name>El Campon - Peñacastillo</name>
+			<LookAt>
+				<longitude>-3.859926124917457</longitude>
+				<latitude>43.45173727443867</latitude>
+				<altitude>33.01109137574569</altitude>
+				<heading>340.3353149529386</heading>
+				<tilt>0</tilt>
+				<gx:fovy>35</gx:fovy>
+				<range>1323.58360474449</range>
+				<altitudeMode>absolute</altitudeMode>
+			</LookAt>
+			<styleUrl>#__managed_style_0F42D466F93D6DC56951</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							-3.862876499446134,43.45089472409409,0 -3.862905900468091,43.4493777915508,0 -3.852925794167983,43.45277582463877,0 -3.854496096429375,43.45361948444589,0 -3.858673030847428,43.45263232702882,0 -3.862876499446134,43.45089472409409,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark id="0ACE85598F3B4CBECAF6">
+			<name>Poligono de Parayas - Norte</name>
+			<LookAt>
+				<longitude>-3.826679615505837</longitude>
+				<latitude>43.44435206826679</latitude>
+				<altitude>0.4043832894819421</altitude>
+				<heading>-0.5458690404348098</heading>
+				<tilt>26.85460659524144</tilt>
+				<gx:fovy>35</gx:fovy>
+				<range>4285.232177309808</range>
+				<altitudeMode>absolute</altitudeMode>
+			</LookAt>
+			<styleUrl>#__managed_style_32B35673B73D6DC56954</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							-3.829588335247984,43.45094483451253,0 -3.830558387426988,43.45085237509177,0 -3.835636027150411,43.4461638383663,0 -3.836358765336709,43.44639613552945,0 -3.838798463533824,43.44295834203479,0 -3.835955506998437,43.44211903804891,0 -3.829588335247984,43.45094483451253,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Folder id="09FC08C8463B5A24B141">
+			<name>Drone visita 360º - Poligonos inteconectados</name>
+			<open>1</open>
+			<styleUrl>#__managed_style_02BFEFD7AB3D6DC56943</styleUrl>
+		</Folder>
+	</Folder>
+</Document>
+</kml>
