@@ -1,0 +1,9 @@
+temp_campon
+temp_kmz
+temp_ubicaciones.zip
+merge_data.py
+*.csv
+*.kml
+*.kmz
+panoramas georreferenciados
+.claude

@@ -39,7 +39,6 @@ const Analytics = {
 
 // ---- ESTADO GLOBAL ----
 let map, miniMap;
-let svPopup = null;
 let activeAreaFilter = 'all';
 let activeSectorFilter = 'all';
 let searchTerm = '';
@@ -735,7 +734,7 @@ function loadCompanyMarkers() {
     });
 
     // Click point -> Street View popup + detail access
-    // svPopup es global (ver top del archivo) para que otras capas puedan cerrarlo/reabrirlo
+    let svPopup = null;
     map.on('click', 'company-points', (e) => {
         const props = e.features[0].properties;
         const company = empresas.find(c => c.id === props.id);
@@ -826,58 +825,22 @@ function loadPanoramaLayer() {
         id: 'panorama-points',
         type: 'circle',
         source: 'panoramas',
-        minzoom: 14,
+        minzoom: 16,
         layout: {
             'visibility': 'none'
         },
         paint: {
             'circle-color': '#4CAF50',
-            'circle-radius': [
-                'interpolate', ['linear'], ['zoom'],
-                14, 4,
-                16, 7,
-                18, 10
-            ],
-            'circle-opacity': 0.9,
-            'circle-stroke-width': 2,
+            'circle-radius': 3.5,
+            'circle-opacity': 0.5,
+            'circle-stroke-width': 1,
             'circle-stroke-color': '#ffffff',
-            'circle-stroke-opacity': 1
+            'circle-stroke-opacity': 0.7
         }
     });
 
-    map.on('click', 'panorama-points', (e) => {
-        const f = e.features[0];
-        const p = f.properties;
-        const coords = f.geometry.coordinates.slice();
-
-        // Punto TourMake antiguo: comportamiento previo
-        if (p.src && p.src !== 'google') {
-            window.open(TOUR_URL, '_blank');
-            return;
-        }
-
-        // Punto Google Street View: mostrar iframe georreferenciado de ESE punto
-        // Formato identico al que usan las fichas de empresa (conocido-funcional)
-        const ts = Date.now();
-        const embedUrl = `https://www.google.com/maps/embed?pb=!4v${ts}!6m8!1m7!1s${p.id}!2m2!1d${p.lat}!2d${p.lng}!3f${p.heading}!4f0!5f0.7820865974627469`;
-        const shareUrl = `https://www.google.com/maps/@${p.lat},${p.lng},3a,75y,${p.heading}h,90t/data=!3m4!1e1!3m2!1s${p.id}!2e10`;
-        console.log('[StreetView click]', { id: p.id, src: p.src, embedUrl });
-
-        if (svPopup) svPopup.remove();
-        popup.remove();
-
-        const html = `<div class="sv-popup-iframe-wrap">
-            <iframe src="${embedUrl}" class="sv-popup-iframe" allowfullscreen loading="eager" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            <div style="padding:8px 10px;display:flex;justify-content:space-between;align-items:center;background:#fff;border-top:1px solid #eee;font-family:Inter,Arial,sans-serif">
-                <span style="font-size:11px;color:#64748b">Street View 360° · Google</span>
-                <a href="${shareUrl}" target="_blank" rel="noopener" style="background:#1a73e8;color:#fff;padding:4px 10px;border-radius:12px;text-decoration:none;font-size:11px;font-weight:500">Abrir en Maps ↗</a>
-            </div>
-        </div>`;
-
-        svPopup = new maplibregl.Popup({ closeButton: true, maxWidth: '460px', className: 'sv-popup' })
-            .setLngLat(coords)
-            .setHTML(html)
-            .addTo(map);
+    map.on('click', 'panorama-points', () => {
+        window.open(TOUR_URL, '_blank');
     });
 
     map.on('mouseenter', 'panorama-points', () => {
